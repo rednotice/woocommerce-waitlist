@@ -1,0 +1,17 @@
+{
+    "name": "wpbits/wpbits-waitlist",
+    "description": "Back in  stock  email notifications for WooCommerce.",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "wpbits",
+            "email": "hello@wpbits.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Inc\\": "./inc"}
+    }
+}
