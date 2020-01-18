@@ -15,30 +15,32 @@ class PostTypes
 
     public $columnsToUnset = array();
 
-    public function register() {
+    public function register(): void
+    {
         $this->setPostTypes();
         $this->setPostStatuses();
         $this->setColumns();
         $this->setColumnsToUnset();
 
-        if( ! empty( $this->postTypes ) ) {
-            add_action( 'init', array( $this, 'registerPostTypes' ), 10 );
+        if(!empty($this->postTypes)) {
+            add_action('init', array( $this, 'registerPostTypes'), 10);
         }
 
-        if( ! empty( $this->postStatuses ) ) {
-            add_action( 'init', array( $this, 'registerPostStatuses' ), 10 );
+        if(!empty($this->postStatuses)) {
+            add_action('init', array($this, 'registerPostStatuses'), 10);
         }
 
-        if( ! empty( $this->columns ) || ! empty( $this->columnsToUnset ) ) {
-            foreach( $this->postTypes as $postType ) {
-                add_action('manage_' . $postType['post_type'] . '_posts_columns', array( $this, 'registerColumns' ) );
-                add_action('manage_' . $postType['post_type'] . '_posts_custom_column', array( $this, 'registerColumnsData' ), 10, 2 );
-                add_filter( 'manage_edit-' . $postType['post_type'] . '_sortable_columns', array( $this, 'sortableColumns' ) );
+        if(!empty($this->columns) || !empty($this->columnsToUnset)) {
+            foreach($this->postTypes as $postType) {
+                add_action('manage_' . $postType['post_type'] . '_posts_columns', array($this, 'registerColumns' ));
+                add_action('manage_' . $postType['post_type'] . '_posts_custom_column', array($this, 'registerColumnsData'), 10, 2);
+                add_filter('manage_edit-' . $postType['post_type'] . '_sortable_columns', array($this, 'sortableColumns' ));
             }
         }
     }
 
-    public function setPostTypes() {
+    public function setPostTypes(): void 
+    {
         $this->postTypes[] = [
             'post_type' => 'wpbitswaitlist',
             'name' => 'Waitlist',
@@ -61,8 +63,9 @@ class PostTypes
         ];
     }
 
-    public function registerPostTypes() {
-        foreach( $this->postTypes as $postType ) {
+    public function registerPostTypes(): void 
+    {
+        foreach($this->postTypes as $postType) {
             register_post_type( 
                 $postType['post_type'], 
                 [
@@ -111,7 +114,8 @@ class PostTypes
         }
     }
 
-    public function setPostStatuses() {
+    public function setPostStatuses(): void 
+    {
         $this->postStatuses = [
             [
                 'post_status' => 'wpbits_subscribed',
@@ -122,7 +126,7 @@ class PostTypes
                     'show_in_admin_all_list' => true,
                     'show_in_admin_status_list' => true,
                     'show_in_admin_status_list' =>  true,
-                    'label_count'               => _n_noop( 'Subscribed <span class="count">(%s)</span>', 'Subscribed <span class="count">(%s)</span>' ),
+                    'label_count'               => _n_noop('Subscribed <span class="count">(%s)</span>', 'Subscribed <span class="count">(%s)</span>'),
                 ]
             ],
             [
@@ -134,7 +138,7 @@ class PostTypes
                     'show_in_admin_all_list' => true,
                     'show_in_admin_status_list' => true,
                     'show_in_admin_status_list' =>  true,
-                    'label_count'               => _n_noop( 'Unsubscribed <span class="count">(%s)</span>', 'Unsubscribed <span class="count">(%s)</span>' ),
+                    'label_count'               => _n_noop('Unsubscribed <span class="count">(%s)</span>', 'Unsubscribed <span class="count">(%s)</span>'),
                 ]
             ],
             [
@@ -146,7 +150,7 @@ class PostTypes
                     'show_in_admin_all_list' => true,
                     'show_in_admin_status_list' => true,
                     'show_in_admin_status_list' =>  true,
-                    'label_count'               => _n_noop( 'Mail Sent <span class="count">(%s)</span>', 'Mail Sent <span class="count">(%s)</span>' ),
+                    'label_count'               => _n_noop('Mail Sent <span class="count">(%s)</span>', 'Mail Sent <span class="count">(%s)</span>'),
                 ]
             ],
             [
@@ -158,19 +162,21 @@ class PostTypes
                     'show_in_admin_all_list' => true,
                     'show_in_admin_status_list' => true,
                     'show_in_admin_status_list' =>  true,
-                    'label_count'               => _n_noop( 'Failed <span class="count">(%s)</span>', 'Failed <span class="count">(%s)</span>' ),
+                    'label_count'               => _n_noop('Failed <span class="count">(%s)</span>', 'Failed <span class="count">(%s)</span>'),
                 ]
             ]
         ];
     }
 
-    public function registerPostStatuses() {
-        foreach( $this->postStatuses as $postStatus ) {
+    public function registerPostStatuses(): void 
+    {
+        foreach($this->postStatuses as $postStatus) {
             register_post_status($postStatus['post_status'], $postStatus['args']);
         }
     }
 
-    public function setColumns() {
+    public function setColumns(): void
+    {
         $this->columns = [
             'subscriber_email' => 'Email',
             'status' => 'Status',
@@ -180,69 +186,70 @@ class PostTypes
         ];
     }
 
-    public function setColumnsToUnset() {
+    public function setColumnsToUnset(): void 
+    {
         $this->columnsToUnset = [
             'title',
             'date'
         ];
     }
 
-    public function registerColumns( $columns ) {
-        foreach( $this->columns as $key => $value ) {
+    public function registerColumns(array $columns): array 
+    {
+        foreach($this->columns as $key => $value) {
             $columns[$key] = __($value);
         };
 
-        foreach( $this->columnsToUnset as $unset ) {
+        foreach($this->columnsToUnset as $unset) {
             unset( $columns[$unset] );
         }; 
 
         return $columns;
     }
 
-    public function registerColumnsData( $column, $post_id) {
-        // $postMeta = get_post_meta( $post_id, '_wpbitswaitlist_email' , true);
+    public function registerColumnsData(string $column, int $post_id): void 
+    {
+        switch ($column) {
+            case 'subscriber_email':
+                echo get_post_meta($post_id, '_wpbitswaitlist_email' , true);
+                break;
 
-        switch ( $column ) {
-            case 'subscriber_email' :
-                echo get_post_meta( $post_id, '_wpbitswaitlist_email' , true);
-            break;
-
-            case 'status' :
-                $status = str_replace( 'wpbits_', '', get_post_status( $post_id ) );
+            case 'status':
+                $status = str_replace('wpbits_', '', get_post_status($post_id));
                 echo $status;
-            break;
+                break;
 
-            case 'product_id' :
-                $productId = get_post_meta( $post_id, '_wpbitswaitlist_product_id' , true);
-                $url = get_permalink( $productId );
-                $product = wc_get_product( $productId );
+            case 'product_id':
+                $productId = get_post_meta($post_id, '_wpbitswaitlist_product_id' , true);
+                $url = get_permalink($productId);
+                $product = wc_get_product($productId);
 
-                $variationId = get_post_meta( $post_id, '_wpbitswaitlist_variation_id' , true);
-                if( $variationId ) {
-                    $product = wc_get_product( $variationId );
+                $variationId = get_post_meta($post_id, '_wpbitswaitlist_variation_id' , true);
+                if($variationId) {
+                    $product = wc_get_product($variationId);
                 }
 
                 echo '<a href="' . $url . '">#' . $productId . ' ' . $product->get_name() .'</a>';
-            break;
+                break;
 
-            case 'mailsent_at' :
-                echo get_post_meta( $post_id, '_wpbitswaitlist_mailsent_at' , true);
-            break;
+            case 'mailsent_at':
+                echo get_post_meta($post_id, '_wpbitswaitlist_mailsent_at' , true);
+                break;
 
             case 'subscribed_at' :
-                echo get_post_meta( $post_id, '_wpbitswaitlist_subscribed_at' , true);
-            break;
+                echo get_post_meta($post_id, '_wpbitswaitlist_subscribed_at' , true);
+                break;
 
-            default :
-            break;      
+            default:
+                break;      
         }
     }
 
-    public function sortableColumns( $columns ) {
-        foreach( array_keys($this->columns) as $key ) {
+    public function sortableColumns(array $columns): array 
+    {
+        foreach(array_keys($this->columns) as $key) {
             $columns[$key] = $key;
         }
-
         return $columns;
     }
 

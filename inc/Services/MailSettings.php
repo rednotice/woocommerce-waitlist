@@ -36,9 +36,9 @@ class MailSettings
 
         $this
         ->settingsApi
-        ->setSettings( $this->settings )
-        ->setSections( $this->sections )
-        ->setFields( $this->fields )
+        ->setSettings($this->settings)
+        ->setSections($this->sections)
+        ->setFields($this->fields)
         ->register();
     }
 
@@ -113,21 +113,21 @@ class MailSettings
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_enable_instock_mail',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeCheckbox')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeCheckbox')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_instock_mail_subject',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_instock_mail_message',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             // Success subscription mail settings.
@@ -135,28 +135,28 @@ class MailSettings
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_enable_subscription_mail',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeCheckbox')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeCheckbox')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_subscription_mail_subject',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_subscription_mail_message',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_subscription_mail_copy',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ]
         ];
@@ -167,20 +167,20 @@ class MailSettings
             [
                 'id' => 'wpbits_waitlist_settings_mail',
                 'title' => 'Mail Settings',
-                'callback' => array( $this->callbacks, 'settingsSectionMail'),
+                'callback' => array($this->callbacks, 'settingsSectionMail'),
                 'page' => 'wpbits_settings'
             ],
         ];
     }
 
     public function setFields() {
-        $this->fields = array();
+        $this->fields = [];
 
-        foreach( $this->options as $option ) {
+        foreach($this->options as $option) {
             $this->fields[] = [
                 'id' => $option['name'],
                 'title' => $option['title'],
-                'callback' => array( $this->callbacks, $option['callback'],),
+                'callback' => array($this->callbacks, $option['callback']),
                 'page' => $option['page'],
                 'section' => $option['section'],
                 'args' => array(

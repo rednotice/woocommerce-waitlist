@@ -5,9 +5,9 @@
 
 namespace Inc\Api;
 
-class WaitlistApi
+class Helpers
 {
-    public function getSubscribedProductIds() {
+    public static function getSubscribedProductIds() {
         $productIds= [];
 
         $args = [ 
@@ -32,7 +32,7 @@ class WaitlistApi
         return array_unique( $productIds );
     }
 
-    public function getSubscribersByProduct( $productId ) {
+    public static function getSubscribersByProduct( $productId ) {
         $args = [ 
             'post_type' => 'wpbitswaitlist', 
             'post_status' => 'wpbits_subscribed',
@@ -53,7 +53,7 @@ class WaitlistApi
         return $query;
     }
 
-    public function saveSubscriber( $email, $productId, $variationId = null ) {
+    public static function saveSubscriber( $email, $productId, $variationId = null ) {
         $meta = [
             '_wpbitswaitlist_email' => $email,
             '_wpbitswaitlist_product_id' => $productId,
@@ -73,7 +73,7 @@ class WaitlistApi
         return $postId;
     }
 
-    public function isSubscribed( $email, $productId, $variationId = null ) {
+    public static function isSubscribed( $email, $productId, $variationId = null ) {
         $args = array(
             'post_type'  => 'wpbitswaitlist',
             'post_status' => 'wpbits_subscribed',
@@ -107,18 +107,18 @@ class WaitlistApi
         return false;
     }
 
-    public function getSubscriberEmail( int $subscriberId ) {
+    public static function getSubscriberEmail( int $subscriberId ) {
         return get_post_meta( $subscriberId, '_wpbitswaitlist_email', true );
     }
 
-    public function getProductId( int $subscriberId ) {
+    public static function getProductId( int $subscriberId ) {
         if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
             return get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
         }
         return get_post_meta( $subscriberId, '_wpbitswaitlist_product_id', true );
     }
 
-    public function getProductName( int $subscriberId ) {
+    public static function getProductName( int $subscriberId ) {
         if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
             $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
         } else {
@@ -128,7 +128,7 @@ class WaitlistApi
         return $product->get_name();
     }
 
-    public function getProductLink( int $subscriberId ) {
+    public static function getProductLink( int $subscriberId ) {
         if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
             $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
         } else {
@@ -137,7 +137,7 @@ class WaitlistApi
         return get_permalink( $productId );
     }
 
-    public function getProductImage( int $subscriberId ) {
+    public static function getProductImage( int $subscriberId ) {
         if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
             $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
         } else {
@@ -147,7 +147,7 @@ class WaitlistApi
         return $productImage;
     }
 
-    public function getShopName() {
+    public static function getShopName() {
         return get_bloginfo('name');
     }
 

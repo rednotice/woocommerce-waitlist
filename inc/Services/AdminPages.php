@@ -18,7 +18,8 @@ class AdminPages
 
     public $subpages = array();
 
-    public function register() {
+    public function register(): void
+    {
         $this->settings = new SettingsApi();
         $this->callbacks = new SettingsCallbacks();
 
@@ -27,12 +28,13 @@ class AdminPages
 
         $this
             ->settings
-            ->setAdminPages( $this->pages )
-            ->setAdminSubpages( $this->subpages )
+            ->setAdminPages($this->pages)
+            ->setAdminSubpages($this->subpages)
             ->register();
     }
 
-    public function setPages() {
+    public function setPages(): void
+    {
         $this->pages = [
             [
                 'page_title' => 'wpbits Waitlist', 
@@ -45,8 +47,8 @@ class AdminPages
         ];  
     }
 
-    public function setSubpages() {
-
+    public function setSubpages(): void
+    {
         $this->subpages = [
             [
                 'parent_slug' => 'wpbits_waitlist',

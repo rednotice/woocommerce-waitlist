@@ -5,14 +5,12 @@
 
 namespace Inc\Services;
 
-use \Inc\Api\WaitlistApi;
+use \Inc\Api\Helpers;
 
 class Mail
 {
-    public function register() 
+    public function register(): void
     {
-        $this->waitlistApi = new WaitlistApi();
-
         add_filter('wpbits_replace_shortcodes', array($this, 'replaceShortcodes'), 10, 2 );
 
         if( get_option('wpbits_waitlist_enable_instock_mail') ) {
@@ -22,12 +20,12 @@ class Mail
 
     public function replaceShortcodes(string $text, int $subscriberId): string  
     {
-        $productId = $this->waitlistApi->getProductId($subscriberId);
-        $productName = $this->waitlistApi->getProductName($subscriberId);
-        $productLink = $this->waitlistApi->getProductLink($subscriberId);
-        $productImage = $this->waitlistApi->getProductImage($subscriberId);
-        $subscriberEmail = $this->waitlistApi->getSubscriberEmail($subscriberId);
-        $shopName = $this->waitlistApi->getShopName();
+        $productId = Helpers::getProductId($subscriberId);
+        $productName = Helpers::getProductName($subscriberId);
+        $productLink = Helpers::getProductLink($subscriberId);
+        $productImage = Helpers::getProductImage($subscriberId);
+        $subscriberEmail = Helpers::getSubscriberEmail($subscriberId);
+        $shopName = Helpers::getShopName();
 
         $shortcodes = [ 
             '{product_id}', 
@@ -104,7 +102,7 @@ class Mail
 
     public function automaticInstockMails(): void 
     {
-        $subscribedProductIds = $this->waitlistApi->getSubscribedProductIds();
+        $subscribedProductIds = Helpers::getSubscribedProductIds();
 
         $backInStockProducts = [];
         foreach($subscribedProductIds as $productId) {
@@ -114,7 +112,7 @@ class Mail
         }
 
         foreach($backInStockProducts as $backInStockProduct) {
-            $query = $this->waitlistApi->getSubscribersByProduct($backInStockProduct);
+            $query = Helpers::getSubscribersByProduct($backInStockProduct);
 
             if ($query->have_posts()) {
                 while ( $query->have_posts() ) {

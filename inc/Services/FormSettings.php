@@ -22,11 +22,13 @@ class FormSettings
 
     public $fields;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->setOptions();
     }
 
-    public function register() {
+    public function register(): void 
+    {
         $this->settingsApi = new SettingsApi();
         $this->callbacks = new SettingsCallbacks();
 
@@ -36,13 +38,14 @@ class FormSettings
 
         $this
         ->settingsApi
-        ->setSettings( $this->settings )
-        ->setSections( $this->sections )
-        ->setFields( $this->fields )
+        ->setSettings($this->settings)
+        ->setSections($this->sections)
+        ->setFields($this->fields)
         ->register();
     }
 
-    public function setOptions() {
+    public function setOptions(): void 
+    {
         $this->options = [
             // Front end form options.
             [
@@ -138,28 +141,29 @@ class FormSettings
         ];
     }
 
-    public function setSettings() {
+    public function setSettings(): void
+    {
         $this->settings = [
             // Front end form settings
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_title_label',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_email_label',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_subscribe_label',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             // Validation settings
@@ -167,35 +171,35 @@ class FormSettings
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_submission_label',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_success_label',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_error_label',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_email_error_label',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_already_subscribed_error_label',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             // Checkbox settings
@@ -203,57 +207,59 @@ class FormSettings
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_confirmation_label',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeCheckbox')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeCheckbox')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_confirmation_text_label',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_confirmation_error_label',
                 'args' => [
-                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
                 ]
             ]
         ];
     }
 
-    public function setSections() {
+    public function setSections(): void
+    {
         $this->sections = [
             [
                 'id' => 'wpbits_waitlist_settings_form',
                 'title' => 'Subscribe Form',
-                'callback' => array( $this->callbacks, 'settingsSectionForm'),
+                'callback' => array($this->callbacks, 'settingsSectionForm'),
                 'page' => 'wpbits_settings'
             ],
             [
                 'id' => 'wpbits_waitlist_settings_validation',
                 'title' => 'Validation Messages',
-                'callback' => array( $this->callbacks, 'settingsSectionValidation'),
+                'callback' => array($this->callbacks, 'settingsSectionValidation'),
                 'page' => 'wpbits_settings'
             ],
             [
                 'id' => 'wpbits_waitlist_settings_checkbox',
                 'title' => 'I Agree Checkbox in Subscribe Form',
-                'callback' => array( $this->callbacks, 'settingsSectionCheckbox'),
+                'callback' => array($this->callbacks, 'settingsSectionCheckbox'),
                 'page' => 'wpbits_settings'
             ]
         ];
     }
 
-    public function setFields() {
-        $this->fields = array();
+    public function setFields(): void 
+    {
+        $this->fields = [];
 
-        foreach( $this->options as $option ) {
+        foreach($this->options as $option) {
             $this->fields[] = [
                 'id' => $option['name'],
                 'title' => $option['title'],
-                'callback' => array( $this->callbacks, $option['callback'],),
+                'callback' => array($this->callbacks, $option['callback']),
                 'page' => $option['page'],
                 'section' => $option['section'],
                 'args' => array(
