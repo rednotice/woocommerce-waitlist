@@ -51,8 +51,9 @@ class Mail
         return $filteredText;
     }
 
-    public function sendSuccessSubscriptionMail(string $to): void 
+    public function sendSuccessSubscriptionMail(int $subscriberId ): void
     {
+        $to = get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
         $subject = apply_filters( 
             'wpbits_replace_shortcodes', 
             get_option('wpbits_waitlist_subscription_mail_subject'), 

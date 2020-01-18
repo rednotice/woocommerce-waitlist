@@ -42,11 +42,12 @@
             <small class="field-msg js-form-submission"><?php echo get_option( 'wpbits_waitlist_submission_label' ); ?></small>
             <small class="field-msg success js-form-success"><?php echo get_option( 'wpbits_waitlist_success_label' ); ?></small>
             <small class="field-msg error js-form-error"><?php echo get_option( 'wpbits_waitlist_error_label' ); ?></small>
+            <small class="field-msg error js-already-subscribed-error"><?php echo get_option( 'wpbits_waitlist_already_subscribed_error_label' ); ?></small>
 
             <input type="hidden" name="productId" value="<?php echo $product->get_id()?>" form="wpbits-waitlist-form">
             <input type="hidden" name="variationId" form="wpbits-waitlist-form">
             <input type="hidden" name="action" value="wpbits_submit_subscriber" form="wpbits-waitlist-form">
-</div>
+        </div>
     </form>
 </section>
 

@@ -102,6 +102,14 @@ class FormSettings
                 'section' => 'wpbits_waitlist_settings_validation',
                 'callback' => 'drawInputText'
             ],
+            [
+                'name' => 'wpbits_waitlist_already_subscribed_error_label',
+                'title' => 'Already Subscribed Error Message',
+                'defaultValue' => 'You have already subscribed to this product. We will email you when it is available again..',
+                'page' => 'wpbits_settings',
+                'section' => 'wpbits_waitlist_settings_validation',
+                'callback' => 'drawInputText'
+            ],
             // I agree-checkbox.
             [
                 'name' => 'wpbits_waitlist_confirmation_label',
@@ -179,6 +187,13 @@ class FormSettings
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_email_error_label',
+                'args' => [
+                    'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
+                ]
+            ],
+            [
+                'option_group' => 'wpbits_waitlist_option_group',
+                'option_name' => 'wpbits_waitlist_already_subscribed_error_label',
                 'args' => [
                     'sanitize_callback' => array( $this->callbacks, 'sanitizeOption')
                 ]

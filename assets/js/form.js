@@ -44,12 +44,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             resetMessages();
 
-            console.log(result);
-
             // Handle the response
+            if (result.status === 'alreadySubscribed') {
+                waitlistContainer.querySelector('.js-already-subscribed-error').classList.add('show');
+                return null;
+            }
+
             if (result === 0 || result.status === 'error') {
                 waitlistContainer.querySelector('.js-form-error').classList.add('show');
-                return;
+                return null;
             }
 
             waitlistContainer.querySelector('.js-form-success').classList.add('show');
