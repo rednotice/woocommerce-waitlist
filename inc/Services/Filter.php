@@ -1,14 +1,35 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
 namespace Inc\Services;
 
+/**
+ * Implements a product filter dropdown menu on the waitlist custom post type admin page.
+ * 
+ * @since 1.0.0
+ */
 class Filter
 {
+    /**
+	 * Dropdown menu options for the product filter.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var array
+	 */
     public $options = array();
 
+    /**
+	 * Used by the Init class to intantiate the class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function register(): void 
     {
         add_action('init', array( $this, 'setOptions'), 10);
@@ -16,6 +37,13 @@ class Filter
         add_filter('parse_query', array( $this, 'filterProducts'), 10);
     }
 
+    /**
+	 * Populates the options attribute.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function setOptions(): void
     {
         $productIds= [];
@@ -41,6 +69,13 @@ class Filter
         }
     }
 
+    /**
+	 * Registers the product filter.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function registerProductFilter(): void
     {
         global $typenow;
@@ -66,6 +101,15 @@ class Filter
         <?php }
     }
 
+    /**
+	 * Filters the products according to the option passed
+     * by the registerProductFilter function.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param object $query Instance of the WP_Query class.
+	 * @return void
+	 */
     public function filterProducts(object $query): void
     {
         global $pagenow;

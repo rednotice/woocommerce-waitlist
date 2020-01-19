@@ -1,23 +1,65 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
 namespace Inc\Services;
 
 use \Inc\Api\SettingsApi;
-use \Inc\Api\Callbacks\SettingsCallbacks;
+use \Inc\Api\SettingsCallbacks;
 
+/**
+ * Creates the admin pages.
+ *
+ * @since 1.0.0
+ */
 class AdminPages
 {
+    /**
+	 * Instance of the SettingsApi class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var object
+	 */
     public $settings;
 
+    /**
+	 * Instance of the SettingsCallbacks class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var object
+	 */
     public $callbacks;
 
+    /**
+	 * Admin pages.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var array
+	 */
     public $pages = array();
 
+    /**
+	 * Admin subpages.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var array
+	 */
     public $subpages = array();
 
+    /**
+	 * Used by the Init class to intantiate the class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function register(): void
     {
         $this->settings = new SettingsApi();
@@ -33,6 +75,13 @@ class AdminPages
             ->register();
     }
 
+    /**
+	 * Populates the pages attribute.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function setPages(): void
     {
         $this->pages = [
@@ -47,6 +96,13 @@ class AdminPages
         ];  
     }
 
+    /**
+	 * Populates the subpages attribute.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function setSubpages(): void
     {
         $this->subpages = [
@@ -60,5 +116,4 @@ class AdminPages
             ]
         ];
     }
-
 }

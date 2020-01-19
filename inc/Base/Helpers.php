@@ -3,7 +3,7 @@
  * @package wpbitsWaitlist
  */
 
-namespace Inc\Api;
+namespace Inc\Base;
 
 class Helpers
 {

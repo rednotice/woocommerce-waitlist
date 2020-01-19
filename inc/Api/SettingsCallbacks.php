@@ -3,7 +3,7 @@
  * @package wpbitsWaitlist
  */
 
-namespace Inc\Api\Callbacks;
+namespace Inc\Api;
 
 use \Inc\Base\Paths;
 

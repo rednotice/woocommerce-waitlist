@@ -1,10 +1,17 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
 namespace Inc\Base;
 
+/**
+ * Contains the plugin paths.
+ * 
+ * @since 1.0.0
+ */
 class Paths
 {
     public $plugin;

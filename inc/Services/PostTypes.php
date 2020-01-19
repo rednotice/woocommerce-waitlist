@@ -1,20 +1,62 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
 namespace Inc\Services;
 
+/**
+ * Implements the waitlist custom post type.
+ * 
+ * @since 1.0.0
+ */
 class PostTypes
 {
+    /**
+	 * Post types.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var array
+	 */
     public $postTypes = array();
 
+    /**
+	 * Post statuses.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var array
+	 */
     public $postStatuses;
 
+    /**
+	 * Columns in the custom post types admin page.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var array
+	 */
     public $columns = array();
 
+    /**
+	 * BUild in columns to be removed in the custom post types admin page.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var array
+	 */
     public $columnsToUnset = array();
 
+    /**
+	 * Used by the Init class to intantiate the class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function register(): void
     {
         $this->setPostTypes();
@@ -39,6 +81,13 @@ class PostTypes
         }
     }
 
+    /**
+	 * Populates the post types attribute.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function setPostTypes(): void 
     {
         $this->postTypes[] = [
@@ -63,6 +112,13 @@ class PostTypes
         ];
     }
 
+    /**
+	 * Registers the custom post types.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function registerPostTypes(): void 
     {
         foreach($this->postTypes as $postType) {
@@ -114,6 +170,13 @@ class PostTypes
         }
     }
 
+    /**
+	 * Populates the post statuses attribute.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function setPostStatuses(): void 
     {
         $this->postStatuses = [
@@ -168,6 +231,13 @@ class PostTypes
         ];
     }
 
+    /**
+	 * Registers the post statuses.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function registerPostStatuses(): void 
     {
         foreach($this->postStatuses as $postStatus) {
@@ -175,6 +245,13 @@ class PostTypes
         }
     }
 
+    /**
+	 * Populates the columns attribute.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function setColumns(): void
     {
         $this->columns = [
@@ -186,6 +263,13 @@ class PostTypes
         ];
     }
 
+    /**
+	 * Populates the columnsToUnset attribute.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function setColumnsToUnset(): void 
     {
         $this->columnsToUnset = [
@@ -194,6 +278,14 @@ class PostTypes
         ];
     }
 
+    /**
+	 * Registers the columns.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param array $columns The columns in the post types admin page.
+	 * @return void
+	 */
     public function registerColumns(array $columns): array 
     {
         foreach($this->columns as $key => $value) {
@@ -207,24 +299,33 @@ class PostTypes
         return $columns;
     }
 
-    public function registerColumnsData(string $column, int $post_id): void 
+    /**
+	 * Displays the data in the columns.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param array $column A column in the post types admin page.
+     * @param array $postId The id of teh post displayed in the column.
+	 * @return void
+	 */
+    public function registerColumnsData(string $column, int $postId): void 
     {
         switch ($column) {
             case 'subscriber_email':
-                echo get_post_meta($post_id, '_wpbitswaitlist_email' , true);
+                echo get_post_meta($postId, '_wpbitswaitlist_email' , true);
                 break;
 
             case 'status':
-                $status = str_replace('wpbits_', '', get_post_status($post_id));
+                $status = str_replace('wpbits_', '', get_post_status($postId));
                 echo $status;
                 break;
 
             case 'product_id':
-                $productId = get_post_meta($post_id, '_wpbitswaitlist_product_id' , true);
+                $productId = get_post_meta($postId, '_wpbitswaitlist_product_id' , true);
                 $url = get_permalink($productId);
                 $product = wc_get_product($productId);
 
-                $variationId = get_post_meta($post_id, '_wpbitswaitlist_variation_id' , true);
+                $variationId = get_post_meta($postId, '_wpbitswaitlist_variation_id' , true);
                 if($variationId) {
                     $product = wc_get_product($variationId);
                 }
@@ -233,11 +334,11 @@ class PostTypes
                 break;
 
             case 'mailsent_at':
-                echo get_post_meta($post_id, '_wpbitswaitlist_mailsent_at' , true);
+                echo get_post_meta($postId, '_wpbitswaitlist_mailsent_at' , true);
                 break;
 
             case 'subscribed_at' :
-                echo get_post_meta($post_id, '_wpbitswaitlist_subscribed_at' , true);
+                echo get_post_meta($postId, '_wpbitswaitlist_subscribed_at' , true);
                 break;
 
             default:
@@ -245,6 +346,13 @@ class PostTypes
         }
     }
 
+    /**
+	 * Makes the columns sortable.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function sortableColumns(array $columns): array 
     {
         foreach(array_keys($this->columns) as $key) {

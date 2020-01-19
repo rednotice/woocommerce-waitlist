@@ -1,16 +1,37 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
 namespace Inc\Services;
 
 use \Inc\Services\Mail;
 
-class Action
+/**
+ * Class used to implement custom actions on the waitlist custom post type admin page.
+ *
+ * @since 1.0.0
+ */
+class Actions
 {
+    /**
+	 * Instance of the Mail class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var object
+	 */
     public $mail;
 
+    /**
+	 * Used by the Init class to intantiate this class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function register(): void
     {
         $this->mail = new Mail;
@@ -27,7 +48,16 @@ class Action
         add_action('admin_notices', array( $this, 'adminNotices' ), 10);
     }
 
-    public function modifyPostRowActions($actions, $post): array
+    /**
+	 * Modies the post row actions on the custom post type admin page.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param array $actions Post row actions.
+     * @param object $post
+	 * @return array
+	 */
+    public function modifyPostRowActions( array $actions, object $post): array
     {
         if ($post->post_type == 'wpbitswaitlist' &&  $post->post_status != 'trash') {
             $trash = $actions['trash'];
@@ -58,6 +88,13 @@ class Action
         return $actions;
     }    
 
+    /**
+	 * Row action to send instock mail.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function sendInstockMail(): void
     {
         if($_GET['action'] != 'wpbits_mailsent') {
@@ -73,6 +110,13 @@ class Action
         exit();
     }
 
+    /**
+	 * Row action to unsubscribe a subscriber.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function unsubscribe(): void
     {
         if( $_GET['action'] != 'wpbits_unsubscribed' ) {
@@ -90,7 +134,15 @@ class Action
         exit();
     }
 
-    public function registerBulkActions($bulk_actions): ?array
+    /**
+	 * Registers the bulk actions on the custom post type admin page.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param array $bulk_actions
+	 * @return array|null
+	 */
+    public function registerBulkActions(array $bulk_actions): ?array
     {
         if( isset( $_GET['post_status'] ) && $_GET['post_status'] == 'trash' ) {
             return null;
@@ -107,7 +159,17 @@ class Action
         return $bulk_actions;
     }
 
-    public function handleBulkActions($redirect, $doaction, $object_ids): string
+    /**
+	 * Handles the bulk actions.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param string $redirect The redirect url.
+     * @param string $doaction The action being taken.
+     * @param array $object_ids The items to take the action on.
+	 * @return string
+	 */
+    public function handleBulkActions(string $redirect, string $doaction, array $object_ids): string
     {
         // Remove query args.
         $redirect = remove_query_arg( array('wpbits_mailsent', 'wpbits_unsubscribed' ), $redirect);
@@ -143,6 +205,13 @@ class Action
         return $redirect;
     }
 
+    /**
+	 * Admin notices for post row actions and bulk actions.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function adminNotices(): void
     {
         if(!empty($_REQUEST['wpbits_failed'])) {

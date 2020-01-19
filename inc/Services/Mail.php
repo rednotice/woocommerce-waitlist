@@ -1,14 +1,28 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
 namespace Inc\Services;
 
-use \Inc\Api\Helpers;
+use \Inc\Base\Helpers;
 
+/**
+ * Handles the mails sent to the subscribers.
+ * 
+ * @since 1.0.0
+ */
 class Mail
 {
+    /**
+	 * Used by the Init class to intantiate the class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function register(): void
     {
         add_filter('wpbits_replace_shortcodes', array($this, 'replaceShortcodes'), 10, 2 );
@@ -18,6 +32,15 @@ class Mail
         }
     }
 
+    /**
+	 * Replaces the shortcodes the user can use in the mail templates.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param string $text Mail subject or message created by the user.
+     * @param int $subscriberId Id of the subscriber the mail will be send to.
+	 * @return string Filtered text.
+	 */
     public function replaceShortcodes(string $text, int $subscriberId): string  
     {
         $productId = Helpers::getProductId($subscriberId);
@@ -49,6 +72,14 @@ class Mail
         return $filteredText;
     }
 
+    /**
+	 * Sends a success subscription mail to the subscriber.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param int $subscriberId Id of the subscriber the mail will be send to.
+	 * @return void
+	 */
     public function sendSuccessSubscriptionMail(int $subscriberId ): void
     {
         $to = get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
@@ -66,6 +97,15 @@ class Mail
         $mailer->send($to, $subject, $this->getMailTemplate( $subject, $message));
     }
 
+    /**
+	 * Gets the mail template.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param string $subject Mail subject.
+     * @param string $message Mail message.
+	 * @return string Mail template.
+	 */
     public function getMailTemplate(string $subject, string $message): string 
     {
         ob_start();
@@ -81,6 +121,14 @@ class Mail
         return ob_get_clean();
     }
 
+    /**
+	 * Sends an instock mail to the subscriber.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param int $subscriberId Id of the subscriber the mail will be send to.
+	 * @return bool Returns if the mail was sent.
+	 */
     public function sendInstockMail(int $subscriberId): bool 
     {
         $to = get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
@@ -100,6 +148,13 @@ class Mail
         return $mailSent;
     }
 
+    /**
+	 * Automatically sends instock mails to the subscribers of a product.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function automaticInstockMails(): void 
     {
         $subscribedProductIds = Helpers::getSubscribedProductIds();
@@ -125,6 +180,17 @@ class Mail
         }
     }
 
+    /**
+	 * Updates the status of the subscriber after an attempt
+     * to send a mail has been made.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param int $subscriberId Id of the subscriber the mail was sent or
+     * attempted to send to.
+     * @param bool $mailsent Indicates if the mail was sent.
+	 * @return string New subscriber status.
+	 */
     public function updateSubscriberStatus(int $subscriberId, bool $mailSent): string 
     {
         if(!$mailSent) {

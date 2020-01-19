@@ -4,6 +4,8 @@
  * This file is triggered on uninstall.
  * 
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
  if (!defined('WP_UNINSTALL_PLUGIN')) {

@@ -1,31 +1,92 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
 namespace Inc\Services;
 
 use \Inc\Api\SettingsApi;
-use \Inc\Api\Callbacks\SettingsCallbacks;
+use \Inc\Api\SettingsCallbacks;
 
+/**
+ * This class allows the user to customize the mails sent to the subscribers.
+ * 
+ * @since 1.0.0
+ */
 class MailSettings
 {
+    /**
+	 * Options.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var array
+	 */
     public $options;
 
-    public $callbacks;
-
+    /**
+	 * Instance of the SettingsApi class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var object
+	 */
     public $settingsApi;
 
+    /**
+	 * Instance of the SettingsCallbacks class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var object
+	 */
+    public $callbacks;
+
+    /**
+	 * Mail settings. 
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var array
+	 */
     public $settings;
 
+    /**
+	 * Sections for the mail settings admin page.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var array
+	 */
     public $sections;
 
+    /**
+	 * Fields for the mail settings admin page.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var array
+	 */
     public $fields;
 
+     /**
+	 * Populates the options attribute.
+	 *
+	 * @since 1.0.0
+	 */
     public function __construct() {
         $this->setOptions();
     }
 
+    /**
+	 * Used by the Init class to intantiate the class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function register() {
         $this->settingsApi = new SettingsApi();
         $this->callbacks = new SettingsCallbacks();
@@ -42,6 +103,13 @@ class MailSettings
         ->register();
     }
 
+    /**
+	 * Populates the options attribute.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function setOptions() {
         $this->options = [
             // Instock mail options.
@@ -106,6 +174,13 @@ class MailSettings
         ];
     }
 
+    /**
+	 * Populates the settings attribute.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function setSettings() {
         $this->settings = [
             // Instock mail settings.
@@ -162,6 +237,13 @@ class MailSettings
         ];
     }
 
+     /**
+	 * Populates the sections attribute.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function setSections() {
         $this->sections = [
             [
@@ -173,6 +255,13 @@ class MailSettings
         ];
     }
 
+    /**
+	 * Populates the fields attribute.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function setFields() {
         $this->fields = [];
 

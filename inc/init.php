@@ -1,26 +1,36 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
 namespace Inc;
 
+/**
+ * Class used to initialize service classes as instantiated objects.
+ *
+ * @since 1.0.0
+ */
 final class Init
 {
     /**
-     * Store all the classes in an array.
+     * Stores all the classes in an array.
+     * 
+     * @since 1.0.0
+     * 
      * @return array Full list of classes
      */
     public static function getServices() 
     {
         return [
-            Base\Enqueue::class,
-            Base\SettingsLink::class,
+            Services\Enqueue::class,
+            Services\SettingsLink::class,
             Services\AdminPages::class,
             Services\FormSettings::class,
             Services\MailSettings::class,
             Services\PostTypes::class,
-            Services\Action::class,
+            Services\Actions::class,
             Services\Filter::class,
             Services\Mail::class,
             Services\WaitlistForm::class
@@ -28,9 +38,12 @@ final class Init
     }
 
     /**
-     * Loop through the classes, initialize them,
-     * and call the register() method if it exists
+     * Loops through the classes, initializes them,
+     * and calls the register() method if it exists
      * in the class.
+     * 
+     * @since 1.0.0
+     * 
      * @return void
      */
     public static function registerServices() 
@@ -44,7 +57,10 @@ final class Init
     }
 
     /**
-     * Initialize the class.
+     * Initializes the class.
+     * 
+     * @since 1.0.0
+     * 
      * @param class $class Class from the get_services array 
      * @return class instance New instance of the class.
      */

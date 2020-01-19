@@ -1,16 +1,30 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
 namespace Inc\Services;
 
 use \Inc\Base\Paths;
-use \Inc\Api\Helpers;
+use \Inc\Base\Helpers;
 use \Inc\Services\Mail;
 
+/**
+ * Implements the waitlist front end form.
+ * 
+ * @since 1.0.0
+ */
 class WaitlistForm extends Paths
 {
+    /**
+	 * Used by the Init class to intantiate the class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function register(): void
     {
         if ( ! class_exists( 'WC_Product' ) ) {
@@ -26,6 +40,13 @@ class WaitlistForm extends Paths
         add_action('wp_ajax_wpbits_submit_subscriber', array($this, 'submitSubscriber'));
     }
 
+    /**
+	 * Loads the waitlist form on single product pages.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return string The waitlist form template.
+	 */
     public function loadTemplateForSingleProducts(): string 
     {
         global $product;
@@ -35,6 +56,14 @@ class WaitlistForm extends Paths
         }
     }
 
+    /**
+	 * Loads the form tags for the waitlist form template
+     * on varation product pages.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function loadFormTagsForVariationProducts(): void 
     {
         global $product;
@@ -48,6 +77,18 @@ class WaitlistForm extends Paths
         }
     }
 
+    /**
+	 * Attached the waitlist form template to the data 
+     * displayed on variation product pages.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param array $data The data displayed on the product variation page.
+     * @param object $product
+     * @param object $variation
+	 * @return array $data The data to display on the page 
+     * including the waitlist form template.
+	 */
     public function loadTemplateForVariationProducts(array $data, object $product, object $variation): array
     {        
         if( ! $variation->is_in_stock() ) {
@@ -60,6 +101,16 @@ class WaitlistForm extends Paths
         return $data;
     }
 
+    /**
+	 * Fires when the submit button of the waitlist front end
+     * form is triggered. Stores the subscriber to the database 
+     * and triggers the sending of the success subscription mail. 
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return array $return Returns the status to form.js by ajax
+     * to trigger the validation messages.
+	 */
     public function submitSubscriber(): array
     {
         $email = sanitize_email($_POST['email'] );

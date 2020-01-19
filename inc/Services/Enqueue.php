@@ -1,20 +1,41 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
-namespace Inc\Base;
+namespace Inc\Services;
 
 use \Inc\Base\Paths;
 
+/**
+ * Enqueues the scripts and styleseets for the plugin.
+ * 
+ * @since 1.0.0
+ */
 class Enqueue extends Paths
 {
+    /**
+	 * Used by the Init class to intantiate the class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function register()
     {
         add_action('admin_enqueue_scripts', array( $this, 'enqueueAdminScripts'), 10);
         add_action('wp_enqueue_scripts', array( $this, 'enqueueFrontEndScripts'), 10);
     }
 
+    /**
+	 * Enqueues all scripts and stylesheets for the admin pages.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function enqueueAdminScripts()
     {
         // wp_enqueue_style( 'bootstrap', $this->pluginUrl . 'assets/css/bootstrap.css' );
@@ -22,6 +43,13 @@ class Enqueue extends Paths
         wp_enqueue_script('adminScript', $this->pluginUrl . 'assets/js/admin.js');
     }
 
+    /**
+	 * Enqueues all scripts and stylesheets for the front end.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
     public function enqueueFrontEndScripts()
     {
         // wp_enqueue_style( 'bootstrap', $this->pluginUrl . 'assets/css/bootstrap.css' );
