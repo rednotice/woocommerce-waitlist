@@ -195,14 +195,14 @@ class MailSettings
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_instock_mail_subject',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_instock_mail_message',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             // Success subscription mail settings.
@@ -217,21 +217,21 @@ class MailSettings
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_subscription_mail_subject',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_subscription_mail_message',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeHtmlTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_subscription_mail_copy',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeEmail')
                 ]
             ]
         ];

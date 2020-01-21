@@ -46,7 +46,7 @@ final class Init
      * 
      * @return void
      */
-    public static function registerServices() 
+    public static function registerServices()
     {
         foreach(self::getServices() as $class) {
             $service = self::instantiate($class);
@@ -57,7 +57,7 @@ final class Init
     }
 
     /**
-     * Initializes the class.
+     * Instantiates the class.
      * 
      * @since 1.0.0
      * 

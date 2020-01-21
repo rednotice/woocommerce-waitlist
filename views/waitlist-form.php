@@ -1,6 +1,6 @@
 <section class="wpbits-waitlist">
     <h3>
-        <?php echo get_option( 'wpbits_waitlist_title_label' ); ?>
+        <?php echo sanitize_text_field(get_option('wpbits_waitlist_title_label')); ?>
     </h3>
 
     <form id="wpbits-waitlist-form" action="#" method="POST" data-url="<?php echo admin_url( 'admin-ajax.php' ); ?>">
@@ -10,15 +10,15 @@
                     type="email" 
                     class="form-field"
                     name="email" 
-                    placeholder="<?php echo get_option( 'wpbits_waitlist_email_label' ); ?>"
+                    placeholder="<?php echo sanitize_text_field(get_option('wpbits_waitlist_email_label' )); ?>"
                     form="wpbits-waitlist-form"
                 >
                 <small class="field-msg error" data-error="invalidEmail">
-                    <?php echo get_option( 'wpbits_waitlist_email_error_label' ); ?>
+                    <?php echo sanitize_text_field(get_option('wpbits_waitlist_email_error_label')); ?>
                 </small>
             </div>
 
-            <?php if( get_option( 'wpbits_waitlist_confirmation_label' ) )
+            <?php if(sanitize_text_field(get_option('wpbits_waitlist_confirmation_label')))
             echo '
             <div class="form-group">
                 <div class="checkbox-group">
@@ -28,21 +28,21 @@
                         name="confirmation"
                         form="wpbits-waitlist-form"
                     >
-                    <label for="confirmation">' . get_option( 'wpbits_waitlist_confirmation_text_label' ) . '</label>
+                    <label for="confirmation">' . sanitize_text_field(get_option('wpbits_waitlist_confirmation_text_label')) . '</label>
                 </div>
                 <small class="field-msg error" data-error="invalidConfirmation">'
-                   . get_option( 'wpbits_waitlist_confirmation_error_label' ) .
+                   . sanitize_text_field(get_option('wpbits_waitlist_confirmation_error_label')) .
                 '</small>
             </div>
             ' ; ?>
 
             
 
-            <button type="submit" name="submit" form="wpbits-waitlist-form"><?php echo get_option( 'wpbits_waitlist_subscribe_label' ); ?></button>
-            <small class="field-msg js-form-submission"><?php echo get_option( 'wpbits_waitlist_submission_label' ); ?></small>
-            <small class="field-msg success js-form-success"><?php echo get_option( 'wpbits_waitlist_success_label' ); ?></small>
-            <small class="field-msg error js-form-error"><?php echo get_option( 'wpbits_waitlist_error_label' ); ?></small>
-            <small class="field-msg error js-already-subscribed-error"><?php echo get_option( 'wpbits_waitlist_already_subscribed_error_label' ); ?></small>
+            <button type="submit" name="submit" form="wpbits-waitlist-form"><?php echo sanitize_text_field(get_option('wpbits_waitlist_subscribe_label')); ?></button>
+            <small class="field-msg js-form-submission"><?php echo sanitize_text_field(get_option('wpbits_waitlist_submission_label')); ?></small>
+            <small class="field-msg success js-form-success"><?php echo sanitize_text_field(get_option('wpbits_waitlist_success_label')); ?></small>
+            <small class="field-msg error js-form-error"><?php echo sanitize_text_field(get_option('wpbits_waitlist_error_label')); ?></small>
+            <small class="field-msg error js-already-subscribed-error"><?php echo sanitize_text_field(get_option( 'wpbits_waitlist_already_subscribed_error_label')); ?></small>
 
             <input type="hidden" name="productId" value="<?php echo $product->get_id()?>" form="wpbits-waitlist-form">
             <input type="hidden" name="variationId" form="wpbits-waitlist-form">

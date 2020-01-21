@@ -78,7 +78,7 @@ class WaitlistForm extends Paths
     }
 
     /**
-	 * Attached the waitlist form template to the data 
+	 * Attaches the waitlist form template to the data 
      * displayed on variation product pages.
 	 *
 	 * @since 1.0.0
@@ -113,9 +113,9 @@ class WaitlistForm extends Paths
 	 */
     public function submitSubscriber(): array
     {
-        $email = sanitize_email($_POST['email'] );
-        $productId = sanitize_text_field($_POST['productId']);
-        $variationId = sanitize_text_field($_POST['variationId']);
+        $email = is_email($_POST['email']);
+        $productId = intval($_POST['productId']);
+        $variationId = intval($_POST['variationId']);
 
         if(Helpers::isSubscribed($email, $productId, $variationId)) {
             $return = [

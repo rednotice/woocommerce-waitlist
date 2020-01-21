@@ -224,21 +224,21 @@ class FormSettings
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_title_label',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_email_label',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_subscribe_label',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             // Validation settings
@@ -246,35 +246,35 @@ class FormSettings
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_submission_label',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_success_label',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_error_label',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_email_error_label',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_already_subscribed_error_label',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             // Checkbox settings
@@ -289,14 +289,14 @@ class FormSettings
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_confirmation_text_label',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_confirmation_error_label',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeOption')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ]
         ];
