@@ -72,8 +72,9 @@ class WaitlistForm extends Paths
             echo '<form 
                 id="wpbits-waitlist-form" 
                 action="#" method="POST" 
-                data-url="' . $url . '">
-                </form>';
+                data-url="' . $url . '"
+            >
+            </form>';
         }
     }
 

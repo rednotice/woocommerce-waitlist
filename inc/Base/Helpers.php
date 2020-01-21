@@ -1,38 +1,58 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
 namespace Inc\Base;
 
+/**
+ * Helper functions.
+ *
+ * @since 1.0.0
+ */
 class Helpers
 {
-    public static function getSubscribedProductIds() {
+    /**
+     * @since 1.0.0
+     * 
+     * @return array $productIds
+     */
+    public static function getSubscribedProductIds(): array
+    {
         $productIds= [];
 
         $args = [ 
             'post_type' => 'wpbitswaitlist', 
             'post_status' => 'wpbits_subscribed',
         ];
-        $query = new \WP_Query( $args );
+        $query = new \WP_Query($args);
 
-        if ( $query->have_posts() ) {
-            while ( $query->have_posts() ) {
+        if($query->have_posts()) {
+            while($query->have_posts()) {
                 $query->the_post();
                 $postId = get_the_ID();
-                if( get_post_meta( $postId, '_wpbitswaitlist_variation_id' , true ) ) {
-                    $productId = get_post_meta( $postId, '_wpbitswaitlist_variation_id' , true );
+                if(get_post_meta($postId, '_wpbitswaitlist_variation_id' , true)) {
+                    $productId = get_post_meta($postId, '_wpbitswaitlist_variation_id' , true);
                 } else {
-                    $productId = get_post_meta( $postId, '_wpbitswaitlist_product_id' , true );
+                    $productId = get_post_meta($postId, '_wpbitswaitlist_product_id' , true);
                 }
-                $productIds[] = trim( $productId );
+                $productIds[] = trim($productId);
             }
         }
 
-        return array_unique( $productIds );
+        return array_unique($productIds);
     }
 
-    public static function getSubscribersByProduct( $productId ) {
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $productId
+     * @return object $subscriber
+     */
+    public static function getSubscribersByProduct(int $productId): object 
+    {
         $args = [ 
             'post_type' => 'wpbitswaitlist', 
             'post_status' => 'wpbits_subscribed',
@@ -49,11 +69,20 @@ class Helpers
             )
         ];
 
-        $query = new \WP_Query( $args );
-        return $query;
+        $subscriber = new \WP_Query($args);
+        return $subscriber;
     }
 
-    public static function saveSubscriber( $email, $productId, $variationId = null ) {
+    /**
+     * @since 1.0.0
+     * 
+     * @param string $email
+     * @param int $productId
+     * @param int $variationId
+     * @return int $subscriberId
+     */
+    public static function saveSubscriber($email, $productId, $variationId = null): int
+    {
         $meta = [
             '_wpbitswaitlist_email' => $email,
             '_wpbitswaitlist_product_id' => $productId,
@@ -62,18 +91,27 @@ class Helpers
             '_wpbitswaitlist_mailsent_at' => null
         ];
 
-        $postData = [
+        $data = [
             'post_title' => $email,
             'post_status' => 'wpbits_subscribed',
             'post_type' => 'wpbitswaitlist',
             'meta_input' => $meta
         ];
 
-        $postId = wp_insert_post( $postData );
-        return $postId;
+        $subscriberId = wp_insert_post($data);
+        return $subscriberId;
     }
 
-    public static function isSubscribed( $email, $productId, $variationId = null ) {
+    /**
+     * @since 1.0.0
+     * 
+     * @param string $email
+     * @param int $productId
+     * @param int $variationId
+     * @return bool
+     */
+    public static function isSubscribed($email, $productId, $variationId = null): bool
+    {
         $args = array(
             'post_type'  => 'wpbitswaitlist',
             'post_status' => 'wpbits_subscribed',
@@ -99,26 +137,47 @@ class Helpers
             )
         );
 
-        $query = new \WP_Query( $args );
+        $query = new \WP_Query($args);
 
-        if( ! empty( $query->have_posts() ) ) {
+        if(!empty( $query->have_posts())) {
             return true;
         }
         return false;
     }
 
-    public static function getSubscriberEmail( int $subscriberId ) {
-        return get_post_meta( $subscriberId, '_wpbitswaitlist_email', true );
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return string $subscriberEmail
+     */
+    public static function getSubscriberEmail(int $subscriberId): string
+    {
+        return get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
     }
 
-    public static function getProductId( int $subscriberId ) {
-        if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
-            return get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return int $productId
+     */
+    public static function getProductId(int $subscriberId): int
+    {
+        if( get_post_meta($subscriberId, '_wpbitswaitlist_variation_id', true )) {
+            return get_post_meta($subscriberId, '_wpbitswaitlist_variation_id', true);
         }
-        return get_post_meta( $subscriberId, '_wpbitswaitlist_product_id', true );
+        return get_post_meta($subscriberId, '_wpbitswaitlist_product_id', true);
     }
 
-    public static function getProductName( int $subscriberId ) {
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return string $productName
+     */
+    public static function getProductName(int $subscriberId): string
+    {
         if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
             $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
         } else {
@@ -128,16 +187,30 @@ class Helpers
         return $product->get_name();
     }
 
-    public static function getProductLink( int $subscriberId ) {
-        if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
-            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return string $productPermalink
+     */
+    public static function getProductLink(int $subscriberId): string
+    {
+        if( get_post_meta($subscriberId, '_wpbitswaitlist_variation_id', true)) {
+            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true);
         } else {
-            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_product_id', true );
+            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_product_id', true);
         }
-        return get_permalink( $productId );
+        return get_permalink($productId);
     }
 
-    public static function getProductImage( int $subscriberId ) {
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return string $productImage
+     */
+    public static function getProductImage(int $subscriberId): string
+    {
         if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
             $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
         } else {
@@ -147,8 +220,24 @@ class Helpers
         return $productImage;
     }
 
-    public static function getShopName() {
+    /**
+     * @since 1.0.0
+     * 
+     * @return string $ShopName
+     */
+    public static function getShopName(): string 
+    {
         return get_bloginfo('name');
+    }
+
+    /**
+     * @since 1.0.0
+     * 
+     * @return string $lineBreak
+     */
+    public static function getLineBreak(): string 
+    {
+        return '<br>';
     }
 
 }

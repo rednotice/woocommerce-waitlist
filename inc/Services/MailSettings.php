@@ -124,7 +124,7 @@ class MailSettings
             [
                 'name' => 'wpbits_waitlist_instock_mail_subject',
                 'title' => 'Instock Mail Subject',
-                'defaultValue' => 'Product {product_name} is back in stock',
+                'defaultValue' => '{product_name} is back in stock',
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_mail',
                 'callback' => 'drawInputText'
@@ -132,7 +132,14 @@ class MailSettings
             [
                 'name' => 'wpbits_waitlist_instock_mail_message',
                 'title' => 'Instock Mail Message',
-                'defaultValue' => 'Some email text....',
+                'defaultValue' => 
+                    'Hello subscriber_email},{line_break}{line_break}
+                    the product "{product_name}" you have been waiting for is available again.
+                    {line_break}{line_break}
+                    You can buy it here:{line_break}
+                    {product_link}
+                    {line_break}Best wishes,
+                    {line_break}your {shop_name} team',
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_mail',
                 'callback' => 'drawTextarea'
@@ -149,7 +156,7 @@ class MailSettings
             [
                 'name' => 'wpbits_waitlist_subscription_mail_subject',
                 'title' => 'Success Subscription Mail Subject',
-                'defaultValue' => 'You have successfully subscribed',
+                'defaultValue' => 'You have successfully subscribed to {product_name}',
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_mail',
                 'callback' => 'drawInputText'
@@ -157,7 +164,12 @@ class MailSettings
             [
                 'name' => 'wpbits_waitlist_subscription_mail_message',
                 'title' => 'Success Subscription Mail Message',
-                'defaultValue' => 'Some email text....',
+                'defaultValue' => 
+                    'Hello {subscriber_email},{line_break}
+                    you have successfully subscribed to {product_name}. 
+                    We will email you when the product is available again.{line_break}
+                    Best wishes,{line_break}
+                    your {shop_name} team',
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_mail',
                 'callback' => 'drawTextarea'

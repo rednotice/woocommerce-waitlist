@@ -1,10 +1,17 @@
 <?php
 /**
  * @package wpbitsWaitlist
+ * 
+ * @since 1.0.0
  */
 
 namespace Inc\Api;
 
+/**
+ * Class SettingsApi.
+ *
+ * @since 1.0.0
+ */
 class SettingsApi
 {
     public $adminPages = array();

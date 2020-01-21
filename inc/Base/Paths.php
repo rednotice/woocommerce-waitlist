@@ -14,12 +14,32 @@ namespace Inc\Base;
  */
 class Paths
 {
+    /**
+     * Plugin.
+     * 
+     * @since 1.0.0
+     */
     public $plugin;
 
+    /**
+     * Plugin path.
+     * 
+     * @since 1.0.0
+     */
     public $pluginPath;
 
+    /**
+     * Plugin url.
+     * 
+     * @since 1.0.0
+     */
     public $pluginUrl;
 
+    /**
+     * Populate the class attributes.
+     * 
+     * @since 1.0.0
+     */
     public function __construct()
     {
         $this->plugin = plugin_basename(dirname(__FILE__, 3) . '/wpbits-waitlist.php');

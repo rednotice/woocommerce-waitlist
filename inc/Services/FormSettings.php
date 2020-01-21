@@ -117,7 +117,7 @@ class FormSettings
         $this->options = [
             // Front end form options.
             [
-                'name' => 'wpbits_waitlist_title_label',
+                'name' => 'wpbits_waitlist_title',
                 'title' => 'Title for Subscribe Form',
                 'defaultValue' => 'Email me when back in stock',
                 'page' => 'wpbits_settings',
@@ -125,7 +125,7 @@ class FormSettings
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_email_label',
+                'name' => 'wpbits_waitlist_email',
                 'title' => 'Placeholder for Email Field',
                 'defaultValue' => 'Your email address',
                 'page' => 'wpbits_settings',
@@ -133,7 +133,7 @@ class FormSettings
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_subscribe_label',
+                'name' => 'wpbits_waitlist_subscribe',
                 'title' => 'Text for Subscribe Button',
                 'defaultValue' => 'Subscribe',
                 'page' => 'wpbits_settings',
@@ -142,7 +142,7 @@ class FormSettings
             ],
             // Validation options.
             [
-                'name' => 'wpbits_waitlist_submission_label',
+                'name' => 'wpbits_waitlist_submission',
                 'title' => 'During Submission Message',
                 'defaultValue' => 'Please wait.',
                 'page' => 'wpbits_settings',
@@ -150,7 +150,7 @@ class FormSettings
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_success_label',
+                'name' => 'wpbits_waitlist_success',
                 'title' => 'Success Message',
                 'defaultValue' => 'Your subscription was successful. We will email you when this product is available again.',
                 'page' => 'wpbits_settings',
@@ -158,7 +158,7 @@ class FormSettings
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_error_label',
+                'name' => 'wpbits_waitlist_error',
                 'title' => 'Error Message',
                 'defaultValue' => 'There was an error. Please try again.',
                 'page' => 'wpbits_settings',
@@ -166,7 +166,7 @@ class FormSettings
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_email_error_label',
+                'name' => 'wpbits_waitlist_email_error',
                 'title' => 'Invalid Email Error Message',
                 'defaultValue' => 'Your email is required.',
                 'page' => 'wpbits_settings',
@@ -174,7 +174,7 @@ class FormSettings
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_already_subscribed_error_label',
+                'name' => 'wpbits_waitlist_already_subscribed_error',
                 'title' => 'Already Subscribed Error Message',
                 'defaultValue' => 'You have already subscribed to this product. We will email you when it is available again..',
                 'page' => 'wpbits_settings',
@@ -183,7 +183,7 @@ class FormSettings
             ],
             // I agree-checkbox.
             [
-                'name' => 'wpbits_waitlist_confirmation_label',
+                'name' => 'wpbits_waitlist_confirmation',
                 'title' => 'Enable I Agree in Subscribe Form',
                 'defaultValue' => '',
                 'page' => 'wpbits_settings',
@@ -191,15 +191,15 @@ class FormSettings
                 'callback' => 'drawCheckbox'
             ],
             [
-                'name' => 'wpbits_waitlist_confirmation_text_label',
+                'name' => 'wpbits_waitlist_confirmation_text',
                 'title' => 'Text to Appear Next to the Checkbox',
-                'defaultValue' => 'I Agree to the <a href="#">terms</a> and <a href="">privacy policy</a>',
+                'defaultValue' => 'I Agree to the <a href="#">terms</a> and <a href="">privacy policy</a>.',
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_checkbox',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_confirmation_error_label',
+                'name' => 'wpbits_waitlist_confirmation_error',
                 'title' => 'Checkbox Error Message',
                 'defaultValue' => 'Please accept our terms and privacy policy.',
                 'page' => 'wpbits_settings',
@@ -222,21 +222,21 @@ class FormSettings
             // Front end form settings
             [
                 'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_title_label',
+                'option_name' => 'wpbits_waitlist_title',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_email_label',
+                'option_name' => 'wpbits_waitlist_email',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_subscribe_label',
+                'option_name' => 'wpbits_waitlist_subscribe',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
@@ -244,35 +244,35 @@ class FormSettings
             // Validation settings
             [
                 'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_submission_label',
+                'option_name' => 'wpbits_waitlist_submission',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_success_label',
+                'option_name' => 'wpbits_waitlist_success',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_error_label',
+                'option_name' => 'wpbits_waitlist_error',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_email_error_label',
+                'option_name' => 'wpbits_waitlist_email_error',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_already_subscribed_error_label',
+                'option_name' => 'wpbits_waitlist_already_subscribed_error',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
@@ -280,21 +280,21 @@ class FormSettings
             // Checkbox settings
             [
                 'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_confirmation_label',
+                'option_name' => 'wpbits_waitlist_confirmation',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeCheckbox')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_confirmation_text_label',
+                'option_name' => 'wpbits_waitlist_confirmation_text',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
                 'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_confirmation_error_label',
+                'option_name' => 'wpbits_waitlist_confirmation_error',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]

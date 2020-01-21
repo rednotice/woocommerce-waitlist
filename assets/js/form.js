@@ -57,14 +57,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             waitlistContainer.querySelector('.js-form-success').classList.add('show');
             waitlistContainer.querySelector('[name="email"]').value = '';
+            waitlistContainer.querySelector('[name="confirmation"]').checked = false;
             
         } catch (error) {
             resetMessages();
             waitlistContainer.querySelector('.js-form-error').classList.add('show');
         }
     });
-
-    
 });
 
 function resetMessages() {

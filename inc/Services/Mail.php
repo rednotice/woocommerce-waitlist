@@ -49,6 +49,7 @@ class Mail
         $productImage = Helpers::getProductImage($subscriberId);
         $subscriberEmail = Helpers::getSubscriberEmail($subscriberId);
         $shopName = Helpers::getShopName();
+        $lineBreak = Helpers::getLineBreak();
 
         $shortcodes = [ 
             '{product_id}', 
@@ -56,7 +57,8 @@ class Mail
             '{product_link}',
             '{product_image}',
             '{subscriber_email}',
-            '{shop_name}'
+            '{shop_name}',
+            '{line_break}'
         ];
 
         $replacements = [ 
@@ -65,7 +67,8 @@ class Mail
             $productLink,
             $productImage,
             $subscriberEmail,
-            $shopName
+            $shopName,
+            $lineBreak
         ];
 
         $filteredText = str_replace($shortcodes, $replacements, $text);
@@ -93,8 +96,14 @@ class Mail
             get_option('wpbits_waitlist_subscription_mail_message'), 
             $subscriberId 
         );
+        $template = $this->getMailTemplate( $subject, $message);
+
+        if(get_option('wpbits_waitlist_subscription_mail_copy')) {
+            $header = 'Bcc: ' . get_option('wpbits_waitlist_subscription_mail_copy');
+        }
+
         $mailer = WC()->mailer();
-        $mailer->send($to, $subject, $this->getMailTemplate( $subject, $message));
+        $mailer->send($to, $subject, $template, $header ?? '');
     }
 
     /**
