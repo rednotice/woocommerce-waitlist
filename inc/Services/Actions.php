@@ -67,11 +67,11 @@ class Actions
                 $quickLinks = [
                     [
                         'name' => 'wpbits_mailsent',
-                        'label' => 'Send Mail'
+                        'label' => __('Send Mail', 'wpbits-waitlist')
                     ],
                     [
                         'name' => 'wpbits_unsubscribed',
-                        'label' => 'Unsubscribe'
+                        'label' => __('Unsubscribe', 'wpbits-waitlist')
                     ]
                 ];
 
@@ -153,8 +153,8 @@ class Actions
         $trash = $bulk_actions['trash'];
         unset( $bulk_actions['trash'] );
 
-        $bulk_actions['wpbits_mailsent'] = 'Send Instock Mail';
-        $bulk_actions['wpbits_unsubscribed'] = 'Unsubscribe';
+        $bulk_actions['wpbits_mailsent'] = __('Send Instock Mail', 'wpbits-waitlist');
+        $bulk_actions['wpbits_unsubscribed'] = __('Unsubscribe', 'wpbits-waitlist');
         $bulk_actions['trash'] = $trash;
         return $bulk_actions;
     }
@@ -216,26 +216,35 @@ class Actions
     {
         if(!empty($_REQUEST['wpbits_failed'])) {
             printf('<div id="message" class="error notice is-dismissible"><p>' .
-                _n('There was an error. %s subscriber was not notified.',
-                'There was an error. %s subscribers were not notified.',
-                intval($_REQUEST['wpbits_failed'])
-            ) . '</p></div>', intval($_REQUEST['wpbits_failed']));
+                _n(
+                    'There was an error. %s subscriber was not notified.',
+                    'There was an error. %s subscribers were not notified.',
+                    intval($_REQUEST['wpbits_failed']),
+                    'wpbits-waitlist'
+                ) . '</p></div>', intval($_REQUEST['wpbits_failed'])
+            );
         }
 
-        if(!empty( $_REQUEST['wpbits_mailsent'])) {
-            printf('<div id="message" class="updated notice is-dismissible"><p>' .
-                _n('%s subscriber was notified.',
-                '%s subscribers were notified.',
-                intval($_REQUEST['wpbits_mailsent'])
-            ) . '</p></div>', intval($_REQUEST['wpbits_mailsent']));
+        if(!empty($_REQUEST['wpbits_mailsent'])) {
+            printf('<div id="message" class="error notice is-dismissible"><p>' .
+                _n(
+                    '%s subscriber was notified.',
+                    '%s subscribers were notified.',
+                    intval($_REQUEST['wpbits_mailsent']),
+                    'wpbits-waitlist'
+                ) . '</p></div>', intval($_REQUEST['wpbits_mailsent'])
+            );
         }
 
-        if(!empty( $_REQUEST['wpbits_unsubscribed'])) {
-            printf('<div id="message" class="updated notice is-dismissible"><p>' .
-                _n('%s subscriber was unsubscribed.',
-                '%s subscribers were unsubscribed.',
-                intval($_REQUEST['wpbits_unsubscribed'])
-            ) . '</p></div>', intval($_REQUEST['wpbits_unsubscribed']));
+        if(!empty($_REQUEST['wpbits_unsubscribed'])) {
+            printf('<div id="message" class="error notice is-dismissible"><p>' .
+                _n(
+                    '%s subscriber was unsubscribed.',
+                    '%s subscribers were unsubscribed.',
+                    intval($_REQUEST['wpbits_unsubscribed']),
+                    'wpbits-waitlist'
+                ) . '</p></div>', intval($_REQUEST['wpbits_unsubscribed'])
+            );
         }
     }
 }

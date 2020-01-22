@@ -108,8 +108,8 @@ class AdminPages
         $this->subpages = [
             [
                 'parent_slug' => 'wpbits_waitlist',
-                'page_title' => 'Settings',
-                'menu_title' => 'Settings',
+                'page_title' => __('Settings', 'wpbits-waitlist'),
+                'menu_title' => __('Settings', 'wpbits-waitlist'),
                 'capability' => 'manage_options',
                 'menu_slug' => 'wpbits_settings',
                 'callback' => array( $this->callbacks, 'settings')

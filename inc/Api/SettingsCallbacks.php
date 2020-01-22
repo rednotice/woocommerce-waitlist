@@ -70,7 +70,10 @@ class SettingsCallbacks extends Paths
             add_settings_error(
                 'wpbits_waitlist_subscription_mail_copy',
                 esc_attr( 'invalid-email' ),
-                'The email address to receive a copy of the subscription success mail is not valid.'
+                __(
+                    'The email address to receive a copy of the subscription success mail is not valid.',
+                    'wpbits-waitlist'
+                )
             );
         }
 
@@ -95,7 +98,7 @@ class SettingsCallbacks extends Paths
      */
     public function settingsSectionForm(): void
     {
-        echo 'Customize how your waitlist form will be displayed to your customers.';
+        _e('Customize how your waitlist form will be displayed to your customers.', 'wpbits-waitlist');
     }
 
     /**
@@ -104,7 +107,7 @@ class SettingsCallbacks extends Paths
      * @return void
      */
     public function settingsSectionValidation() {
-        echo 'Customize the success and error messages your subscribers will see when submitting the form.';
+        _e('Customize the success and error messages your subscribers will see when submitting the form.', 'wpbits-waitlist');
     }
 
     /**
@@ -114,7 +117,7 @@ class SettingsCallbacks extends Paths
      */
     public function settingsSectionCheckbox(): void 
     {
-        echo 'Add an I Agree-checkbox to the subscribe form.';
+        _e('Add an I Agree-checkbox to the subscribe form.', 'wpbits-waitlist');
     }
 
     /**
@@ -124,14 +127,17 @@ class SettingsCallbacks extends Paths
      */
     public function settingsSectionMail(): void 
     {
-        echo 'Customize the emails sent to your subscribers. You can use these shortcodes in the subject and the message of your mails:
-        <b>{line_break}</b>,
-        <b>{product_id}</b>,
-        <b>{product_name}</b>,
-        <b>{product_link}</b>,
-        <b>{product_image}</b>,
-        <b>{subscriber_email}</b>,
-        <b>{shop_name}</b>.';
+        _e(
+            'Customize the emails sent to your subscribers. You can use these shortcodes in the subject and the message of your mails:
+            <b>{line_break}</b>,
+            <b>{product_id}</b>,
+            <b>{product_name}</b>,
+            <b>{product_link}</b>,
+            <b>{product_image}</b>,
+            <b>{subscriber_email}</b>,
+            <b>{shop_name}</b>.',
+            'wpbits-waitlist'
+        );
     }
 
     /**

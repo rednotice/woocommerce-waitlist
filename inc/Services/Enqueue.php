@@ -23,7 +23,7 @@ class Enqueue extends Paths
      * 
 	 * @return void
 	 */
-    public function register()
+    public function register(): void
     {
         add_action('admin_enqueue_scripts', array( $this, 'enqueueAdminScripts'), 10);
         add_action('wp_enqueue_scripts', array( $this, 'enqueueFrontEndScripts'), 10);
@@ -36,7 +36,7 @@ class Enqueue extends Paths
      * 
 	 * @return void
 	 */
-    public function enqueueAdminScripts()
+    public function enqueueAdminScripts(): void
     {
         // wp_enqueue_style( 'bootstrap', $this->pluginUrl . 'assets/css/bootstrap.css' );
         wp_enqueue_style('adminStyle', $this->pluginUrl . 'assets/css/admin.css');
@@ -50,7 +50,7 @@ class Enqueue extends Paths
      * 
 	 * @return void
 	 */
-    public function enqueueFrontEndScripts()
+    public function enqueueFrontEndScripts(): void
     {
         // wp_enqueue_style( 'bootstrap', $this->pluginUrl . 'assets/css/bootstrap.css' );
         wp_enqueue_style('waitlistFormStyle', $this->pluginUrl . 'assets/css/form.css');

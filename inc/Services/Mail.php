@@ -28,7 +28,7 @@ class Mail
         add_filter('wpbits_replace_shortcodes', array($this, 'replaceShortcodes'), 10, 2 );
 
         if( get_option('wpbits_waitlist_enable_instock_mail') ) {
-            add_action( 'init', array($this, 'automaticInstockMails'), 10 );
+            add_action('init', array($this, 'automaticInstockMails'), 10 );
         }
     }
 
@@ -96,7 +96,7 @@ class Mail
             get_option('wpbits_waitlist_subscription_mail_message'), 
             $subscriberId 
         );
-        $template = $this->getMailTemplate( $subject, $message);
+        $template = $this->getMailTemplate($subject, $message);
 
         if(get_option('wpbits_waitlist_subscription_mail_copy')) {
             $header = 'Bcc: ' . get_option('wpbits_waitlist_subscription_mail_copy');
@@ -179,7 +179,7 @@ class Mail
             $query = Helpers::getSubscribersByProduct($backInStockProduct);
 
             if ($query->have_posts()) {
-                while ( $query->have_posts() ) {
+                while ($query->have_posts()) {
                     $query->the_post();
                     $subscriberId = get_the_ID();
                     $mailSent = $this->sendInstockMail($subscriberId);

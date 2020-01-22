@@ -118,24 +118,24 @@ class FormSettings
             // Front end form options.
             [
                 'name' => 'wpbits_waitlist_title',
-                'title' => 'Title for Subscribe Form',
-                'defaultValue' => 'Email me when back in stock',
+                'title' => __('Title for Subscribe Form', 'wpbits-waitlist'),
+                'defaultValue' => __('Email me when back in stock', 'wpbits-waitlist'),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_form',
                 'callback' => 'drawInputText'
             ],
             [
                 'name' => 'wpbits_waitlist_email',
-                'title' => 'Placeholder for Email Field',
-                'defaultValue' => 'Your email address',
+                'title' => __('Placeholder for Email Field', 'wpbits-waitlist'),
+                'defaultValue' => __('Your email address', 'wpbits-waitlist'),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_form',
                 'callback' => 'drawInputText'
             ],
             [
                 'name' => 'wpbits_waitlist_subscribe',
-                'title' => 'Text for Subscribe Button',
-                'defaultValue' => 'Subscribe',
+                'title' => __('Text for Subscribe Button', 'wpbits-waitlist'),
+                'defaultValue' => __('Subscribe', 'wpbits-waitlist'),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_form',
                 'callback' => 'drawInputText'
@@ -143,40 +143,48 @@ class FormSettings
             // Validation options.
             [
                 'name' => 'wpbits_waitlist_submission',
-                'title' => 'During Submission Message',
-                'defaultValue' => 'Please wait.',
+                'title' => __('During Submission Message', 'wpbits-waitlist'),
+                'defaultValue' => __('Please wait.', 'wpbits-waitlist'),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_validation',
                 'callback' => 'drawInputText'
             ],
             [
                 'name' => 'wpbits_waitlist_success',
-                'title' => 'Success Message',
-                'defaultValue' => 'Your subscription was successful. We will email you when this product is available again.',
+                'title' => __('Success Message', 'wpbits-waitlist'),
+                'defaultValue' => __(
+                    'Your subscription was successful. 
+                    We will email you when this product is available again.',
+                    'wpbits-waitlist'
+                ),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_validation',
                 'callback' => 'drawInputText'
             ],
             [
                 'name' => 'wpbits_waitlist_error',
-                'title' => 'Error Message',
-                'defaultValue' => 'There was an error. Please try again.',
+                'title' => __('Error Message', 'wpbits-waitlist'),
+                'defaultValue' => __('There was an error. Please try again.', 'wpbits-waitlist'),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_validation',
                 'callback' => 'drawInputText'
             ],
             [
                 'name' => 'wpbits_waitlist_email_error',
-                'title' => 'Invalid Email Error Message',
-                'defaultValue' => 'Your email is required.',
+                'title' => __('Invalid Email Error Message', 'wpbits-waitlist'),
+                'defaultValue' => __('Your email is required.', 'wpbits-waitlist'),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_validation',
                 'callback' => 'drawInputText'
             ],
             [
                 'name' => 'wpbits_waitlist_already_subscribed_error',
-                'title' => 'Already Subscribed Error Message',
-                'defaultValue' => 'You have already subscribed to this product. We will email you when it is available again..',
+                'title' => __('Already Subscribed Error Message', 'wpbits-waitlist'),
+                'defaultValue' => __(
+                    'You have already subscribed to this product. 
+                    We will email you when it is available again.',
+                    'wpbits-waitlist'
+                ),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_validation',
                 'callback' => 'drawInputText'
@@ -184,7 +192,7 @@ class FormSettings
             // I agree-checkbox.
             [
                 'name' => 'wpbits_waitlist_confirmation',
-                'title' => 'Enable I Agree in Subscribe Form',
+                'title' => __('Enable I Agree in Subscribe Form', 'wpbits-waitlist'),
                 'defaultValue' => '',
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_checkbox',
@@ -192,16 +200,19 @@ class FormSettings
             ],
             [
                 'name' => 'wpbits_waitlist_confirmation_text',
-                'title' => 'Text to Appear Next to the Checkbox',
-                'defaultValue' => 'I Agree to the <a href="#">terms</a> and <a href="">privacy policy</a>.',
+                'title' => __('Text to Appear Next to the Checkbox', 'wpbits-waitlist'),
+                'defaultValue' => __(
+                    'I Agree to the <a href="#">terms</a> and <a href="">privacy policy</a>.',
+                    'wpbits-waitlist'
+                ),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_checkbox',
                 'callback' => 'drawInputText'
             ],
             [
                 'name' => 'wpbits_waitlist_confirmation_error',
-                'title' => 'Checkbox Error Message',
-                'defaultValue' => 'Please accept our terms and privacy policy.',
+                'title' => __('Checkbox Error Message', 'wpbits-waitlist'),
+                'defaultValue' => __('Please accept our terms and privacy policy.', 'wpbits-waitlist'),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_checkbox',
                 'callback' => 'drawInputText'
@@ -314,19 +325,19 @@ class FormSettings
         $this->sections = [
             [
                 'id' => 'wpbits_waitlist_settings_form',
-                'title' => 'Subscribe Form',
+                'title' => __('Subscribe Form', 'wpbits-waitlist'),
                 'callback' => array($this->callbacks, 'settingsSectionForm'),
                 'page' => 'wpbits_settings'
             ],
             [
                 'id' => 'wpbits_waitlist_settings_validation',
-                'title' => 'Validation Messages',
+                'title' => __('Validation Messages', 'wpbits-waitlist'),
                 'callback' => array($this->callbacks, 'settingsSectionValidation'),
                 'page' => 'wpbits_settings'
             ],
             [
                 'id' => 'wpbits_waitlist_settings_checkbox',
-                'title' => 'I Agree Checkbox in Subscribe Form',
+                'title' => __('I Agree Checkbox in Subscribe Form', 'wpbits-waitlist'),
                 'callback' => array($this->callbacks, 'settingsSectionCheckbox'),
                 'page' => 'wpbits_settings'
             ]

@@ -38,7 +38,8 @@ class SettingsLink extends Paths
 	 */
     public function generateSettingsLink(array $links): array
     {
-        $settingsLink = '<a href="admin.php?page=wpbits_waitlist">Settings</a>';
+        $label = __('Settings', 'wpbits-waitlist');
+        $settingsLink = '<a href="admin.php?page=wpbits_waitlist">' . $label . '</a>';
         $links[] = $settingsLink;
         return $links;
     }

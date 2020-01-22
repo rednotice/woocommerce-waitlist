@@ -115,7 +115,7 @@ class MailSettings
             // Instock mail options.
             [
                 'name' => 'wpbits_waitlist_enable_instock_mail',
-                'title' => 'Enable Automatic Instock Mail',
+                'title' => __('Enable Automatic Instock Mail', 'wpbits-waitlist'),
                 'defaultValue' => 1,
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_mail',
@@ -123,16 +123,16 @@ class MailSettings
             ],
             [
                 'name' => 'wpbits_waitlist_instock_mail_subject',
-                'title' => 'Instock Mail Subject',
-                'defaultValue' => '{product_name} is back in stock',
+                'title' => __('Instock Mail Subject', 'wpbits-waitlist'),
+                'defaultValue' => __('{product_name} is back in stock', 'wpbits-waitlist'),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_mail',
                 'callback' => 'drawInputText'
             ],
             [
                 'name' => 'wpbits_waitlist_instock_mail_message',
-                'title' => 'Instock Mail Message',
-                'defaultValue' => 
+                'title' => __('Instock Mail Message', 'wpbits-waitlist'),
+                'defaultValue' => __(
                     'Hello subscriber_email},{line_break}{line_break}
                     the product "{product_name}" you have been waiting for is available again.
                     {line_break}{line_break}
@@ -140,6 +140,8 @@ class MailSettings
                     {product_link}
                     {line_break}Best wishes,
                     {line_break}your {shop_name} team',
+                    'wpbits-waitlist'
+                ),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_mail',
                 'callback' => 'drawTextarea'
@@ -147,7 +149,7 @@ class MailSettings
             // Subscription success mail options.
             [
                 'name' => 'wpbits_waitlist_enable_subscription_mail',
-                'title' => 'Enable Success Subscription Mail',
+                'title' => __('Enable Success Subscription Mail', 'wpbits-waitlist'),
                 'defaultValue' => 1,
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_mail',
@@ -155,28 +157,30 @@ class MailSettings
             ],
             [
                 'name' => 'wpbits_waitlist_subscription_mail_subject',
-                'title' => 'Success Subscription Mail Subject',
-                'defaultValue' => 'You have successfully subscribed to {product_name}',
+                'title' => __('Success Subscription Mail Subject', 'wpbits-waitlist'),
+                'defaultValue' => __('You have successfully subscribed to {product_name}', 'wpbits-waitlist'),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_mail',
                 'callback' => 'drawInputText'
             ],
             [
                 'name' => 'wpbits_waitlist_subscription_mail_message',
-                'title' => 'Success Subscription Mail Message',
-                'defaultValue' => 
+                'title' => __('Success Subscription Mail Message', 'wpbits-waitlist'),
+                'defaultValue' => __(
                     'Hello {subscriber_email},{line_break}
                     you have successfully subscribed to {product_name}. 
                     We will email you when the product is available again.{line_break}
                     Best wishes,{line_break}
                     your {shop_name} team',
+                    'wpbits-waitlist'
+                ),
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_mail',
                 'callback' => 'drawTextarea'
             ],
             [
                 'name' => 'wpbits_waitlist_subscription_mail_copy',
-                'title' => 'Send Copy of Success Subscription Mail to this Email Address Email',
+                'title' => __('Send Copy of Success Subscription Mail to this Email Address Email', 'wpbits-waitlist'),
                 'defaultValue' => '',
                 'page' => 'wpbits_settings',
                 'section' => 'wpbits_waitlist_settings_mail',
@@ -260,7 +264,7 @@ class MailSettings
         $this->sections = [
             [
                 'id' => 'wpbits_waitlist_settings_mail',
-                'title' => 'Mail Settings',
+                'title' => __('Mail Settings', 'wpbits-waitlist'),
                 'callback' => array($this->callbacks, 'settingsSectionMail'),
                 'page' => 'wpbits_settings'
             ],

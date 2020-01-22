@@ -87,7 +87,7 @@ class Filter
             } ?>
             <select name="slug" id="slug">
                 <option value="all" <?php selected('all', $currentOption); ?>>
-                    <?php echo 'All Products'; ?>
+                    <?php _e('All Products', 'wpbits-waitlist'); ?>
                 </option>
                 <?php foreach($options as $option) { ?>
                     <option 
