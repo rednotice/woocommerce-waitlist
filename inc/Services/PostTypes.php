@@ -191,7 +191,8 @@ class PostTypes
                     'show_in_admin_status_list' =>  true,
                     'label_count' => _n_noop(
                         'Subscribed <span class="count">(%s)</span>', 
-                        'Subscribed <span class="count">(%s)</span>'
+                        'Subscribed <span class="count">(%s)</span>',
+                        'wbits-waitlist'
                     ),
                 ]
             ],
@@ -204,7 +205,11 @@ class PostTypes
                     'show_in_admin_all_list' => true,
                     'show_in_admin_status_list' => true,
                     'show_in_admin_status_list' =>  true,
-                    'label_count' => _n_noop('Unsubscribed <span class="count">(%s)</span>', 'Unsubscribed <span class="count">(%s)</span>'),
+                    'label_count' => _n_noop(
+                        'Unsubscribed <span class="count">(%s)</span>', 
+                        'Unsubscribed <span class="count">(%s)</span>',
+                        'wbits-waitlist'
+                    ),
                 ]
             ],
             [
@@ -216,7 +221,11 @@ class PostTypes
                     'show_in_admin_all_list' => true,
                     'show_in_admin_status_list' => true,
                     'show_in_admin_status_list' =>  true,
-                    'label_count' => _n_noop('Mail Sent <span class="count">(%s)</span>', 'Mail Sent <span class="count">(%s)</span>'),
+                    'label_count' => _n_noop(
+                        'Mail Sent <span class="count">(%s)</span>', 
+                        'Mail Sent <span class="count">(%s)</span>',
+                        'wbits-waitlist'
+                    ),
                 ]
             ],
             [
@@ -228,7 +237,11 @@ class PostTypes
                     'show_in_admin_all_list' => true,
                     'show_in_admin_status_list' => true,
                     'show_in_admin_status_list' =>  true,
-                    'label_count' => _n_noop('Failed <span class="count">(%s)</span>', 'Failed <span class="count">(%s)</span>'),
+                    'label_count' => _n_noop(
+                        'Failed <span class="count">(%s)</span>',
+                        'Failed <span class="count">(%s)</span>',
+                        'wbits-waitlist'
+                    ),
                 ]
             ]
         ];
