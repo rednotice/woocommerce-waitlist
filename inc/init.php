@@ -29,6 +29,7 @@ final class Init
             Services\AdminPages::class,
             Services\FormSettings::class,
             Services\MailSettings::class,
+            Services\CsvExport::class,
             Services\PostTypes::class,
             Services\Actions::class,
             Services\Filter::class,

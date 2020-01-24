@@ -17,32 +17,17 @@ class Helpers
     /**
      * @since 1.0.0
      * 
-     * @return array $productIds
+     * @return array All subscribers.
      */
-    public static function getSubscribedProductIds(): array
+    public static function getAllSubscribers(): array 
     {
-        $productIds= [];
-
-        $args = [ 
+        $args = [
             'post_type' => 'wpbitswaitlist', 
-            'post_status' => 'wpbits_subscribed',
+            'posts_per_page' => -1
         ];
+
         $query = new \WP_Query($args);
-
-        if($query->have_posts()) {
-            while($query->have_posts()) {
-                $query->the_post();
-                $postId = get_the_ID();
-                if(get_post_meta($postId, '_wpbitswaitlist_variation_id' , true)) {
-                    $productId = get_post_meta($postId, '_wpbitswaitlist_variation_id' , true);
-                } else {
-                    $productId = get_post_meta($postId, '_wpbitswaitlist_product_id' , true);
-                }
-                $productIds[] = trim($productId);
-            }
-        }
-
-        return array_unique($productIds);
+        return $query->posts;
     }
 
     /**
@@ -145,6 +130,37 @@ class Helpers
         return false;
     }
 
+        /**
+     * @since 1.0.0
+     * 
+     * @return array $productIds
+     */
+    public static function getSubscribedProductIds(): array
+    {
+        $productIds= [];
+
+        $args = [ 
+            'post_type' => 'wpbitswaitlist', 
+            'post_status' => 'wpbits_subscribed',
+        ];
+        $query = new \WP_Query($args);
+
+        if($query->have_posts()) {
+            while($query->have_posts()) {
+                $query->the_post();
+                $postId = get_the_ID();
+                if(get_post_meta($postId, '_wpbitswaitlist_variation_id' , true)) {
+                    $productId = get_post_meta($postId, '_wpbitswaitlist_variation_id' , true);
+                } else {
+                    $productId = get_post_meta($postId, '_wpbitswaitlist_product_id' , true);
+                }
+                $productIds[] = trim($productId);
+            }
+        }
+
+        return array_unique($productIds);
+    }
+
     /**
      * @since 1.0.0
      * 
@@ -155,6 +171,31 @@ class Helpers
     {
         return get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
     }
+
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return string 
+     */
+    public static function getSubscriptionDate(int $subscriberId): string
+    {
+
+        return get_post_meta($subscriberId, '_wpbitswaitlist_subscribed_at', true);
+    }
+
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return string|null
+     */
+    public static function getInstockMailDate(int $subscriberId): ?string
+    {
+
+        return get_post_meta($subscriberId, '_wpbitswaitlist_mailsent_at', true);
+    }
+
 
     /**
      * @since 1.0.0
