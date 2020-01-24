@@ -1,6 +1,6 @@
 <?php
 /**
- * @package woobitsWaitlist
+ * @package wpbitsWaitlist
  * 
  * @since 1.0.0
  */
@@ -48,12 +48,12 @@ class Filter
     {
         $productIds= [];
 
-        $query = new \WP_Query('post_type=woobitswaitlist');
+        $query = new \WP_Query('post_type=wpbitswaitlist');
         if($query->have_posts()) {
             while($query->have_posts()) {
                 $query->the_post();
                 $post_id = get_the_ID();
-                $meta = get_post_meta($post_id, '_woobitswaitlist_product_id' , true);
+                $meta = get_post_meta($post_id, '_wpbitswaitlist_product_id' , true);
                 $productIds[] = trim($meta);
             }
         }
@@ -79,7 +79,7 @@ class Filter
     public function registerProductFilter(): void
     {
         global $typenow;
-            if($typenow == 'woobitswaitlist') {
+            if($typenow == 'wpbitswaitlist') {
                 $options = $this->options; // Options for the filter select field
                 $currentOption = '';
             if(isset($_GET['slug'])) {
@@ -87,7 +87,7 @@ class Filter
             } ?>
             <select name="slug" id="slug">
                 <option value="all" <?php selected('all', $currentOption); ?>>
-                    <?php _e('All Products', 'woobits-waitlist'); ?>
+                    <?php _e('All Products', 'wpbits-waitlist'); ?>
                 </option>
                 <?php foreach($options as $option) { ?>
                     <option 
@@ -116,10 +116,10 @@ class Filter
         $post_type = $_GET['post_type'] ?? '';
         if ( is_admin() 
             && $pagenow === 'edit.php' 
-            && $post_type === 'woobitswaitlist' 
+            && $post_type === 'wpbitswaitlist' 
             && isset($_GET['slug'])
             && $_GET['slug'] !='all' ) {
-            $query->query_vars['meta_key'] = '_woobitswaitlist_product_id';
+            $query->query_vars['meta_key'] = '_wpbitswaitlist_product_id';
             $query->query_vars['meta_value'] = $_GET['slug'];
             $query->query_vars['meta_compare'] = '=';
         }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package woobitsWaitlist
+ * @package wpbitsWaitlist
  * 
  * @since 1.0.0
  */
@@ -22,7 +22,7 @@ class Helpers
     public static function getAllSubscribers(): array 
     {
         $args = [
-            'post_type' => 'woobitswaitlist', 
+            'post_type' => 'wpbitswaitlist', 
             'posts_per_page' => -1
         ];
 
@@ -39,16 +39,16 @@ class Helpers
     public static function getSubscribersByProduct(int $productId): object 
     {
         $args = [ 
-            'post_type' => 'woobitswaitlist', 
-            'post_status' => 'woobits_subscribed',
+            'post_type' => 'wpbitswaitlist', 
+            'post_status' => 'wpbits_subscribed',
             'meta_query' => array(
                 'relation' => 'OR',
                 array(
-                    'key' => '_woobitswaitlist_product_id',
+                    'key' => '_wpbitswaitlist_product_id',
                     'value' => $productId
                 ),
                 array(
-                    'key' => '_woobitswaitlist_variation_id',
+                    'key' => '_wpbitswaitlist_variation_id',
                     'value' => $productId
                 )
             )
@@ -69,17 +69,17 @@ class Helpers
     public static function saveSubscriber($email, $productId, $variationId = null): int
     {
         $meta = [
-            '_woobitswaitlist_email' => $email,
-            '_woobitswaitlist_product_id' => $productId,
-            '_woobitswaitlist_variation_id' => ( $variationId ?? null ),
-            '_woobitswaitlist_subscribed_at' => date('Y-m-d H:i:s'),
-            '_woobitswaitlist_mailsent_at' => null
+            '_wpbitswaitlist_email' => $email,
+            '_wpbitswaitlist_product_id' => $productId,
+            '_wpbitswaitlist_variation_id' => ( $variationId ?? null ),
+            '_wpbitswaitlist_subscribed_at' => date('Y-m-d H:i:s'),
+            '_wpbitswaitlist_mailsent_at' => null
         ];
 
         $data = [
             'post_title' => $email,
-            'post_status' => 'woobits_subscribed',
-            'post_type' => 'woobitswaitlist',
+            'post_status' => 'wpbits_subscribed',
+            'post_type' => 'wpbitswaitlist',
             'meta_input' => $meta
         ];
 
@@ -98,23 +98,23 @@ class Helpers
     public static function isSubscribed($email, $productId, $variationId = null): bool
     {
         $args = array(
-            'post_type'  => 'woobitswaitlist',
-            'post_status' => 'woobits_subscribed',
+            'post_type'  => 'wpbitswaitlist',
+            'post_status' => 'wpbits_subscribed',
             'meta_query' => array(
                 'relation' => 'AND',
                 array(
-                    'key'     => '_woobitswaitlist_email',
+                    'key'     => '_wpbitswaitlist_email',
                     'value'   => $email,
                     'compare' => '='
                 ),
                 array(
-                    'key'     => '_woobitswaitlist_product_id',
+                    'key'     => '_wpbitswaitlist_product_id',
                     'value'   => $productId,
                     'compare' => '='
                 ),
                 (isset( $variationId ) ?
                     array(
-                    'key'     => '_woobitswaitlist_variation_id',
+                    'key'     => '_wpbitswaitlist_variation_id',
                     'value'   => $variationId,
                     'compare' => '='
                     ) : ''
@@ -130,7 +130,73 @@ class Helpers
         return false;
     }
 
-        /**
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return string Subscriber status.
+     */
+    public function setStatusToSubscribed(int $subscriberId): string
+    {
+        $subscriber = array(
+            'ID' => $subscriberId,
+            'post_status' => 'wpbits_subscribed'
+        );
+        wp_update_post($subscriber);
+        update_post_meta($subscriberId, '_wpbitswaitlist_subscribed_at', date('Y-m-d H:i:s'));
+        return $subscriber['post_status'];
+    }
+
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return string Subscriber status.
+     */
+    public function setStatusToUnsubscribed(int $subscriberId): string
+    {
+        $subscriber = array(
+            'ID' => $subscriberId,
+            'post_status' => 'wpbits_unsubscribed'
+        );
+        wp_update_post($subscriber);
+        return $subscriber['post_status'];
+    }
+
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return string Subscriber status.
+     */
+    public function setStatusToMailSent(int $subscriberId): string
+    {
+        $subscriber = array(
+            'ID' => $subscriberId,
+            'post_status' => 'wpbits_mailsent'
+        );
+        wp_update_post($subscriber);
+        update_post_meta($subscriberId, '_wpbitswaitlist_mailsent_at', date('Y-m-d H:i:s'));
+        return $subscriber['post_status'];
+    }
+
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return string Subscriber status.
+     */
+    public function setStatusToFailed(int $subscriberId): string
+    {
+        $subscriber = array(
+            'ID' => $subscriberId,
+            'post_status' => 'wpbits_failed'
+        );
+        wp_update_post($subscriber);
+        return $subscriber['post_status'];
+    }
+
+    /**
      * @since 1.0.0
      * 
      * @return array $productIds
@@ -140,8 +206,8 @@ class Helpers
         $productIds= [];
 
         $args = [ 
-            'post_type' => 'woobitswaitlist', 
-            'post_status' => 'woobits_subscribed',
+            'post_type' => 'wpbitswaitlist', 
+            'post_status' => 'wpbits_subscribed',
         ];
         $query = new \WP_Query($args);
 
@@ -149,10 +215,10 @@ class Helpers
             while($query->have_posts()) {
                 $query->the_post();
                 $postId = get_the_ID();
-                if(get_post_meta($postId, '_woobitswaitlist_variation_id' , true)) {
-                    $productId = get_post_meta($postId, '_woobitswaitlist_variation_id' , true);
+                if(get_post_meta($postId, '_wpbitswaitlist_variation_id' , true)) {
+                    $productId = get_post_meta($postId, '_wpbitswaitlist_variation_id' , true);
                 } else {
-                    $productId = get_post_meta($postId, '_woobitswaitlist_product_id' , true);
+                    $productId = get_post_meta($postId, '_wpbitswaitlist_product_id' , true);
                 }
                 $productIds[] = trim($productId);
             }
@@ -169,7 +235,7 @@ class Helpers
      */
     public static function getSubscriberEmail(int $subscriberId): string
     {
-        return get_post_meta($subscriberId, '_woobitswaitlist_email', true);
+        return get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
     }
 
     /**
@@ -181,7 +247,7 @@ class Helpers
     public static function getSubscriptionDate(int $subscriberId): string
     {
 
-        return get_post_meta($subscriberId, '_woobitswaitlist_subscribed_at', true);
+        return get_post_meta($subscriberId, '_wpbitswaitlist_subscribed_at', true);
     }
 
     /**
@@ -193,7 +259,7 @@ class Helpers
     public static function getInstockMailDate(int $subscriberId): ?string
     {
 
-        return get_post_meta($subscriberId, '_woobitswaitlist_mailsent_at', true);
+        return get_post_meta($subscriberId, '_wpbitswaitlist_mailsent_at', true);
     }
 
 
@@ -205,10 +271,10 @@ class Helpers
      */
     public static function getProductId(int $subscriberId): int
     {
-        if( get_post_meta($subscriberId, '_woobitswaitlist_variation_id', true )) {
-            return get_post_meta($subscriberId, '_woobitswaitlist_variation_id', true);
+        if( get_post_meta($subscriberId, '_wpbitswaitlist_variation_id', true )) {
+            return get_post_meta($subscriberId, '_wpbitswaitlist_variation_id', true);
         }
-        return get_post_meta($subscriberId, '_woobitswaitlist_product_id', true);
+        return get_post_meta($subscriberId, '_wpbitswaitlist_product_id', true);
     }
 
     /**
@@ -219,10 +285,10 @@ class Helpers
      */
     public static function getProductName(int $subscriberId): string
     {
-        if( get_post_meta( $subscriberId, '_woobitswaitlist_variation_id', true ) ) {
-            $productId = get_post_meta( $subscriberId, '_woobitswaitlist_variation_id', true );
+        if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
+            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
         } else {
-            $productId = get_post_meta( $subscriberId, '_woobitswaitlist_product_id', true );
+            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_product_id', true );
         }
         $product = wc_get_product( $productId );
         return $product->get_name();
@@ -236,10 +302,10 @@ class Helpers
      */
     public static function getProductLink(int $subscriberId): string
     {
-        if( get_post_meta($subscriberId, '_woobitswaitlist_variation_id', true)) {
-            $productId = get_post_meta( $subscriberId, '_woobitswaitlist_variation_id', true);
+        if( get_post_meta($subscriberId, '_wpbitswaitlist_variation_id', true)) {
+            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true);
         } else {
-            $productId = get_post_meta( $subscriberId, '_woobitswaitlist_product_id', true);
+            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_product_id', true);
         }
         return get_permalink($productId);
     }
@@ -252,10 +318,10 @@ class Helpers
      */
     public static function getProductImage(int $subscriberId): string
     {
-        if( get_post_meta( $subscriberId, '_woobitswaitlist_variation_id', true ) ) {
-            $productId = get_post_meta( $subscriberId, '_woobitswaitlist_variation_id', true );
+        if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
+            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
         } else {
-            $productId = get_post_meta( $subscriberId, '_woobitswaitlist_product_id', true );
+            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_product_id', true );
         }
         $productImage = wc_get_product( $productId )->get_image();
         return $productImage;
@@ -264,7 +330,7 @@ class Helpers
     /**
      * @since 1.0.0
      * 
-     * @return string $ShopName
+     * @return string Shop name.
      */
     public static function getShopName(): string 
     {
@@ -274,7 +340,7 @@ class Helpers
     /**
      * @since 1.0.0
      * 
-     * @return string $lineBreak
+     * @return string <br> HTML Tag.
      */
     public static function getLineBreak(): string 
     {

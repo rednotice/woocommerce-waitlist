@@ -1,6 +1,6 @@
 <?php
 /**
- * @package woobitsWaitlist
+ * @package wpbitsWaitlist
  * 
  * @since 1.0.0
  */
@@ -34,7 +34,8 @@ final class Init
             Services\Actions::class,
             Services\Filter::class,
             Services\Mail::class,
-            Services\WaitlistForm::class
+            Services\WaitlistForm::class,
+            Services\Unsubscribe::class
         ];
     }
 

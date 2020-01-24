@@ -1,25 +1,25 @@
 <?php
 /**
- * @package woobitsWaitlist
+ * @package wpbitsWaitlist
  * 
  * @since 1.0.0
  */
 
  /**
- * Plugin Name: woobits Waitlist
- * Plugin URI: https://woobits.com/plugins/waitlist
+ * Plugin Name: wpbits Waitlist
+ * Plugin URI: https://wpbits.com/plugins/waitlist
  * Description: Back in  stock  email notifications for WooCommerce.
  * Version: 1.0.0
- * Author: woobits
- * Author URI: https://woobits.com
- * Text Domain: woobits-waitlist
+ * Author: wpbits
+ * Author URI: https://wpbits.com
+ * Text Domain: wpbits-waitlist
  * Domain Path: /languages
  * WC requires at least: 2.2.0
- * WC tested up to: 3.8
+ * WC tested up to: 3.9
  * 
- * @package     woobitsWaitlist
- * @author      woobits
- * @copyright   2020 woobits
+ * @package     wpbitsWaitlist
+ * @author      wpbits
+ * @copyright   2020 wpbits
  * @license     GPL-3.0+
  * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  */
@@ -36,17 +36,17 @@ if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
     require_once( dirname(__FILE__) . '/vendor/autoload.php');
 }
 
-function activatewoobitsWaitlist() 
+function activatewpbitsWaitlist() 
 {
     Inc\Base\Activate::activate();
 }
-register_activation_hook(__FILE__, 'activatewoobitsWaitlist');
+register_activation_hook(__FILE__, 'activatewpbitsWaitlist');
 
-function deactivatewoobitsWaitlist() 
+function deactivatewpbitsWaitlist() 
 {
     Inc\Base\Deactivate::deactivate();
 }
-register_deactivation_hook(__FILE__, 'deactivatewoobitsWaitlist');
+register_deactivation_hook(__FILE__, 'deactivatewpbitsWaitlist');
 
 if (class_exists('Inc\\Init') ) {
     Inc\Init::registerServices();

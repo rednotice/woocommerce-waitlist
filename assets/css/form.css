@@ -1,31 +1,31 @@
-#woobits-waitlist-container {
+#wpbits-waitlist-container {
     display: flex;
     flex-direction: column;
 }
 
-#woobits-waitlist-container .email-group {
+#wpbits-waitlist-container .email-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-#woobits-waitlist-container .checkbox-group {
+#wpbits-waitlist-container .checkbox-group {
     display: flex;
     justify-content: start;
 }
 
-#woobits-waitlist-container .field-msg {
+#wpbits-waitlist-container .field-msg {
     display: none;
 }
 
-#woobits-waitlist-container .show {
+#wpbits-waitlist-container .show {
     display: block;
 }
 
-#woobits-waitlist-container .error {
+#wpbits-waitlist-container .error {
     color: rgba(255, 0, 0, 0.623);
 }
 
-#woobits-waitlist-container .success {
+#wpbits-waitlist-container .success {
     color: rgba(0, 128, 0, 0.774);
 }

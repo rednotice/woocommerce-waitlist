@@ -1,6 +1,6 @@
 <?php
 /**
- * @package woobitsWaitlist
+ * @package wpbitsWaitlist
  * 
  * @since 1.0.0
  */
@@ -86,10 +86,10 @@ class AdminPages
     {
         $this->pages = [
             [
-                'page_title' => 'woobits Waitlist', 
-                'menu_title' => 'woobits Waitlist', 
+                'page_title' => 'wpbits Waitlist', 
+                'menu_title' => 'wpbits Waitlist', 
                 'capability' => 'manage_options', 
-                'menu_slug' => 'woobits_waitlist',
+                'menu_slug' => 'wpbits_waitlist',
                 'icon_url' => 'dashicons-clipboard',
                 'position' => 110 
             ]
@@ -107,11 +107,11 @@ class AdminPages
     {
         $this->subpages = [
             [
-                'parent_slug' => 'woobits_waitlist',
-                'page_title' => __('Settings', 'woobits-waitlist'),
-                'menu_title' => __('Settings', 'woobits-waitlist'),
+                'parent_slug' => 'wpbits_waitlist',
+                'page_title' => __('Settings', 'wpbits-waitlist'),
+                'menu_title' => __('Settings', 'wpbits-waitlist'),
                 'capability' => 'manage_options',
-                'menu_slug' => 'woobits_settings',
+                'menu_slug' => 'wpbits_settings',
                 'callback' => array( $this->callbacks, 'settings')
             ]
         ];

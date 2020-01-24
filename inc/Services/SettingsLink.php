@@ -1,6 +1,6 @@
 <?php
 /**
- * @package woobitsWaitlist
+ * @package wpbitsWaitlist
  * 
  * @since 1.0.0
  */
@@ -38,8 +38,8 @@ class SettingsLink extends Paths
 	 */
     public function generateSettingsLink(array $links): array
     {
-        $label = __('Settings', 'woobits-waitlist');
-        $settingsLink = '<a href="admin.php?page=woobits_waitlist">' . $label . '</a>';
+        $label = __('Settings', 'wpbits-waitlist');
+        $settingsLink = '<a href="admin.php?page=wpbits_waitlist">' . $label . '</a>';
         $links[] = $settingsLink;
         return $links;
     }

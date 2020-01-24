@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', (event) => {
 
-    const waitlistForm = document.getElementById('woobits-waitlist-form');
+    const waitlistForm = document.getElementById('wpbits-waitlist-form');
 
     waitlistForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        resetMessages();
+        resetValidationMessages();
 
-        const waitlistContainer = document.getElementById('woobits-waitlist-container');
+        const waitlistContainer = document.getElementById('wpbits-waitlist-container');
         const email = waitlistContainer.querySelector('[name="email"]').value;
         if( !email || !validateEmail(email) ) {
             waitlistContainer.querySelector('[data-error="invalidEmail"]').classList.add('show');
-            return;
+            return null;
         }
 
         if( waitlistContainer.querySelector('[name="confirmation"]') ) {
-            const checkbox = waitlistContainer.querySelector('[name="confirmation"]');
-            if( !checkbox.checked ) {
+            const confirmationCheckbox = waitlistContainer.querySelector('[name="confirmation"]');
+            if( !confirmationCheckbox.checked ) {
                 waitlistContainer.querySelector('[data-error="invalidConfirmation"]').classList.add('show');
-                return;
+                return null;
             }
         }
 
@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
 
             const result = await res.json();
-
-            resetMessages();
+            
+            resetValidationMessages();
 
             // Handle the response
             if (result.status === 'alreadySubscribed') {
@@ -57,16 +57,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             waitlistContainer.querySelector('.js-form-success').classList.add('show');
             waitlistContainer.querySelector('[name="email"]').value = '';
-            waitlistContainer.querySelector('[name="confirmation"]').checked = false;
+            if(waitlistContainer.querySelector('[name="confirmation"]')) {
+                waitlistContainer.querySelector('[name="confirmation"]').checked = false;
+            }
             
         } catch (error) {
-            resetMessages();
+            resetValidationMessages();
             waitlistContainer.querySelector('.js-form-error').classList.add('show');
         }
     });
 });
 
-function resetMessages() {
+function resetValidationMessages() {
     document.querySelectorAll('.field-msg').forEach(field => field.classList.remove('show'));
 }
 
