@@ -1,6 +1,6 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package woobitsWaitlist
  * 
  * @since 1.0.0
  */
@@ -114,24 +114,24 @@ class MailSettings
         $this->options = [
             // Instock mail options.
             [
-                'name' => 'wpbits_waitlist_enable_instock_mail',
-                'title' => __('Enable Automatic Instock Mail', 'wpbits-waitlist'),
+                'name' => 'woobits_waitlist_enable_instock_mail',
+                'title' => __('Enable Automatic Instock Mail', 'woobits-waitlist'),
                 'defaultValue' => 1,
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'page' => 'woobits_settings',
+                'section' => 'woobits_waitlist_settings_mail',
                 'callback' => 'drawCheckbox'
             ],
             [
-                'name' => 'wpbits_waitlist_instock_mail_subject',
-                'title' => __('Instock Mail Subject', 'wpbits-waitlist'),
-                'defaultValue' => __('{product_name} is back in stock', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'name' => 'woobits_waitlist_instock_mail_subject',
+                'title' => __('Instock Mail Subject', 'woobits-waitlist'),
+                'defaultValue' => __('{product_name} is back in stock', 'woobits-waitlist'),
+                'page' => 'woobits_settings',
+                'section' => 'woobits_waitlist_settings_mail',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_instock_mail_message',
-                'title' => __('Instock Mail Message', 'wpbits-waitlist'),
+                'name' => 'woobits_waitlist_instock_mail_message',
+                'title' => __('Instock Mail Message', 'woobits-waitlist'),
                 'defaultValue' => __(
                     'Hello subscriber_email},{line_break}{line_break}
                     the product "{product_name}" you have been waiting for is available again.
@@ -140,50 +140,50 @@ class MailSettings
                     {product_link}
                     {line_break}Best wishes,
                     {line_break}your {shop_name} team',
-                    'wpbits-waitlist'
+                    'woobits-waitlist'
                 ),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'page' => 'woobits_settings',
+                'section' => 'woobits_waitlist_settings_mail',
                 'callback' => 'drawTextarea'
             ],
             // Subscription success mail options.
             [
-                'name' => 'wpbits_waitlist_enable_subscription_mail',
-                'title' => __('Enable Success Subscription Mail', 'wpbits-waitlist'),
+                'name' => 'woobits_waitlist_enable_subscription_mail',
+                'title' => __('Enable Success Subscription Mail', 'woobits-waitlist'),
                 'defaultValue' => 1,
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'page' => 'woobits_settings',
+                'section' => 'woobits_waitlist_settings_mail',
                 'callback' => 'drawCheckbox'
             ],
             [
-                'name' => 'wpbits_waitlist_subscription_mail_subject',
-                'title' => __('Success Subscription Mail Subject', 'wpbits-waitlist'),
-                'defaultValue' => __('You have successfully subscribed to {product_name}', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'name' => 'woobits_waitlist_subscription_mail_subject',
+                'title' => __('Success Subscription Mail Subject', 'woobits-waitlist'),
+                'defaultValue' => __('You have successfully subscribed to {product_name}', 'woobits-waitlist'),
+                'page' => 'woobits_settings',
+                'section' => 'woobits_waitlist_settings_mail',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_subscription_mail_message',
-                'title' => __('Success Subscription Mail Message', 'wpbits-waitlist'),
+                'name' => 'woobits_waitlist_subscription_mail_message',
+                'title' => __('Success Subscription Mail Message', 'woobits-waitlist'),
                 'defaultValue' => __(
                     'Hello {subscriber_email},{line_break}
                     you have successfully subscribed to {product_name}. 
                     We will email you when the product is available again.{line_break}
                     Best wishes,{line_break}
                     your {shop_name} team',
-                    'wpbits-waitlist'
+                    'woobits-waitlist'
                 ),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'page' => 'woobits_settings',
+                'section' => 'woobits_waitlist_settings_mail',
                 'callback' => 'drawTextarea'
             ],
             [
-                'name' => 'wpbits_waitlist_subscription_mail_copy',
-                'title' => __('Send Copy of Success Subscription Mail to this Email Address Email', 'wpbits-waitlist'),
+                'name' => 'woobits_waitlist_subscription_mail_copy',
+                'title' => __('Send Copy of Success Subscription Mail to this Email Address Email', 'woobits-waitlist'),
                 'defaultValue' => '',
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'page' => 'woobits_settings',
+                'section' => 'woobits_waitlist_settings_mail',
                 'callback' => 'drawInputText',
                 'placeholder' => 'sample@example.com'
             ]
@@ -201,51 +201,51 @@ class MailSettings
         $this->settings = [
             // Instock mail settings.
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_enable_instock_mail',
+                'option_group' => 'woobits_waitlist_option_group',
+                'option_name' => 'woobits_waitlist_enable_instock_mail',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeCheckbox')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_instock_mail_subject',
+                'option_group' => 'woobits_waitlist_option_group',
+                'option_name' => 'woobits_waitlist_instock_mail_subject',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_instock_mail_message',
+                'option_group' => 'woobits_waitlist_option_group',
+                'option_name' => 'woobits_waitlist_instock_mail_message',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             // Success subscription mail settings.
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_enable_subscription_mail',
+                'option_group' => 'woobits_waitlist_option_group',
+                'option_name' => 'woobits_waitlist_enable_subscription_mail',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeCheckbox')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_subscription_mail_subject',
+                'option_group' => 'woobits_waitlist_option_group',
+                'option_name' => 'woobits_waitlist_subscription_mail_subject',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_subscription_mail_message',
+                'option_group' => 'woobits_waitlist_option_group',
+                'option_name' => 'woobits_waitlist_subscription_mail_message',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeHtmlTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_subscription_mail_copy',
+                'option_group' => 'woobits_waitlist_option_group',
+                'option_name' => 'woobits_waitlist_subscription_mail_copy',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeEmail')
                 ]
@@ -263,10 +263,10 @@ class MailSettings
     public function setSections() {
         $this->sections = [
             [
-                'id' => 'wpbits_waitlist_settings_mail',
-                'title' => __('Mail Settings', 'wpbits-waitlist'),
+                'id' => 'woobits_waitlist_settings_mail',
+                'title' => __('Mail Settings', 'woobits-waitlist'),
                 'callback' => array($this->callbacks, 'settingsSectionMail'),
-                'page' => 'wpbits_settings'
+                'page' => 'woobits_settings'
             ],
         ];
     }

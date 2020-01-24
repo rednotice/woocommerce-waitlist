@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', (event) => {
 
-    const waitlistForm = document.getElementById('wpbits-waitlist-form');
+    const waitlistForm = document.getElementById('woobits-waitlist-form');
 
     waitlistForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         resetMessages();
 
-        const waitlistContainer = document.getElementById('wpbits-waitlist-container');
+        const waitlistContainer = document.getElementById('woobits-waitlist-container');
         const email = waitlistContainer.querySelector('[name="email"]').value;
         if( !email || !validateEmail(email) ) {
             waitlistContainer.querySelector('[data-error="invalidEmail"]').classList.add('show');

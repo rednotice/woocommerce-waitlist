@@ -1,6 +1,6 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package woobitsWaitlist
  * 
  * @since 1.0.0
  */
@@ -38,12 +38,12 @@ class Actions
 
         // Row actions
         add_filter('post_row_actions', array( $this, 'modifyPostRowActions' ), 10, 2);
-        add_action('admin_post_wpbits_mailsent', array( $this, 'sendInstockMail' ), 10);
-        add_action('admin_post_wpbits_unsubscribed', array( $this, 'unsubscribe' ), 10);
+        add_action('admin_post_woobits_mailsent', array( $this, 'sendInstockMail' ), 10);
+        add_action('admin_post_woobits_unsubscribed', array( $this, 'unsubscribe' ), 10);
 
         // Bulk actions
-        add_filter('bulk_actions-edit-wpbitswaitlist', array( $this, 'registerBulkActions'));
-        add_filter('handle_bulk_actions-edit-wpbitswaitlist', array( $this, 'handleBulkActions'), 10, 3);
+        add_filter('bulk_actions-edit-woobitswaitlist', array( $this, 'registerBulkActions'));
+        add_filter('handle_bulk_actions-edit-woobitswaitlist', array( $this, 'handleBulkActions'), 10, 3);
         
         add_action('admin_notices', array( $this, 'adminNotices' ), 10);
     }
@@ -59,19 +59,19 @@ class Actions
 	 */
     public function modifyPostRowActions( array $actions, object $post): array
     {
-        if ($post->post_type == 'wpbitswaitlist' &&  $post->post_status != 'trash') {
+        if ($post->post_type == 'woobitswaitlist' &&  $post->post_status != 'trash') {
             $trash = $actions['trash'];
             $actions = [];
 
-            if (get_post_status($post) != 'wpbits_unsubscribed') {
+            if (get_post_status($post) != 'woobits_unsubscribed') {
                 $quickLinks = [
                     [
-                        'name' => 'wpbits_mailsent',
-                        'label' => __('Send Mail', 'wpbits-waitlist')
+                        'name' => 'woobits_mailsent',
+                        'label' => __('Send Mail', 'woobits-waitlist')
                     ],
                     [
-                        'name' => 'wpbits_unsubscribed',
-                        'label' => __('Unsubscribe', 'wpbits-waitlist')
+                        'name' => 'woobits_unsubscribed',
+                        'label' => __('Unsubscribe', 'woobits-waitlist')
                     ]
                 ];
 
@@ -97,7 +97,7 @@ class Actions
 	 */
     public function sendInstockMail(): void
     {
-        if($_GET['action'] != 'wpbits_mailsent') {
+        if($_GET['action'] != 'woobits_mailsent') {
             wp_redirect($_SERVER['HTTP_REFERER']);
             exit();
         }
@@ -119,18 +119,18 @@ class Actions
 	 */
     public function unsubscribe(): void
     {
-        if( $_GET['action'] != 'wpbits_unsubscribed' ) {
+        if( $_GET['action'] != 'woobits_unsubscribed' ) {
             wp_redirect( $_SERVER['HTTP_REFERER'] );
             exit();
         }
 
         $post = array(
             'ID' => $_GET['post_id'],
-            'post_status' => 'wpbits_unsubscribed'
+            'post_status' => 'woobits_unsubscribed'
         );
         wp_update_post($post);
 
-        wp_redirect( add_query_arg( 'wpbits_unsubscribed', 1, $_SERVER['HTTP_REFERER'] ) );
+        wp_redirect( add_query_arg( 'woobits_unsubscribed', 1, $_SERVER['HTTP_REFERER'] ) );
         exit();
     }
 
@@ -153,8 +153,8 @@ class Actions
         $trash = $bulk_actions['trash'];
         unset( $bulk_actions['trash'] );
 
-        $bulk_actions['wpbits_mailsent'] = __('Send Instock Mail', 'wpbits-waitlist');
-        $bulk_actions['wpbits_unsubscribed'] = __('Unsubscribe', 'wpbits-waitlist');
+        $bulk_actions['woobits_mailsent'] = __('Send Instock Mail', 'woobits-waitlist');
+        $bulk_actions['woobits_unsubscribed'] = __('Unsubscribe', 'woobits-waitlist');
         $bulk_actions['trash'] = $trash;
         return $bulk_actions;
     }
@@ -172,12 +172,12 @@ class Actions
     public function handleBulkActions(string $redirect, string $doaction, array $object_ids): string
     {
         // Remove query args.
-        $redirect = remove_query_arg( array('wpbits_mailsent', 'wpbits_unsubscribed' ), $redirect);
+        $redirect = remove_query_arg( array('woobits_mailsent', 'woobits_unsubscribed' ), $redirect);
 
-	    if($doaction == 'wpbits_mailsent') {
+	    if($doaction == 'woobits_mailsent') {
             $queryArgs = [
-                'wpbits_mailsent' => 0,
-                'wpbits_failed' => 0,
+                'woobits_mailsent' => 0,
+                'woobits_failed' => 0,
             ];
  
 		    foreach($object_ids as $postId) {
@@ -191,15 +191,15 @@ class Actions
         }
         
         // Handle "Unsubscribe" bulk action
-        if ($doaction == 'wpbits_unsubscribed') {
+        if ($doaction == 'woobits_unsubscribed') {
 
             foreach ($object_ids as $post_id) {
                 wp_update_post([
 				    'ID' => $post_id,
-				    'post_status' => 'wpbits_unsubscribed'
+				    'post_status' => 'woobits_unsubscribed'
                 ]);
             }
-            $redirect = add_query_arg('wpbits_unsubscribed', count($object_ids), $redirect);
+            $redirect = add_query_arg('woobits_unsubscribed', count($object_ids), $redirect);
         }
  
         return $redirect;
@@ -214,36 +214,36 @@ class Actions
 	 */
     public function adminNotices(): void
     {
-        if(!empty($_REQUEST['wpbits_failed'])) {
+        if(!empty($_REQUEST['woobits_failed'])) {
             printf('<div id="message" class="error notice is-dismissible"><p>' .
                 _n(
                     'There was an error. %s subscriber was not notified.',
                     'There was an error. %s subscribers were not notified.',
-                    intval($_REQUEST['wpbits_failed']),
-                    'wpbits-waitlist'
-                ) . '</p></div>', intval($_REQUEST['wpbits_failed'])
+                    intval($_REQUEST['woobits_failed']),
+                    'woobits-waitlist'
+                ) . '</p></div>', intval($_REQUEST['woobits_failed'])
             );
         }
 
-        if(!empty($_REQUEST['wpbits_mailsent'])) {
+        if(!empty($_REQUEST['woobits_mailsent'])) {
             printf('<div id="message" class="error notice is-dismissible"><p>' .
                 _n(
                     '%s subscriber was notified.',
                     '%s subscribers were notified.',
-                    intval($_REQUEST['wpbits_mailsent']),
-                    'wpbits-waitlist'
-                ) . '</p></div>', intval($_REQUEST['wpbits_mailsent'])
+                    intval($_REQUEST['woobits_mailsent']),
+                    'woobits-waitlist'
+                ) . '</p></div>', intval($_REQUEST['woobits_mailsent'])
             );
         }
 
-        if(!empty($_REQUEST['wpbits_unsubscribed'])) {
+        if(!empty($_REQUEST['woobits_unsubscribed'])) {
             printf('<div id="message" class="error notice is-dismissible"><p>' .
                 _n(
                     '%s subscriber was unsubscribed.',
                     '%s subscribers were unsubscribed.',
-                    intval($_REQUEST['wpbits_unsubscribed']),
-                    'wpbits-waitlist'
-                ) . '</p></div>', intval($_REQUEST['wpbits_unsubscribed'])
+                    intval($_REQUEST['woobits_unsubscribed']),
+                    'woobits-waitlist'
+                ) . '</p></div>', intval($_REQUEST['woobits_unsubscribed'])
             );
         }
     }

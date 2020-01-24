@@ -1,6 +1,6 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package woobitsWaitlist
  * 
  * @since 1.0.0
  */
@@ -40,7 +40,7 @@ class Enqueue extends Paths
     {
         // wp_enqueue_style( 'bootstrap', $this->pluginUrl . 'assets/css/bootstrap.css' );
         wp_enqueue_style('adminStyle', $this->pluginUrl . 'assets/css/admin.css');
-        wp_enqueue_script('adminScript', $this->pluginUrl . 'assets/js/admin.js');
+        // wp_enqueue_script('adminScript', $this->pluginUrl . 'assets/js/admin.js');
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package woobitsWaitlist
  * 
  * @since 1.0.0
  */
@@ -25,9 +25,9 @@ class Mail
 	 */
     public function register(): void
     {
-        add_filter('wpbits_replace_shortcodes', array($this, 'replaceShortcodes'), 10, 2 );
+        add_filter('woobits_replace_shortcodes', array($this, 'replaceShortcodes'), 10, 2 );
 
-        if( get_option('wpbits_waitlist_enable_instock_mail') ) {
+        if( get_option('woobits_waitlist_enable_instock_mail') ) {
             add_action('init', array($this, 'automaticInstockMails'), 10 );
         }
     }
@@ -85,21 +85,21 @@ class Mail
 	 */
     public function sendSuccessSubscriptionMail(int $subscriberId ): void
     {
-        $to = get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
+        $to = get_post_meta($subscriberId, '_woobitswaitlist_email', true);
         $subject = apply_filters( 
-            'wpbits_replace_shortcodes', 
-            get_option('wpbits_waitlist_subscription_mail_subject'), 
+            'woobits_replace_shortcodes', 
+            get_option('woobits_waitlist_subscription_mail_subject'), 
             $subscriberId 
         );
         $message = apply_filters( 
-            'wpbits_replace_shortcodes', 
-            get_option('wpbits_waitlist_subscription_mail_message'), 
+            'woobits_replace_shortcodes', 
+            get_option('woobits_waitlist_subscription_mail_message'), 
             $subscriberId 
         );
         $template = $this->getMailTemplate($subject, $message);
 
-        if(get_option('wpbits_waitlist_subscription_mail_copy')) {
-            $header = 'Bcc: ' . get_option('wpbits_waitlist_subscription_mail_copy');
+        if(get_option('woobits_waitlist_subscription_mail_copy')) {
+            $header = 'Bcc: ' . get_option('woobits_waitlist_subscription_mail_copy');
         }
 
         $mailer = WC()->mailer();
@@ -140,15 +140,15 @@ class Mail
 	 */
     public function sendInstockMail(int $subscriberId): bool 
     {
-        $to = get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
+        $to = get_post_meta($subscriberId, '_woobitswaitlist_email', true);
         $subject = apply_filters( 
-            'wpbits_replace_shortcodes', 
-            get_option('wpbits_waitlist_instock_mail_subject'), 
+            'woobits_replace_shortcodes', 
+            get_option('woobits_waitlist_instock_mail_subject'), 
             $subscriberId 
         );
         $message = apply_filters( 
-            'wpbits_replace_shortcodes', 
-            get_option('wpbits_waitlist_instock_mail_message'), 
+            'woobits_replace_shortcodes', 
+            get_option('woobits_waitlist_instock_mail_message'), 
             $subscriberId 
         );
 
@@ -205,7 +205,7 @@ class Mail
         if(!$mailSent) {
             $subscriber = array(
                 'ID' => $subscriberId,
-                'post_status' => 'wpbits_failed'
+                'post_status' => 'woobits_failed'
             );
             wp_update_post($subscriber);
             return $subscriber['post_status'];
@@ -213,11 +213,11 @@ class Mail
 
         $subscriber = array(
             'ID' => $subscriberId,
-            'post_status' => 'wpbits_mailsent'
+            'post_status' => 'woobits_mailsent'
         );
 
         wp_update_post($subscriber);
-        update_post_meta($subscriberId, '_wpbitswaitlist_mailsent_at', date('Y-m-d H:i:s'));
+        update_post_meta($subscriberId, '_woobitswaitlist_mailsent_at', date('Y-m-d H:i:s'));
         return $subscriber['post_status'];
     }
 }

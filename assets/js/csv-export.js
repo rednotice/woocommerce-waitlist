@@ -10,13 +10,13 @@ function generateButton() {
     const exportButton = document.createElement('a');
     heading.insertAdjacentElement('afterend', exportButton);
     exportButton.classList.add('page-title-action');
-    exportButton.id = 'wpbits-export';
+    exportButton.id = 'woobits-export';
     exportButton.innerHTML = 'Export';
 }
 
 function buttonHandler() {
-    const exportButton = document.getElementById('wpbits-export');
-    const url = '/wp-admin/admin-ajax.php?action=wpbits_export';
+    const exportButton = document.getElementById('woobits-export');
+    const url = '/wp-admin/admin-ajax.php?action=woobits_export';
 
     exportButton.addEventListener('click', async function(event) {
         const res = await fetch(url, {

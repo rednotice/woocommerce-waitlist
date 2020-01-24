@@ -1,6 +1,6 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package woobitsWaitlist
  * 
  * @since 1.0.0
  */
@@ -68,11 +68,11 @@ class SettingsCallbacks extends Paths
     {
         if($input && !is_email($input)) {
             add_settings_error(
-                'wpbits_waitlist_subscription_mail_copy',
+                'woobits_waitlist_subscription_mail_copy',
                 esc_attr( 'invalid-email' ),
                 __(
                     'The email address to receive a copy of the subscription success mail is not valid.',
-                    'wpbits-waitlist'
+                    'woobits-waitlist'
                 )
             );
         }
@@ -98,7 +98,7 @@ class SettingsCallbacks extends Paths
      */
     public function settingsSectionForm(): void
     {
-        _e('Customize how your waitlist form will be displayed to your customers.', 'wpbits-waitlist');
+        _e('Customize how your waitlist form will be displayed to your customers.', 'woobits-waitlist');
     }
 
     /**
@@ -107,7 +107,7 @@ class SettingsCallbacks extends Paths
      * @return void
      */
     public function settingsSectionValidation() {
-        _e('Customize the success and error messages your subscribers will see when submitting the form.', 'wpbits-waitlist');
+        _e('Customize the success and error messages your subscribers will see when submitting the form.', 'woobits-waitlist');
     }
 
     /**
@@ -117,7 +117,7 @@ class SettingsCallbacks extends Paths
      */
     public function settingsSectionCheckbox(): void 
     {
-        _e('Add an I Agree-checkbox to the subscribe form.', 'wpbits-waitlist');
+        _e('Add an I Agree-checkbox to the subscribe form.', 'woobits-waitlist');
     }
 
     /**
@@ -136,7 +136,7 @@ class SettingsCallbacks extends Paths
             <b>{product_image}</b>,
             <b>{subscriber_email}</b>,
             <b>{shop_name}</b>.',
-            'wpbits-waitlist'
+            'woobits-waitlist'
         );
     }
 

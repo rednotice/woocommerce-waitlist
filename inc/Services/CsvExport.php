@@ -1,6 +1,6 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package woobitsWaitlist
  * 
  * @since 1.0.0
  */
@@ -28,8 +28,8 @@ class CsvExport extends Paths
     {
         add_action('admin_head-edit.php', array($this, 'addExportButton'), 10);
 
-        add_action('wp_ajax_nopriv_wpbits_export', array($this, 'formatExportData'));
-        add_action('wp_ajax_wpbits_export', array($this, 'formatExportData'));
+        add_action('wp_ajax_nopriv_woobits_export', array($this, 'formatExportData'));
+        add_action('wp_ajax_woobits_export', array($this, 'formatExportData'));
     }
 
     /**
@@ -41,7 +41,7 @@ class CsvExport extends Paths
     {
         global $current_screen;
 
-        if ($current_screen->post_type !== 'wpbitswaitlist') {
+        if ($current_screen->post_type !== 'woobitswaitlist') {
             return null;
         }
 
@@ -60,7 +60,7 @@ class CsvExport extends Paths
         $formattedSubscribers = [];
         foreach($subscribers as $subscriber) {
             $email = Helpers::getSubscriberEmail($subscriber->ID);
-            $status = str_replace('wpbits_', '', $subscriber->post_status);
+            $status = str_replace('woobits_', '', $subscriber->post_status);
             $productId = Helpers::getProductId($subscriber->ID);
             $productName = Helpers::getProductName($subscriber->ID);
             $subscribedAt = Helpers::getSubscriptionDate($subscriber->ID);
