@@ -53,7 +53,5 @@ class Enqueue extends Paths
     public function enqueueFrontEndScripts(): void
     {
         // wp_enqueue_style( 'bootstrap', $this->pluginUrl . 'assets/css/bootstrap.css' );
-        wp_enqueue_style('waitlistFormStyle', $this->pluginUrl . 'assets/css/form.css');
-        wp_enqueue_script('waitlistFormScript', $this->pluginUrl . 'assets/js/form.js');
     }
 }

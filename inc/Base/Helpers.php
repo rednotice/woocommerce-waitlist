@@ -61,6 +61,33 @@ class Helpers
     /**
      * @since 1.0.0
      * 
+     * @param string $subscriberEmail
+     * @param string $subscriberStatus (optional) Default: 'wpbits_subscribed'.
+     * @param string $returnFields (optional) 'All' to return all fields, 
+     * 'ids' to return only the ids (default: 'all').
+     * @return array Subscribers.
+     */
+    public static function getSubscribersByEmail(string $subscriberEmail, string $subscriberStatus = 'wpbits_subscribed', string $returnFields = 'all'): array 
+    {
+        $args = [ 
+            'post_type' => 'wpbitswaitlist',
+            'post_status' => $subscriberStatus,
+            'fields' => $returnFields,
+            'meta_query' => array(
+                array(
+                    'key' => '_wpbitswaitlist_email',
+                    'value' => $subscriberEmail
+                )
+            )
+        ];
+
+        $query = new \WP_Query($args);
+        return $query->posts;
+    }
+
+    /**
+     * @since 1.0.0
+     * 
      * @param string $email
      * @param int $productId
      * @param int $variationId
@@ -124,7 +151,7 @@ class Helpers
 
         $query = new \WP_Query($args);
 
-        if(!empty( $query->have_posts())) {
+        if(!empty($query->have_posts())) {
             return true;
         }
         return false;

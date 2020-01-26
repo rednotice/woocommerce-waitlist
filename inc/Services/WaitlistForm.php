@@ -31,13 +31,34 @@ class WaitlistForm extends Paths
             return;
         }
 
-        add_action('woocommerce_single_product_summary', array($this, 'loadTemplateForSingleProducts'), 31 );
+        add_action('wp_enqueue_scripts', array( $this, 'enqueueScripts'), 10);
 
+        add_action('woocommerce_single_product_summary', array($this, 'loadTemplateForSingleProducts'), 31 );
         add_action('woocommerce_single_product_summary', array($this, 'loadFormTagsForVariationProducts'), 10);
         add_filter('woocommerce_available_variation',  array($this, 'loadTemplateForVariationProducts'), 1, 3);
 
         add_action('wp_ajax_nopriv_wpbits_submit_subscriber', array($this, 'submitSubscriber'));
         add_action('wp_ajax_wpbits_submit_subscriber', array($this, 'submitSubscriber'));
+    }
+
+    /**
+	 * Enqueues the javascript script and style sheet for the waitlist form.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return bool
+	 */
+    public function enqueueScripts(): bool
+    {
+        // global $product;
+
+        // if (!is_product() || $product->is_in_stock()) {
+        //     return false;
+        // }
+
+        wp_enqueue_style('waitlistFormStyle', $this->pluginUrl . 'assets/css/form.css');
+        wp_enqueue_script('waitlistFormScript', $this->pluginUrl . 'assets/js/form.js');
+        return true;
     }
 
     /**
@@ -51,9 +72,10 @@ class WaitlistForm extends Paths
     {
         global $product;
 
-        if ($product->is_type('variable') || $product->is_in_stock()) { 
+        if($product->is_type('variable') || $product->is_in_stock()) { 
             return null;
         }
+
         return require_once( $this->pluginPath .'/views/waitlist-form.php' );
     }
 
@@ -68,8 +90,8 @@ class WaitlistForm extends Paths
     public function loadFormTagsForVariationProducts(): void 
     {
         global $product;
-        $url = admin_url( 'admin-ajax.php' );
-        if ( $product->is_type('variable') ) { 
+        $url = admin_url('admin-ajax.php');
+        if ($product->is_type('variable')) { 
             echo '<form 
                 id="wpbits-waitlist-form" 
                 action="#" method="POST" 

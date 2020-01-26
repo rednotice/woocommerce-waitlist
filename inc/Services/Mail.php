@@ -8,6 +8,7 @@
 namespace Inc\Services;
 
 use \Inc\Base\Helpers;
+use \Inc\Services\Unsubscribe;
 
 /**
  * Handles the mails sent to the subscribers.
@@ -16,6 +17,15 @@ use \Inc\Base\Helpers;
  */
 class Mail
 {
+    /**
+	 * Instance of the Unsubcribe class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var object
+	 */
+    public $unsubscribe;
+
     /**
 	 * Used by the Init class to intantiate the class.
 	 *
@@ -50,6 +60,7 @@ class Mail
         $subscriberEmail = Helpers::getSubscriberEmail($subscriberId);
         $shopName = Helpers::getShopName();
         $lineBreak = Helpers::getLineBreak();
+        $unsubscribeLink = Unsubscribe::generateUrl($subscriberEmail);
 
         $shortcodes = [ 
             '{product_id}', 
@@ -58,7 +69,8 @@ class Mail
             '{product_image}',
             '{subscriber_email}',
             '{shop_name}',
-            '{line_break}'
+            '{line_break}',
+            '{unsubscribe_link}'
         ];
 
         $replacements = [ 
@@ -68,7 +80,8 @@ class Mail
             $productImage,
             $subscriberEmail,
             $shopName,
-            $lineBreak
+            $lineBreak,
+            $unsubscribeLink
         ];
 
         $filteredText = str_replace($shortcodes, $replacements, $text);

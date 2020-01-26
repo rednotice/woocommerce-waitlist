@@ -1,38 +1,39 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+class WaitlistForm {
+    constructor() {
+        this.form = document.getElementById('wpbits-waitlist-form');
+        this.container = document.getElementById('wpbits-waitlist-container');
 
-    const waitlistForm = document.getElementById('wpbits-waitlist-form');
+        this.form.addEventListener('submit', this.subscriptionHandler.bind(this));
+    }
 
-    waitlistForm.addEventListener('submit', async (event) => {
+    async subscriptionHandler() {
         event.preventDefault();
+        this.resetValidationMessages();
 
-        resetValidationMessages();
+        this.email = this.container.querySelector('[name="email"]').value;
+        this.setVariationId();
+        this.setConfirmationCheckbox();
 
-        const waitlistContainer = document.getElementById('wpbits-waitlist-container');
-        const email = waitlistContainer.querySelector('[name="email"]').value;
-        if( !email || !validateEmail(email) ) {
-            waitlistContainer.querySelector('[data-error="invalidEmail"]').classList.add('show');
-            return null;
+        if(!this.email || !this.validateEmail(this.email)) {
+            this.displayValidationMessage('[data-error="invalidEmail"]');
+            return false;
         }
 
-        if( waitlistContainer.querySelector('[name="confirmation"]') ) {
-            const confirmationCheckbox = waitlistContainer.querySelector('[name="confirmation"]');
-            if( !confirmationCheckbox.checked ) {
-                waitlistContainer.querySelector('[data-error="invalidConfirmation"]').classList.add('show');
-                return null;
-            }
+        if(this.confirmationCheckbox && !this.confirmationCheckbox.checked) {
+            this.displayValidationMessage('[data-error="invalidConfirmation"]');
+            return false;
         }
 
-        const url = waitlistForm.dataset.url;
-        const formData = new FormData(waitlistForm);
+        const formData = new FormData(this.form);
 
-        if( document.querySelector('[name="variation_id"]') ) {
-            const variationId = document.querySelector('[name="variation_id"]').value;
-            formData.append('variationId', variationId);
+        if(this.variationId) {
+            formData.append('variationId', this.variationId);
         }
 
         const params = new URLSearchParams(formData);
+        const url = this.form.dataset.url;
 
-        waitlistContainer.querySelector('.js-form-submission').classList.add('show');
+        this.displayValidationMessage('.js-form-submission');
 
         try {
             const res = await fetch(url, {
@@ -42,37 +43,61 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             const result = await res.json();
             
-            resetValidationMessages();
+            this.resetValidationMessages();
 
-            // Handle the response
             if (result.status === 'alreadySubscribed') {
-                waitlistContainer.querySelector('.js-already-subscribed-error').classList.add('show');
-                return null;
+                this.displayValidationMessage('.js-already-subscribed-error');
+                return false;
             }
 
             if (result === 0 || result.status === 'error') {
-                waitlistContainer.querySelector('.js-form-error').classList.add('show');
-                return null;
+                this.displayValidationMessage('.js-form-error');
+                return false;
             }
 
-            waitlistContainer.querySelector('.js-form-success').classList.add('show');
-            waitlistContainer.querySelector('[name="email"]').value = '';
-            if(waitlistContainer.querySelector('[name="confirmation"]')) {
-                waitlistContainer.querySelector('[name="confirmation"]').checked = false;
-            }
-            
+            this.displayValidationMessage('.js-form-success');
+            this.resetForm();
+            return true;
         } catch (error) {
             resetValidationMessages();
-            waitlistContainer.querySelector('.js-form-error').classList.add('show');
+            this.displayValidationMessage('.js-form-error');
+            return false;
         }
-    });
-});
+    }
 
-function resetValidationMessages() {
-    document.querySelectorAll('.field-msg').forEach(field => field.classList.remove('show'));
+    setVariationId() {
+        if(this.container.querySelector('[name="variation_id"]')) {
+            this.variationId = this.container.querySelector('[name="variation_id"]').value;
+        }
+    }
+
+    setConfirmationCheckbox() {
+        if(this.container.querySelector('[name="confirmation"]')) {
+            this.confirmationCheckbox = this.container.querySelector('[name="confirmation"]');
+        }
+    }
+
+    validateEmail(email) {
+        const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regEx.test(String(email).toLowerCase());
+    }
+
+    displayValidationMessage(querySelector) {
+        this.container.querySelector(querySelector).classList.add('show');
+    }
+
+    resetValidationMessages() {
+        document.querySelectorAll('.field-msg').forEach(field => field.classList.remove('show'));
+    }
+
+    resetForm() {
+        this.container.querySelector('[name="email"]').value = '';
+        if(this.confirmationCheckbox) {
+            this.container.querySelector('[name="confirmation"]').checked = false;
+        }
+    }
 }
 
-function validateEmail(email) {
-    const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return regEx.test(String(email).toLowerCase());
-}
+document.addEventListener('DOMContentLoaded', (event) => {
+    const waitlistForm = new WaitlistForm();
+})
