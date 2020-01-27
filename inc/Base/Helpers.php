@@ -33,10 +33,10 @@ class Helpers
     /**
      * @since 1.0.0
      * 
-     * @param int $productId
-     * @return object $subscriber
+     * @param int $productId Product id.
+     * @return array Subscribers.
      */
-    public static function getSubscribersByProduct(int $productId): object 
+    public static function getSubscribersByProductId(int $productId): array 
     {
         $args = [ 
             'post_type' => 'wpbitswaitlist', 
@@ -54,20 +54,20 @@ class Helpers
             )
         ];
 
-        $subscriber = new \WP_Query($args);
-        return $subscriber;
+        $query = new \WP_Query($args);
+        return $query->posts;;
     }
 
     /**
      * @since 1.0.0
      * 
-     * @param string $subscriberEmail
-     * @param string $subscriberStatus (optional) Default: 'wpbits_subscribed'.
-     * @param string $returnFields (optional) 'All' to return all fields, 
-     * 'ids' to return only the ids (default: 'all').
+     * @param string $email Subscriber email.
+     * @param string $status (optional) Subscriber status (efault: 'wpbits_subscribed').
+     * @param string $fields (optional) Return fields. Param 'all' returns all fields, 
+     *  param 'ids' returns only the ids (default: 'all').
      * @return array Subscribers.
      */
-    public static function getSubscribersByEmail(string $subscriberEmail, string $subscriberStatus = 'wpbits_subscribed', string $returnFields = 'all'): array 
+    public static function getSubscribersByEmail(string $email, string $status = 'wpbits_subscribed', string $fields = 'all'): array 
     {
         $args = [ 
             'post_type' => 'wpbitswaitlist',
@@ -228,7 +228,7 @@ class Helpers
      * 
      * @return array $productIds
      */
-    public static function getSubscribedProductIds(): array
+    public static function getAllSubscribedProductIds(): array
     {
         $productIds= [];
 

@@ -31,6 +31,7 @@ final class Init
             Services\MailSettings::class,
             Services\CsvExport::class,
             Services\PostTypes::class,
+            Services\SubscriberStatus::class,
             Services\Actions::class,
             Services\Filter::class,
             Services\Mail::class,

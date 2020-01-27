@@ -175,38 +175,29 @@ class Mail
     }
 
     /**
-	 * Automatically sends instock mails to the subscribers of a product.
+	 * Automatically sends instock mails to the subscribers of a back in stock product.
 	 *
 	 * @since 1.0.0
      * 
-	 * @return void
+     * @param int $updatedProductId
+	 * @return bool
 	 */
-    public function automaticInstockMails(int $updatedProductId): void 
+    public function automaticInstockMails(int $updatedProductId): bool 
     {
-        $subscribedProductIds = Helpers::getSubscribedProductIds();
+        $updatedProduct = wc_get_product($updatedProductId);
 
-        $backInStockProducts = [];
-        foreach($subscribedProductIds as $productId) {
-            if (wc_get_product($productId)->is_in_stock()) {
-                $backInStockProducts[] = $productId;
-            }
+        if(!$updatedProduct->is_in_stock() || $updatedProduct->get_stock_quantity() <= 0 ) {
+            return false;
         }
 
-        foreach($backInStockProducts as $backInStockProduct) {
-            $query = Helpers::getSubscribersByProduct($backInStockProduct);
+        $subscribers = Helpers::getSubscribersByProductId($updatedProductId);
 
-            if ($query->have_posts()) {
-                while ($query->have_posts()) {
-                    $query->the_post();
-                    $subscriberId = get_the_ID();
-                    $mailSent = $this->sendInstockMail($subscriberId);
-                    if(!$mailSent) {
-                        Helpers::setStatusToFailed($subscriberId);
-                    } else {
-                        Helpers::setStatusToMailSent($subscriberId);
-                    }
-                }
+        if($subscribers) {
+            foreach($subscribers as $subscriber) {
+                $subscriberId = $subscriber->ID;
+                $this->sendInstockMail($subscriberId);
             }
         }
+        return true;
     }
 }

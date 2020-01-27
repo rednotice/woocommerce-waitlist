@@ -23,14 +23,14 @@ class PostTypes
 	 */
     public $postTypes = array();
 
-    /**
-	 * Post statuses.
-	 *
-	 * @since 1.0.0
-     * 
-	 * @var array
-	 */
-    public $postStatuses;
+    // /**
+	//  * Post statuses.
+	//  *
+	//  * @since 1.0.0
+    //  * 
+	//  * @var array
+	//  */
+    // public $postStatuses;
 
     /**
 	 * Columns in the custom post types admin page.
@@ -59,17 +59,12 @@ class PostTypes
 	 */
     public function register(): void
     {
-        $this->setPostTypes();
-        $this->setPostStatuses();
+        $this->setPostTypes();;
         $this->setColumns();
         $this->setColumnsToUnset();
 
         if(!empty($this->postTypes)) {
             add_action('init', array( $this, 'registerPostTypes'), 10);
-        }
-
-        if(!empty($this->postStatuses)) {
-            add_action('init', array($this, 'registerPostStatuses'), 10);
         }
 
         if(!empty($this->columns) || !empty($this->columnsToUnset)) {
@@ -167,97 +162,6 @@ class PostTypes
                     'supports' => $postType['supports'] ?? []
                 ]
             );
-        }
-    }
-
-    /**
-	 * Populates the post statuses attribute.
-	 *
-	 * @since 1.0.0
-     * 
-	 * @return void
-	 */
-    public function setPostStatuses(): void 
-    {
-        $this->postStatuses = [
-            [
-                'post_status' => 'wpbits_subscribed',
-                'args' => [
-                    'label' => __('Subscribed', 'wpbits-waitlist'),
-                    'public' => true,
-                    'exclude_from_search' => false,
-                    'show_in_admin_all_list' => true,
-                    'show_in_admin_status_list' => true,
-                    'show_in_admin_status_list' =>  true,
-                    'label_count' => _n_noop(
-                        'Subscribed <span class="count">(%s)</span>', 
-                        'Subscribed <span class="count">(%s)</span>',
-                        'wbits-waitlist'
-                    ),
-                ]
-            ],
-            [
-                'post_status' => 'wpbits_unsubscribed',
-                'args' => [
-                    'label' => __('Unsubscribed', 'wpbits-waitlist'),
-                    'public' => true,
-                    'exclude_from_search' => false,
-                    'show_in_admin_all_list' => true,
-                    'show_in_admin_status_list' => true,
-                    'show_in_admin_status_list' =>  true,
-                    'label_count' => _n_noop(
-                        'Unsubscribed <span class="count">(%s)</span>', 
-                        'Unsubscribed <span class="count">(%s)</span>',
-                        'wbits-waitlist'
-                    ),
-                ]
-            ],
-            [
-                'post_status' => 'wpbits_mailsent',
-                'args' => [
-                    'label' => __('Mail Sent', 'wpbits-waitlist'),
-                    'public' => true,
-                    'exclude_from_search' => false,
-                    'show_in_admin_all_list' => true,
-                    'show_in_admin_status_list' => true,
-                    'show_in_admin_status_list' =>  true,
-                    'label_count' => _n_noop(
-                        'Mail Sent <span class="count">(%s)</span>', 
-                        'Mail Sent <span class="count">(%s)</span>',
-                        'wbits-waitlist'
-                    ),
-                ]
-            ],
-            [
-                'post_status' => 'wpbits_failed',
-                'args' => [
-                    'label' => __('Failed', 'wpbits-waitlist'),
-                    'public' => true,
-                    'exclude_from_search' => false,
-                    'show_in_admin_all_list' => true,
-                    'show_in_admin_status_list' => true,
-                    'show_in_admin_status_list' =>  true,
-                    'label_count' => _n_noop(
-                        'Failed <span class="count">(%s)</span>',
-                        'Failed <span class="count">(%s)</span>',
-                        'wbits-waitlist'
-                    ),
-                ]
-            ]
-        ];
-    }
-
-    /**
-	 * Registers the post statuses.
-	 *
-	 * @since 1.0.0
-     * 
-	 * @return void
-	 */
-    public function registerPostStatuses(): void 
-    {
-        foreach($this->postStatuses as $postStatus) {
-            register_post_status($postStatus['post_status'], $postStatus['args']);
         }
     }
 
