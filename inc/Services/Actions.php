@@ -8,7 +8,7 @@
 namespace Inc\Services;
 
 use \Inc\Services\Mail;
-use \Inc\Base\Helpers;
+use \Inc\Services\SubscriberStatus;
 
 /**
  * Class used to implement custom actions on the waitlist custom post type admin page.
@@ -26,6 +26,15 @@ class Actions
 	 */
     public $mail;
 
+     /**
+	 * Instance of the SubscriberStatus class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var object
+	 */
+    public $subscriberStatus;
+
     /**
 	 * Used by the Init class to intantiate this class.
 	 *
@@ -36,6 +45,7 @@ class Actions
     public function register(): void
     {
         $this->mail = new Mail;
+        $this->subscriberStatus = new SubscriberStatus();
 
         // Row actions
         add_filter('post_row_actions', array( $this, 'modifyPostRowActions' ), 10, 2);
@@ -125,7 +135,7 @@ class Actions
         }
 
         $subscriberId = $_GET['post_id'];
-        $status = Helpers::setStatusToUnsubscribed($subscriberId);
+        $status = $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_unsubscribed');
 
         wp_redirect( add_query_arg($status, 1, $_SERVER['HTTP_REFERER']));
         exit();
@@ -189,7 +199,7 @@ class Actions
         // Handle "Unsubscribe" bulk action
         if ($doaction == 'wpbits_unsubscribed') {
             foreach ($object_ids as $subscriberId) {
-                Helpers::setStatusToUnsubscribed($subscriberId);
+                $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_unsubscribed');
             }
             $redirect = add_query_arg('wpbits_unsubscribed', count($object_ids), $redirect);
         }

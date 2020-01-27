@@ -9,6 +9,7 @@ namespace Inc\Services;
 
 use \Inc\Base\Helpers;
 use \Inc\Services\Unsubscribe;
+use \Inc\Services\SubscriberStatus;
 
 /**
  * Handles the mails sent to the subscribers.
@@ -25,6 +26,16 @@ class Mail
 	 * @var object
 	 */
     public $unsubscribe;
+
+    /**
+	 * Instance of the SubscriberStatus class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var object
+	 */
+    public $subscriberStatus;
+
 
     /**
 	 * Used by the Init class to intantiate the class.
@@ -149,9 +160,9 @@ class Mail
 	 * @since 1.0.0
      * 
      * @param int $subscriberId Id of the subscriber the mail will be send to.
-	 * @return string Subscriber status.
+	 * @return bool
 	 */
-    public function sendInstockMail(int $subscriberId): string 
+    public function sendInstockMail(int $subscriberId): bool 
     {
         $to = get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
         $subject = apply_filters( 
@@ -166,12 +177,15 @@ class Mail
         );
 
         $mailer = WC()->mailer();
-        $mailSent = $mailer->send($to, $subject, $this->getMailTemplate($subject, $message));
+        $mailSentSuccess = $mailer->send($to, $subject, $this->getMailTemplate($subject, $message));
         
-        if(!$mailSent) {
-            return Helpers::setStatusToFailed($subscriberId);
+        $this->subscriberStatus = new SubscriberStatus();
+        if(!$mailSentSuccess) {
+            $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_failed');
+            return false;
         }
-        return Helpers::setStatusToMailSent($subscriberId);
+        $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_mailsent');
+        return true;
     }
 
     /**

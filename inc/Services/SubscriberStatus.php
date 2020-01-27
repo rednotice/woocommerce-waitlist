@@ -23,7 +23,17 @@ class SubscriberStatus
 	 */
     public $statuses;
 
-        /**
+    /**
+     * Constructor
+     * 
+     * @since 1.0.0
+     */
+    public function __construct() 
+    {
+        $this->setStatuses();
+    }
+
+    /**
 	 * Used by the Init class to intantiate the class.
 	 *
 	 * @since 1.0.0
@@ -32,8 +42,6 @@ class SubscriberStatus
 	 */
     public function register(): void
     {
-        $this->setStatuses();
-
         if(!empty($this->statuses)) {
             add_action('init', array($this, 'registerStatuses'), 10);
         }
@@ -50,68 +58,24 @@ class SubscriberStatus
     {
         $this->statuses = [
             [
-                'post_status' => 'wpbits_subscribed',
-                'args' => [
-                    'label' => __('Subscribed', 'wpbits-waitlist'),
-                    'public' => true,
-                    'exclude_from_search' => false,
-                    'show_in_admin_all_list' => true,
-                    'show_in_admin_status_list' => true,
-                    'show_in_admin_status_list' =>  true,
-                    'label_count' => _n_noop(
-                        'Subscribed <span class="count">(%s)</span>', 
-                        'Subscribed <span class="count">(%s)</span>',
-                        'wbits-waitlist'
-                    ),
-                ]
+                'name' => 'wpbits_subscribed',
+                'label' => 'Subscribed', 
+                'textdomain' => 'wpbits-waitlist'
             ],
             [
-                'post_status' => 'wpbits_unsubscribed',
-                'args' => [
-                    'label' => __('Unsubscribed', 'wpbits-waitlist'),
-                    'public' => true,
-                    'exclude_from_search' => false,
-                    'show_in_admin_all_list' => true,
-                    'show_in_admin_status_list' => true,
-                    'show_in_admin_status_list' =>  true,
-                    'label_count' => _n_noop(
-                        'Unsubscribed <span class="count">(%s)</span>', 
-                        'Unsubscribed <span class="count">(%s)</span>',
-                        'wbits-waitlist'
-                    ),
-                ]
+                'name' => 'wpbits_unsubscribed',
+                'label' => 'Unsubscribed', 
+                'textdomain' => 'wpbits-waitlist'
             ],
             [
-                'post_status' => 'wpbits_mailsent',
-                'args' => [
-                    'label' => __('Mail Sent', 'wpbits-waitlist'),
-                    'public' => true,
-                    'exclude_from_search' => false,
-                    'show_in_admin_all_list' => true,
-                    'show_in_admin_status_list' => true,
-                    'show_in_admin_status_list' =>  true,
-                    'label_count' => _n_noop(
-                        'Mail Sent <span class="count">(%s)</span>', 
-                        'Mail Sent <span class="count">(%s)</span>',
-                        'wbits-waitlist'
-                    ),
-                ]
+                'name' => 'wpbits_mailsent',
+                'label' => 'Instock Mail Sent', 
+                'textdomain' => 'wpbits-waitlist'
             ],
             [
-                'post_status' => 'wpbits_failed',
-                'args' => [
-                    'label' => __('Failed', 'wpbits-waitlist'),
-                    'public' => true,
-                    'exclude_from_search' => false,
-                    'show_in_admin_all_list' => true,
-                    'show_in_admin_status_list' => true,
-                    'show_in_admin_status_list' =>  true,
-                    'label_count' => _n_noop(
-                        'Failed <span class="count">(%s)</span>',
-                        'Failed <span class="count">(%s)</span>',
-                        'wbits-waitlist'
-                    ),
-                ]
+                'name' => 'wpbits_failed',
+                'label' => 'Failed', 
+                'textdomain' => 'wpbits-waitlist'
             ]
         ];
     }
@@ -126,7 +90,21 @@ class SubscriberStatus
     public function registerStatuses(): void 
     {
         foreach($this->statuses as $status) {
-            register_post_status($status['post_status'], $status['args']);
+            $args = [
+                'label' => __($status['label'], $status['textdomain']),
+                'public' => true,
+                'exclude_from_search' => false,
+                'show_in_admin_all_list' => true,
+                'show_in_admin_status_list' => true,
+                'show_in_admin_status_list' =>  true,
+                'label_count' => _n_noop(
+                    $status['label'] . ' <span class="count">(%s)</span>', 
+                    $status['label'] . ' <span class="count">(%s)</span>',
+                    $status['textdomain']
+                ),
+            ];
+
+            register_post_status($status['name'], $args);
         }
     }
 
@@ -140,14 +118,24 @@ class SubscriberStatus
     public function updateStatus(int $subscriberId, string $status): string
     {
         // Check if $status contained in Self:statuses
-        is_array($status, $this->statuses, true);
+        if(!in_array($status, array_column($this->statuses, 'name'), true)) {
+            return new WP_Error('unknown_status', __('The argument given is not a valid status.', 'wpbits-waitlist'));
+        }
 
         $subscriber = array(
             'ID' => $subscriberId,
-            'post_status' => 'wpbits_mailsent'
+            'post_status' => $status
         );
         wp_update_post($subscriber);
-        update_post_meta($subscriberId, '_wpbitswaitlist_mailsent_at', date('Y-m-d H:i:s'));
+
+        if($status === 'wpbits_subscribed') {
+            update_post_meta($subscriberId, '_wpbitswaitlist_subscribed_at', date('Y-m-d H:i:s'));
+        }
+
+        if($status === 'wpbits_mailsent') {
+            update_post_meta($subscriberId, '_wpbitswaitlist_mailsent_at', date('Y-m-d H:i:s'));
+        }
+
         return $subscriber['post_status'];
     }
 }

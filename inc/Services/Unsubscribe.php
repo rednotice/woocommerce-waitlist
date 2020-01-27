@@ -9,6 +9,7 @@ namespace Inc\Services;
 
 use \Inc\Base\Paths;
 use \Inc\Base\Helpers;
+use \Inc\Services\SubscriberStatus;
 
 /**
  * Lets subscribers unsubcribe from the waitlist.
@@ -17,6 +18,15 @@ use \Inc\Base\Helpers;
  */
 class Unsubscribe extends Paths
 {
+    /**
+	 * Instance of the SubscriberStatus class.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @var object
+	 */
+    public $subscriberStatus;
+
     /**
 	 * Used by the Init class to intantiate the class.
 	 *
@@ -69,8 +79,9 @@ class Unsubscribe extends Paths
             return false;
         }
 
+        $this->subscriberStatus = new SubscriberStatus();
         foreach($subscriberIds as $subscriberId) {
-            Helpers::setStatusToUnsubscribed($subscriberId);
+            $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_unsubscribe');
         }
 
         wp_redirect('/?post_type=wpbitswaitlist&wpbits_goodbye');

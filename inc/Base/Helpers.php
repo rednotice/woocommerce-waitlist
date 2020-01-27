@@ -17,6 +17,37 @@ class Helpers
     /**
      * @since 1.0.0
      * 
+     * @return array $productIds
+     */
+    public static function getAllSubscribedProductIds(): array
+    {
+        $productIds= [];
+
+        $args = [ 
+            'post_type' => 'wpbitswaitlist', 
+            'post_status' => 'wpbits_subscribed',
+        ];
+        $query = new \WP_Query($args);
+
+        if($query->have_posts()) {
+            while($query->have_posts()) {
+                $query->the_post();
+                $postId = get_the_ID();
+                if(get_post_meta($postId, '_wpbitswaitlist_variation_id' , true)) {
+                    $productId = get_post_meta($postId, '_wpbitswaitlist_variation_id' , true);
+                } else {
+                    $productId = get_post_meta($postId, '_wpbitswaitlist_product_id' , true);
+                }
+                $productIds[] = trim($productId);
+            }
+        }
+
+        return array_unique($productIds);
+    }
+
+    /**
+     * @since 1.0.0
+     * 
      * @return array All subscribers.
      */
     public static function getAllSubscribers(): array 
@@ -155,103 +186,6 @@ class Helpers
             return true;
         }
         return false;
-    }
-
-    /**
-     * @since 1.0.0
-     * 
-     * @param int $subscriberId
-     * @return string Subscriber status.
-     */
-    public function setStatusToSubscribed(int $subscriberId): string
-    {
-        $subscriber = array(
-            'ID' => $subscriberId,
-            'post_status' => 'wpbits_subscribed'
-        );
-        wp_update_post($subscriber);
-        update_post_meta($subscriberId, '_wpbitswaitlist_subscribed_at', date('Y-m-d H:i:s'));
-        return $subscriber['post_status'];
-    }
-
-    /**
-     * @since 1.0.0
-     * 
-     * @param int $subscriberId
-     * @return string Subscriber status.
-     */
-    public function setStatusToUnsubscribed(int $subscriberId): string
-    {
-        $subscriber = array(
-            'ID' => $subscriberId,
-            'post_status' => 'wpbits_unsubscribed'
-        );
-        wp_update_post($subscriber);
-        return $subscriber['post_status'];
-    }
-
-    /**
-     * @since 1.0.0
-     * 
-     * @param int $subscriberId
-     * @return string Subscriber status.
-     */
-    public function setStatusToMailSent(int $subscriberId): string
-    {
-        $subscriber = array(
-            'ID' => $subscriberId,
-            'post_status' => 'wpbits_mailsent'
-        );
-        wp_update_post($subscriber);
-        update_post_meta($subscriberId, '_wpbitswaitlist_mailsent_at', date('Y-m-d H:i:s'));
-        return $subscriber['post_status'];
-    }
-
-    /**
-     * @since 1.0.0
-     * 
-     * @param int $subscriberId
-     * @return string Subscriber status.
-     */
-    public function setStatusToFailed(int $subscriberId): string
-    {
-        $subscriber = array(
-            'ID' => $subscriberId,
-            'post_status' => 'wpbits_failed'
-        );
-        wp_update_post($subscriber);
-        return $subscriber['post_status'];
-    }
-
-    /**
-     * @since 1.0.0
-     * 
-     * @return array $productIds
-     */
-    public static function getAllSubscribedProductIds(): array
-    {
-        $productIds= [];
-
-        $args = [ 
-            'post_type' => 'wpbitswaitlist', 
-            'post_status' => 'wpbits_subscribed',
-        ];
-        $query = new \WP_Query($args);
-
-        if($query->have_posts()) {
-            while($query->have_posts()) {
-                $query->the_post();
-                $postId = get_the_ID();
-                if(get_post_meta($postId, '_wpbitswaitlist_variation_id' , true)) {
-                    $productId = get_post_meta($postId, '_wpbitswaitlist_variation_id' , true);
-                } else {
-                    $productId = get_post_meta($postId, '_wpbitswaitlist_product_id' , true);
-                }
-                $productIds[] = trim($productId);
-            }
-        }
-
-        return array_unique($productIds);
     }
 
     /**
