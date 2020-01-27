@@ -99,5 +99,7 @@ class WaitlistForm {
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    const waitlistForm = new WaitlistForm();
+    if(document.getElementById('wpbits-waitlist-form')) {
+        const waitlistForm = new WaitlistForm();
+    }
 })

@@ -35,10 +35,10 @@ class Mail
 	 */
     public function register(): void
     {
-        add_filter('wpbits_replace_shortcodes', array($this, 'replaceShortcodes'), 10, 2 );
+        add_filter('wpbits_replace_shortcodes', array($this, 'replaceShortcodes'), 10, 2);
 
         if( get_option('wpbits_waitlist_enable_instock_mail') ) {
-            add_action('init', array($this, 'automaticInstockMails'), 10 );
+            add_action('woocommerce_update_product', array($this, 'automaticInstockMails'), 10, 1);
         }
     }
 
@@ -181,7 +181,7 @@ class Mail
      * 
 	 * @return void
 	 */
-    public function automaticInstockMails(): void 
+    public function automaticInstockMails(int $updatedProductId): void 
     {
         $subscribedProductIds = Helpers::getSubscribedProductIds();
 

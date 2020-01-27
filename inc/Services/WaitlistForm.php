@@ -50,11 +50,9 @@ class WaitlistForm extends Paths
 	 */
     public function enqueueScripts(): bool
     {
-        // global $product;
-
-        // if (!is_product() || $product->is_in_stock()) {
-        //     return false;
-        // }
+        if(!is_product()) {
+            return false;
+        }
 
         wp_enqueue_style('waitlistFormStyle', $this->pluginUrl . 'assets/css/form.css');
         wp_enqueue_script('waitlistFormScript', $this->pluginUrl . 'assets/js/form.js');
