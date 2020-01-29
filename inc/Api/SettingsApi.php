@@ -75,36 +75,72 @@ class SettingsApi
         }
     }
 
+    /**
+     * Populates the adminPages attribute.
+     * 
+     * @param array $pages
+     * @return object $this
+     */
     public function setAdminPages(array $pages): object
     {
         $this->adminPages = $pages;
         return $this;
     }
 
+    /**
+     * Populates the adminSubpages attribute.
+     * 
+     * @param array $pages
+     * @return object $this
+     */
     public function setAdminSubpages(array $pages): object
     {
         $this->adminSubpages = array_merge($this->adminSubpages, $pages);
         return $this;
     }
 
+    /**
+     * Populates the settings attribute.
+     * 
+     * @param array $settings
+     * @return object $this
+     */
     public function setSettings(array $settings): object
     {
         $this->settings = array_merge($this->settings, $settings);
         return $this;
     }
 
+    /**
+     * Populates the sections attribute.
+     * 
+     * @param array $sections
+     * @return object $this
+     */
     public function setSections(array $sections): object
     {
         $this->sections = array_merge($this->sections, $sections);
         return $this;
     }
 
+    /**
+     * Populates the fields attribute.
+     * 
+     * @param array $fields
+     * @return object $this
+     */
     public function setFields(array $fields): object
     {
         $this->fields = array_merge($this->fields, $fields);
         return $this;
     }
 
+    /**
+     * Adds a subpage to an admin page.
+     * 
+     * @param string $title (default: null)
+     * @return object $this
+     */
     public function withSubpage(string $title = null): object
     {
         if(empty( $this->adminPages ) ) {
@@ -128,6 +164,11 @@ class SettingsApi
         return $this;
     }
 
+    /**
+     * Generates the admin menu.
+     * 
+     * @return void
+     */
     public function addAdminMenu(): void
     {
         foreach($this->adminPages as $page) {
@@ -154,6 +195,11 @@ class SettingsApi
         }
     }
 
+    /**
+     * Registers the settings.
+     * 
+     * @return void
+     */
     public function registerSettings(): void
     {
         foreach($this->settings as $setting) {
@@ -165,6 +211,11 @@ class SettingsApi
         }
     }
 
+    /**
+     * Registers the settings sections.
+     * 
+     * @return void
+     */
     public function registerSections(): void
     {
         foreach( $this->sections as $section ) {
@@ -177,6 +228,11 @@ class SettingsApi
         }
     }
 
+    /**
+     * Registers the settings fields.
+     * 
+     * @return void
+     */
     public function registerFields() {
         foreach( $this->fields as $field ) {
             add_settings_field( 

@@ -76,6 +76,11 @@ class SubscriberStatus
                 'name' => 'wpbits_failed',
                 'label' => 'Failed', 
                 'textdomain' => 'wpbits-waitlist'
+            ],
+            [
+                'name' => 'wpbits_purchased',
+                'label' => 'Purchased', 
+                'textdomain' => 'wpbits-waitlist'
             ]
         ];
     }
