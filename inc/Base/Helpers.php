@@ -297,15 +297,4 @@ class Helpers
     {
         return get_bloginfo('name');
     }
-
-    /**
-     * @since 1.0.0
-     * 
-     * @return string <br> HTML Tag.
-     */
-    public static function getLineBreak(): string 
-    {
-        return '<br>';
-    }
-
 }

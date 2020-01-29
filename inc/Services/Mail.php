@@ -70,7 +70,6 @@ class Mail
         $productImage = Helpers::getProductImage($subscriberId);
         $subscriberEmail = Helpers::getSubscriberEmail($subscriberId);
         $shopName = Helpers::getShopName();
-        $lineBreak = Helpers::getLineBreak();
         $unsubscribeLink = Unsubscribe::generateUrl($subscriberEmail);
 
         $shortcodes = [ 
@@ -80,7 +79,6 @@ class Mail
             '{product_image}',
             '{subscriber_email}',
             '{shop_name}',
-            '{line_break}',
             '{unsubscribe_link}'
         ];
 
@@ -91,7 +89,6 @@ class Mail
             $productImage,
             $subscriberEmail,
             $shopName,
-            $lineBreak,
             $unsubscribeLink
         ];
 

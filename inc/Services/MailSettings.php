@@ -133,13 +133,15 @@ class MailSettings
                 'name' => 'wpbits_waitlist_instock_mail_message',
                 'title' => __('Instock Mail Message', 'wpbits-waitlist'),
                 'defaultValue' => __(
-                    'Hello subscriber_email},{line_break}{line_break}
-                    the product "{product_name}" you have been waiting for is available again.
-                    {line_break}{line_break}
-                    You can buy it here:{line_break}
-                    {product_link}
-                    {line_break}Best wishes,
-                    {line_break}your {shop_name} team',
+                    '<p>Hello {subscriber_email},</p>
+
+                    <p>the product "{product_name}" you have been waiting for is available again.</p>
+                    
+                    <p>You can buy it here:<br>
+                    <a href="{product_link}">{product_name}</a></p>
+                    
+                    <p>Best wishes,<br>
+                    your {shop_name} team</p>',
                     'wpbits-waitlist'
                 ),
                 'page' => 'wpbits_settings',
@@ -167,11 +169,13 @@ class MailSettings
                 'name' => 'wpbits_waitlist_subscription_mail_message',
                 'title' => __('Success Subscription Mail Message', 'wpbits-waitlist'),
                 'defaultValue' => __(
-                    'Hello {subscriber_email},{line_break}
-                    you have successfully subscribed to {product_name}. 
-                    We will email you when the product is available again.{line_break}
-                    Best wishes,{line_break}
-                    your {shop_name} team',
+                    '<p>Hello {subscriber_email},</p>
+
+                    <p>you have successfully subscribed to {product_name}. 
+                    We will email you when the product is available again.</p>
+                    
+                    <p>Best wishes,<br>
+                    your {shop_name} team</p>',
                     'wpbits-waitlist'
                 ),
                 'page' => 'wpbits_settings',
@@ -218,7 +222,7 @@ class MailSettings
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_instock_mail_message',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeHtmlTextField')
                 ]
             ],
             // Success subscription mail settings.
