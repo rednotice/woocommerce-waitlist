@@ -15,8 +15,17 @@ use \Inc\Base\Helpers;
  * 
  * @since 1.0.0
  */
-class CsvExport extends Paths
+class CsvExport
 {
+    /**
+     * Instance of the Paths class.
+     * 
+     * @since 1.0.0
+     * 
+     * @var object
+     */
+    public $paths;
+
     /**
 	 * Used by the Init class to intantiate the class.
 	 *
@@ -26,6 +35,8 @@ class CsvExport extends Paths
 	 */
     public function register(): void
     {
+        $this->paths = new Paths();
+
         add_action('admin_head-edit.php', array($this, 'addExportButton'), 10);
 
         add_action('wp_ajax_nopriv_wpbits_export', array($this, 'formatExportData'));
@@ -45,7 +56,7 @@ class CsvExport extends Paths
             return null;
         }
 
-        echo '<script type="text/javascript" src="' . $this->pluginUrl .'/assets/js/csv-export.js"></script>';
+        echo '<script type="text/javascript" src="' . $this->paths->pluginUrl .'/assets/js/csv-export.js"></script>';
     }
 
     /**

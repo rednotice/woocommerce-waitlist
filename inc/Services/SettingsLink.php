@@ -14,8 +14,17 @@ use \Inc\Base\Paths;
  * 
  * @since 1.0.0
  */
-class SettingsLink extends Paths
+class SettingsLink
 {
+    /**
+     * Instance of the Paths class.
+     * 
+     * @since 1.0.0
+     * 
+     * @var object
+     */
+    public $paths;
+
     /**
 	 * Used by the Init class to intantiate the class.
 	 *
@@ -25,7 +34,8 @@ class SettingsLink extends Paths
 	 */
     public function register(): void 
     {
-        add_filter('plugin_action_links_' . $this->plugin, array($this, 'generateSettingsLink'));
+        $this->paths = new Paths();
+        add_filter('plugin_action_links_' . $this->paths->plugin, array($this, 'generateSettingsLink'));
     }
 
     /**

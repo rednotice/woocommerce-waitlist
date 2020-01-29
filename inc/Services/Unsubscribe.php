@@ -16,8 +16,17 @@ use \Inc\Services\SubscriberStatus;
  * 
  * @since 1.0.0
  */
-class Unsubscribe extends Paths
+class Unsubscribe
 {
+    /**
+     * Instance of the Paths class.
+     * 
+     * @since 1.0.0
+     * 
+     * @var object
+     */
+    public $paths;
+
     /**
 	 * Instance of the SubscriberStatus class.
 	 *
@@ -36,6 +45,8 @@ class Unsubscribe extends Paths
 	 */
     public function register(): void
     {
+        $this->paths = new Paths();
+        
         add_action('init', array($this, 'unsubscribe'), 10);
         add_filter('init', array($this, 'displayConfirmationPage'), 10);
     }
@@ -98,7 +109,7 @@ class Unsubscribe extends Paths
     public function displayConfirmationPage(): void
     {
         if(isset($_GET['wpbits_goodbye'])) {
-            require $this->pluginPath . '/views/unsubscribe.php';
+            require $this->paths->pluginPath . '/views/unsubscribe.php';
             exit();
         }
     }

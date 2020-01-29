@@ -16,8 +16,17 @@ use \Inc\Services\Mail;
  * 
  * @since 1.0.0
  */
-class WaitlistForm extends Paths
+class WaitlistForm
 {
+    /**
+     * Instance of the Paths class.
+     * 
+     * @since 1.0.0
+     * 
+     * @var object
+     */
+    public $paths;
+
     /**
 	 * Used by the Init class to intantiate the class.
 	 *
@@ -28,8 +37,10 @@ class WaitlistForm extends Paths
     public function register(): void
     {
         if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-            return;
+            exit();
         }
+
+        $this->paths = new Paths();
 
         add_action('wp_enqueue_scripts', array( $this, 'enqueueScripts'), 10);
 
@@ -54,8 +65,8 @@ class WaitlistForm extends Paths
             return false;
         }
 
-        wp_enqueue_style('waitlistFormStyle', $this->pluginUrl . 'assets/css/form.css');
-        wp_enqueue_script('waitlistFormScript', $this->pluginUrl . 'assets/js/form.js');
+        wp_enqueue_style('waitlistFormStyle', $this->paths->pluginUrl . 'assets/css/form.css');
+        wp_enqueue_script('waitlistFormScript', $this->paths->pluginUrl . 'assets/js/form.js');
         return true;
     }
 
@@ -64,7 +75,7 @@ class WaitlistForm extends Paths
 	 *
 	 * @since 1.0.0
      * 
-	 * @return string The waitlist form template.
+	 * @return string|null The waitlist form template.
 	 */
     public function loadTemplateForSingleProducts(): ?string 
     {
@@ -74,7 +85,7 @@ class WaitlistForm extends Paths
             return null;
         }
 
-        return require_once( $this->pluginPath .'/views/waitlist-form.php' );
+        return require_once( $this->paths->pluginPath .'/views/waitlist-form.php' );
     }
 
     /**
@@ -113,9 +124,9 @@ class WaitlistForm extends Paths
 	 */
     public function loadTemplateForVariationProducts(array $data, object $product, object $variation): array
     {        
-        if( ! $variation->is_in_stock() ) {
+        if(!$variation->is_in_stock() ) {
             ob_start();
-            include $this->pluginPath .'/views/waitlist-form.php';
+            include $this->paths->pluginPath .'/views/waitlist-form.php';
             $form = ob_get_clean();
 
             $data['availability_html'] .= $form;
@@ -124,6 +135,8 @@ class WaitlistForm extends Paths
     }
 
     /**
+     * Submit the subscriber.
+     * 
 	 * Fires when the submit button of the waitlist front end
      * form is triggered. Stores the subscriber to the database 
      * and triggers the sending of the success subscription mail. 

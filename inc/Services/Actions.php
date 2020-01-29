@@ -147,12 +147,12 @@ class Actions
 	 * @since 1.0.0
      * 
      * @param array $bulk_actions
-	 * @return array|null
+	 * @return array
 	 */
-    public function registerBulkActions(array $bulk_actions): ?array
+    public function registerBulkActions(array $bulk_actions): array
     {
-        if( isset( $_GET['post_status'] ) && $_GET['post_status'] == 'trash' ) {
-            return null;
+        if(isset($_GET['post_status']) && $_GET['post_status'] == 'trash') {
+            return $bulk_actions;
         }
 
         unset( $bulk_actions['edit'] );

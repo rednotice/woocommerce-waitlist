@@ -117,7 +117,6 @@ class SubscriberStatus
      */
     public function updateStatus(int $subscriberId, string $status): string
     {
-        // Check if $status contained in Self:statuses
         if(!in_array($status, array_column($this->statuses, 'name'), true)) {
             return new WP_Error('unknown_status', __('The argument given is not a valid status.', 'wpbits-waitlist'));
         }

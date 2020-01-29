@@ -14,8 +14,28 @@ use \Inc\Base\Paths;
  *
  * @since 1.0.0
  */
-class SettingsCallbacks extends Paths
+class SettingsCallbacks
 {
+    /**
+     * Instance of the Paths class.
+     * 
+     * @since 1.0.0
+     * 
+     * @var object
+     */
+    public $paths;
+
+    /**
+     * Constructor.
+     * 
+     * @since 1.0.0
+     * 
+     */
+    public function __construct()
+    {
+        $this->paths = new Paths();
+    }
+
     /**
      * @since 1.0.0
      * 
@@ -23,7 +43,7 @@ class SettingsCallbacks extends Paths
      */
     public function settings(): string
     {
-        return require_once($this->pluginPath .'/views/settings.php');
+        return require_once($this->paths->pluginPath .'/views/settings.php');
     }
 
     /**
@@ -33,7 +53,7 @@ class SettingsCallbacks extends Paths
      */
     public function upgrade(): string 
     {
-        return require_once($this->pluginPath .'/views/upgrade.php');
+        return require_once($this->paths->pluginPath .'/views/upgrade.php');
     }
 
     /**

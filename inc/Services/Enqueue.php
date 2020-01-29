@@ -14,8 +14,17 @@ use \Inc\Base\Paths;
  * 
  * @since 1.0.0
  */
-class Enqueue extends Paths
+class Enqueue
 {
+    /**
+     * Instance of the Paths class.
+     * 
+     * @since 1.0.0
+     * 
+     * @var object
+     */
+    public $paths;
+
     /**
 	 * Used by the Init class to intantiate the class.
 	 *
@@ -25,6 +34,8 @@ class Enqueue extends Paths
 	 */
     public function register(): void
     {
+        $this->paths = new Paths();
+
         add_action('admin_enqueue_scripts', array( $this, 'enqueueAdminScripts'), 10);
         add_action('wp_enqueue_scripts', array( $this, 'enqueueFrontEndScripts'), 10);
     }
@@ -39,7 +50,7 @@ class Enqueue extends Paths
     public function enqueueAdminScripts(): void
     {
         // wp_enqueue_style( 'bootstrap', $this->pluginUrl . 'assets/css/bootstrap.css' );
-        wp_enqueue_style('adminStyle', $this->pluginUrl . 'assets/css/admin.css');
+        wp_enqueue_style('adminStyle', $this->paths->pluginUrl . 'assets/css/admin.css');
         // wp_enqueue_script('adminScript', $this->pluginUrl . 'assets/js/admin.js');
     }
 
