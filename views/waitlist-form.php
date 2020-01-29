@@ -35,7 +35,7 @@
                         id="wpbits-confirmation"
                         form="wpbits-waitlist-form"
                     >
-                    <label for="wpbits-confirmation">' . sanitize_text_field(get_option('wpbits_waitlist_confirmation_text')) . '</label>
+                    <label for="wpbits-confirmation">' . get_option('wpbits_waitlist_confirmation_text') . '</label>
                 </div>
                 <small class="field-msg error" data-error="invalidConfirmation">'
                    . sanitize_text_field(get_option('wpbits_waitlist_confirmation_error')) .

@@ -218,7 +218,7 @@ class SettingsApi
      */
     public function registerSections(): void
     {
-        foreach( $this->sections as $section ) {
+        foreach($this->sections as $section) {
             add_settings_section( 
                 $section['id'], 
                 $section['title'], 
@@ -234,7 +234,7 @@ class SettingsApi
      * @return void
      */
     public function registerFields() {
-        foreach( $this->fields as $field ) {
+        foreach($this->fields as $field) {
             add_settings_field( 
                 $field['id'],   
                 $field['title'],    

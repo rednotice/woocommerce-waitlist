@@ -137,7 +137,14 @@ class SettingsCallbacks
      */
     public function settingsSectionCheckbox(): void 
     {
-        _e('Add an I Agree-checkbox to the subscribe form.', 'wpbits-waitlist');
+        _e(
+            '<p>Add an I Agree-checkbox to the subscribe form.</p>
+
+            <p>The custom text next to the checkbox accepts HTML tags, 
+            so you can link to your terms and privacy policy:
+            <b>&lta href="#">terms&lt/a&gt; and &lta href="#">privacy policy&lt/a&gt;</b></p>', 
+            'wpbits-waitlist'
+        );
     }
 
     /**
@@ -172,7 +179,7 @@ class SettingsCallbacks
      */
     public function drawInputText(array $args): void 
     {
-        $value = sanitize_text_field(get_option($args['name']));
+        $value = htmlentities(get_option($args['name']));
         $placeholder = (isset($args['placeholder']) ? 'placeholder="' . $args['placeholder'] . '"' : '');
 
         echo '<input 

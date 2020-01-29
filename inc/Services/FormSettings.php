@@ -202,7 +202,7 @@ class FormSettings
                 'name' => 'wpbits_waitlist_confirmation_text',
                 'title' => __('Text to Appear Next to the Checkbox', 'wpbits-waitlist'),
                 'defaultValue' => __(
-                    'I Agree to the <a href="#">terms</a> and <a href="">privacy policy</a>.',
+                    'I agree to the <a href="#">terms</a> and <a href="#">privacy policy</a>.',
                     'wpbits-waitlist'
                 ),
                 'page' => 'wpbits_settings',
@@ -300,7 +300,7 @@ class FormSettings
                 'option_group' => 'wpbits_waitlist_option_group',
                 'option_name' => 'wpbits_waitlist_confirmation_text',
                 'args' => [
-                    'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
+                    'sanitize_callback' => array($this->callbacks, 'sanitizeHtmlTextField')
                 ]
             ],
             [
@@ -365,7 +365,8 @@ class FormSettings
                 'args' => array(
                     'name' => $option['name'],
                     'label_for' => $option['name'],
-                    'class' => ''
+                    'class' => ($option['class'] ?? ''),
+                    'help_tip' => ($option['help_tip'] ?? '')
                 )
             ];
         }
