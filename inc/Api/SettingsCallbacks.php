@@ -49,16 +49,6 @@ class SettingsCallbacks
     /**
      * @since 1.0.0
      * 
-     * @return string Upgrade view.
-     */
-    public function upgrade(): string 
-    {
-        return require_once($this->paths->pluginPath .'/views/upgrade.php');
-    }
-
-    /**
-     * @since 1.0.0
-     * 
      * @param string $input
      * @return string $sanitizedInput 
      */

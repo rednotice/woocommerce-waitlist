@@ -7,6 +7,8 @@
 
 namespace Inc\Services;
 
+use \Inc\Services\SubscriberStatus;
+
 /**
  * Implements the waitlist custom post type.
  * 
@@ -178,8 +180,8 @@ class PostTypes
             'subscriber_email' => __('Email', 'wpbits-waitlist'),
             'status' => __('Status', 'wpbits-waitlist'),
             'product_id' => __('Product', 'wpbits-waitlist'),
-            'mailsent_at' => __('Mail Sent On', 'wpbits-waitlist'),
-            'subscribed_at' => __('Subscribed On', 'wpbits-waitlist'),
+            'mailsent_at' => __('Instock Mail Sent', 'wpbits-waitlist'),
+            'subscribed_at' => __('Subscription Date', 'wpbits-waitlist'),
         ];
     }
 
@@ -236,8 +238,15 @@ class PostTypes
                 break;
 
             case 'status':
-                $status = str_replace('wpbits_', '', get_post_status($postId));
-                echo $status;
+                $status = get_post_status($postId);
+
+                $this->subscriberStatus = new SubscriberStatus();
+
+                $index = array_search($status, array_column($this->subscriberStatus->statuses, 'name'));
+                $statusToDisplay = $this->subscriberStatus->statuses[$index]['label'];
+                $color = $this->subscriberStatus->statuses[$index]['color'];
+
+                echo '<span class="wpbits-status-label" style="background-color:' . $color . '">' . $statusToDisplay . '</span>';
                 break;
 
             case 'product_id':

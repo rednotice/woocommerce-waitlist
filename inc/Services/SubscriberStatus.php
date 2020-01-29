@@ -60,27 +60,26 @@ class SubscriberStatus
             [
                 'name' => 'wpbits_subscribed',
                 'label' => 'Subscribed', 
-                'textdomain' => 'wpbits-waitlist'
+                'textdomain' => 'wpbits-waitlist',
+                'color' => 'blue'
             ],
             [
                 'name' => 'wpbits_unsubscribed',
                 'label' => 'Unsubscribed', 
-                'textdomain' => 'wpbits-waitlist'
+                'textdomain' => 'wpbits-waitlist',
+                'color' => 'grey'
             ],
             [
                 'name' => 'wpbits_mailsent',
-                'label' => 'Instock Mail Sent', 
-                'textdomain' => 'wpbits-waitlist'
+                'label' => 'Mail Sent', 
+                'textdomain' => 'wpbits-waitlist',
+                'color' => 'green'
             ],
             [
                 'name' => 'wpbits_failed',
                 'label' => 'Failed', 
-                'textdomain' => 'wpbits-waitlist'
-            ],
-            [
-                'name' => 'wpbits_purchased',
-                'label' => 'Purchased', 
-                'textdomain' => 'wpbits-waitlist'
+                'textdomain' => 'wpbits-waitlist',
+                'color' => 'red'
             ]
         ];
     }
