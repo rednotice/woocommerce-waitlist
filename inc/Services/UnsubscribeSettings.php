@@ -171,7 +171,7 @@ class UnsubscribeSettings
         $this->sections = [
             [
                 'id' => 'wpbits_waitlist_settings_unsubscribe',
-                'title' => __('Ubsubscribe Confirmation Page Settings', 'wpbits-waitlist'),
+                'title' => __('Unsubscribe Confirmation Page', 'wpbits-waitlist'),
                 'callback' => array($this->callbacks, 'settingsSectionUnsubscribe'),
                 'page' => 'wpbits_settings'
             ],
