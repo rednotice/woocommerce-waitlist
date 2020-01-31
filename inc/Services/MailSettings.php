@@ -141,7 +141,9 @@ class MailSettings
                     <a href="{product_link}">{product_name}</a></p>
                     
                     <p>Best wishes,<br>
-                    your {shop_name} team</p>',
+                    your {shop_name} team</p>
+                    
+                    <p>To unsubscribe from this service <a href="{unsubscribe_link}">click here</a>.</p>',
                     'wpbits-waitlist'
                 ),
                 'page' => 'wpbits_settings',

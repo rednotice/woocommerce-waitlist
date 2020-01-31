@@ -122,7 +122,10 @@ class SubscriberStatus
     public function updateStatus(int $subscriberId, string $status): string
     {
         if(!in_array($status, array_column($this->statuses, 'name'), true)) {
-            return new WP_Error('unknown_status', __('The argument given is not a valid status.', 'wpbits-waitlist'));
+            status_header(404);
+            nocache_headers();
+            include(get_query_template('404'));
+            exit();
         }
 
         $subscriber = array(

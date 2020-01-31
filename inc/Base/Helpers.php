@@ -102,12 +102,12 @@ class Helpers
     {
         $args = [ 
             'post_type' => 'wpbitswaitlist',
-            'post_status' => $subscriberStatus,
-            'fields' => $returnFields,
+            'post_status' => $status,
+            'fields' => $fields,
             'meta_query' => array(
                 array(
                     'key' => '_wpbitswaitlist_email',
-                    'value' => $subscriberEmail
+                    'value' => $email
                 )
             )
         ];

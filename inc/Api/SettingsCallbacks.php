@@ -152,11 +152,27 @@ class SettingsCallbacks
             <b>{product_link}</b>,
             <b>{product_image}</b>,
             <b>{subscriber_email}</b>,
-            <b>{shop_name}</b>.</p> 
+            <b>{shop_name}</b>,
+            <b>{unsubscribe_link}</b>.</p> 
             
             <p>The mail messages also accept all HTML tags which may be used in posts. 
             Use this snippet to link to a product: 
             <b>&lt;a href="{product_link}"&gt;{product_name}&lt;/a&gt;</b></p>',
+            'wpbits-waitlist'
+        );
+    }
+
+    /**
+     * @since 1.0.0
+     * 
+     * @return void
+     */
+    public function settingsSectionUnsubscribe(): void 
+    {
+        _e(
+            '<p>Customize the title and the message of  the unsubscribe confirmation page. 
+            The unsubscribe link in a success subscription mail leads to this page. 
+            The unsubscribe message accepts all HTML tags which may be used in posts.</p>',
             'wpbits-waitlist'
         );
     }

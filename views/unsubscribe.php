@@ -1,4 +1,8 @@
-<div class="wrap">
-    <h1>You have successfully unsubscribed</h1>
-    <p>We will not send you a notification mail when the product is available again.</p>
+<?php get_header(); ?>
+
+<div class="wrap wpbits-waitlist-unsubscribe" style="text-align: center;">
+    <h1><?php echo sanitize_text_field(get_option('wpbits_waitlist_unsubscribe_title')); ?></h1>
+    <p><?php echo get_option('wpbits_waitlist_unsubscribe_message'); ?></p>
 </div>
+
+<?php get_footer(); ?>

@@ -47,8 +47,8 @@ class Unsubscribe
     {
         $this->paths = new Paths();
         
-        add_action('init', array($this, 'unsubscribe'), 10);
-        add_filter('init', array($this, 'displayConfirmationPage'), 10);
+        add_action('wp_loaded', array($this, 'unsubscribe'), 10);
+        add_filter('wp_loaded', array($this, 'displayConfirmationPage'), 10);
     }
 
     /**
@@ -92,7 +92,7 @@ class Unsubscribe
 
         $this->subscriberStatus = new SubscriberStatus();
         foreach($subscriberIds as $subscriberId) {
-            $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_unsubscribe');
+            $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_unsubscribed');
         }
 
         wp_redirect('/?post_type=wpbitswaitlist&wpbits_goodbye');
