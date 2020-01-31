@@ -1,3 +1,13 @@
+.wpbits-waitlist {
+    margin-bottom: 1em;
+}
+
+@media (max-width: 575px) {
+    .wpbits-waitlist-title {
+        text-align: center;
+    }
+}
+  
 #wpbits-waitlist-container {
     display: flex;
     flex-direction: column;

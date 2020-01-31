@@ -251,7 +251,7 @@ class PostTypes
 
             case 'product_id':
                 $productId = get_post_meta($postId, '_wpbitswaitlist_product_id' , true);
-                $url = get_permalink($productId);
+                $url = get_edit_post_link($productId);
                 $product = wc_get_product($productId);
 
                 $variationId = get_post_meta($postId, '_wpbitswaitlist_variation_id' , true);
@@ -263,11 +263,20 @@ class PostTypes
                 break;
 
             case 'mailsent_at':
-                echo get_post_meta($postId, '_wpbitswaitlist_mailsent_at' , true);
+                $unixTimeStamp = get_post_meta($postId, '_wpbitswaitlist_mailsent_at' , true);
+                if($unixTimeStamp) {
+                    $date = date_i18n(get_option('date_format'), strtotime($unixTimeStamp));
+                    $time = date_i18n(get_option('time_format'), strtotime($unixTimeStamp));
+                    echo $date . ' ' . $time;
+                }
                 break;
 
             case 'subscribed_at' :
-                echo get_post_meta($postId, '_wpbitswaitlist_subscribed_at' , true);
+                $unixTimeStamp = get_post_meta($postId, '_wpbitswaitlist_subscribed_at' , true);
+                $date = date_i18n(get_option('date_format'), strtotime($unixTimeStamp));
+                $time = date_i18n(get_option('time_format'), strtotime($unixTimeStamp));
+
+                echo $date . ' ' . $time;
                 break;
 
             default:
