@@ -12,6 +12,7 @@
         <div id="wpbits-waitlist-container">
             <div class="form-group email-group">
                 <input 
+                    id="wpbits-waitlist-email"
                     type="email" 
                     class="form-field"
                     name="email" 
@@ -43,7 +44,7 @@
             </div>
             ' ; ?>
 
-            <button type="submit" name="submit" form="wpbits-waitlist-form"><?php echo sanitize_text_field(get_option('wpbits_waitlist_subscribe')); ?></button>
+            <button id="wpbits-waitlist-submit" type="submit" name="submit" form="wpbits-waitlist-form"><?php echo sanitize_text_field(get_option('wpbits_waitlist_subscribe')); ?></button>
             <small class="field-msg js-form-submission"><?php echo sanitize_text_field(get_option('wpbits_waitlist_submission')); ?></small>
             <small class="field-msg success js-form-success"><?php echo sanitize_text_field(get_option('wpbits_waitlist_success')); ?></small>
             <small class="field-msg error js-form-error"><?php echo sanitize_text_field(get_option('wpbits_waitlist_error')); ?></small>

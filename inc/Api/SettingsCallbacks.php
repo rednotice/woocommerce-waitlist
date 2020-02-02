@@ -171,8 +171,9 @@ class SettingsCallbacks
     {
         _e(
             '<p>Customize the title and the message of  the unsubscribe confirmation page. 
-            The unsubscribe link in a success subscription mail leads to this page. 
-            The unsubscribe message accepts all HTML tags which may be used in posts.</p>',
+            The unsubscribe link in a success subscription mail leads to this page.</p>
+
+            <p>The unsubscribe message accepts all HTML tags which may be used in posts.</p>',
             'wpbits-waitlist'
         );
     }
