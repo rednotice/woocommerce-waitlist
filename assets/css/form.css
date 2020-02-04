@@ -1,4 +1,5 @@
 .wpbits-waitlist {
+    padding: 10px;
     margin-bottom: 1em;
 }
 
@@ -16,7 +17,6 @@
 #wpbits-waitlist-container .email-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
 }
 
 #wpbits-waitlist-email {
@@ -26,6 +26,7 @@
 #wpbits-waitlist-container .checkbox-group {
     display: flex;
     justify-content: start;
+    margin-top: 10px;
 }
 
 #wpbits-waitlist-container .field-msg {
@@ -42,4 +43,8 @@
 
 #wpbits-waitlist-container .success {
     color: rgba(0, 128, 0, 0.774);
+}
+
+#wpbits-waitlist-submit {
+    margin-top: 10px;
 }

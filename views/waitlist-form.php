@@ -7,7 +7,7 @@
         id="wpbits-waitlist-form"
         action="#" 
         method="POST" 
-        data-url="<?php echo admin_url( 'admin-ajax.php' ); ?>"
+        data-url="<?php echo admin_url('admin-ajax.php'); ?>"
     >
         <div id="wpbits-waitlist-container">
             <div class="form-group email-group">

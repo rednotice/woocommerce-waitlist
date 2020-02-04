@@ -139,7 +139,7 @@ class Mail
     public function getMailTemplate(string $subject, string $message): string 
     {
         ob_start();
-        if (function_exists('wc_get_template')) {
+        if(function_exists('wc_get_template')) {
             do_action('woocommerce_email_header', $subject, null);
             echo $message;
             do_action('woocommerce_email_footer', get_option('woocommerce_email_footer_text'));
