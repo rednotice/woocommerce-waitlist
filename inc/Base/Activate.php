@@ -9,6 +9,7 @@ namespace Inc\Base;
 
 use \Inc\Services\FormSettings;
 use \Inc\Services\MailSettings;
+use \Inc\Services\UnsubscribeSettings;
 
 /**
  * Activation class.
@@ -42,6 +43,7 @@ class Activate
     {
         $formSettings = new FormSettings;
         $mailSettings = new MailSettings;
+        $unsubscribeSettings = new UnsubscribeSettings;
 
         foreach($formSettings->options as $option) {
             if (!get_option($option['name'])) {
@@ -49,7 +51,13 @@ class Activate
             }
         }
 
-        foreach( $mailSettings->options as $option) {
+        foreach($mailSettings->options as $option) {
+            if (!get_option($option['name'])) {
+                update_option($option['name'], $option['defaultValue']);
+            }
+        }
+
+        foreach($unsubscribeSettings->options as $option) {
             if (!get_option( $option['name'])) {
                 update_option( $option['name'], $option['defaultValue']);
             }

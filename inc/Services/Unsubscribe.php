@@ -73,7 +73,7 @@ class Unsubscribe
 	 * @return bool
 	 */
     public function unsubscribe(): bool
-    {
+    {   
         if(!isset($_GET['action']) || $_GET['action'] !== 'wpbits_user_unsubscribe') {
             return false;
         }

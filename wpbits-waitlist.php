@@ -29,7 +29,7 @@
  */
 
 if (!defined('ABSPATH')) {
-    exit;
+    exit();
 }
 
 if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
@@ -48,6 +48,6 @@ function deactivatewpbitsWaitlist()
 }
 register_deactivation_hook(__FILE__, 'deactivatewpbitsWaitlist');
 
-if (class_exists('Inc\\Init') ) {
+if(class_exists('Inc\\Init') && in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' )))) {
     Inc\Init::registerServices();
 }

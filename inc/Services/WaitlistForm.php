@@ -36,10 +36,6 @@ class WaitlistForm
 	 */
     public function register(): void
     {
-        if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-            exit();
-        }
-
         $this->paths = new Paths();
 
         add_action('wp_enqueue_scripts', array( $this, 'enqueueScripts'), 10);

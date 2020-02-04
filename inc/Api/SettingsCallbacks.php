@@ -208,8 +208,7 @@ class SettingsCallbacks
     public function drawTextarea(array $args): void 
     {
         $text = get_option($args['name']);
-        echo '<textarea 
-            id="' . $args['name'] . '" 
+        echo '<textarea id="' . $args['name'] . '" 
             rows="15"
             cols="50" 
             class="regular-text ' . $args['class'] . '" 

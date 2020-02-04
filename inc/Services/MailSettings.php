@@ -135,15 +135,14 @@ class MailSettings
                 'defaultValue' => __(
                     '<p>Hello {subscriber_email},</p>
 
-                    <p>the product "{product_name}" you have been waiting for is available again.</p>
-                    
-                    <p>You can buy it here:<br>
-                    <a href="{product_link}">{product_name}</a></p>
-                    
-                    <p>Best wishes,<br>
-                    your {shop_name} team</p>
-                    
-                    <p>To unsubscribe from this service <a href="{unsubscribe_link}">click here</a>.</p>',
+<p>the product "{product_name}" you have been waiting for is available again.</p>
+
+<p>You can buy it here:<br> <a href="{product_link}">{product_name}</a></p>
+
+<p>Best wishes,<br>
+your {shop_name} team</p>
+
+<p>To unsubscribe from this service <a href="{unsubscribe_link}">click here</a>.</p>',
                     'wpbits-waitlist'
                 ),
                 'page' => 'wpbits_settings',
@@ -173,11 +172,10 @@ class MailSettings
                 'defaultValue' => __(
                     '<p>Hello {subscriber_email},</p>
 
-                    <p>you have successfully subscribed to {product_name}. 
-                    We will email you when the product is available again.</p>
-                    
-                    <p>Best wishes,<br>
-                    your {shop_name} team</p>',
+<p>you have successfully subscribed to {product_name}. We will email you when the product is available again.</p>
+
+<p>Best wishes,<br>
+your {shop_name} team</p>',
                     'wpbits-waitlist'
                 ),
                 'page' => 'wpbits_settings',
