@@ -28,15 +28,6 @@ class Unsubscribe
     public $paths;
 
     /**
-	 * Instance of the SubscriberStatus class.
-	 *
-	 * @since 1.0.0
-     * 
-	 * @var object
-	 */
-    public $subscriberStatus;
-
-    /**
 	 * Used by the Init class to intantiate the class.
 	 *
 	 * @since 1.0.0
@@ -90,9 +81,9 @@ class Unsubscribe
             return false;
         }
 
-        $this->subscriberStatus = new SubscriberStatus();
+        $subscriberStatus = new SubscriberStatus();
         foreach($subscriberIds as $subscriberId) {
-            $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_unsubscribed');
+            $subscriberStatus->updateStatus($subscriberId, 'wpbits_unsubscribed');
         }
 
         wp_redirect('/?post_type=wpbitswaitlist&wpbits_goodbye');

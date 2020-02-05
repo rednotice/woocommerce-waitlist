@@ -25,7 +25,12 @@ class Helpers
 
         $args = [ 
             'post_type' => 'wpbitswaitlist', 
-            'post_status' => 'wpbits_subscribed',
+            'meta_query' => array(
+                array(
+                    'key' => '_wpbitswaitlist_status',
+                    'value' => 'wpbits_subscribed'
+                )
+            )
         ];
         $query = new \WP_Query($args);
 
@@ -71,16 +76,22 @@ class Helpers
     {
         $args = [ 
             'post_type' => 'wpbitswaitlist', 
-            'post_status' => 'wpbits_subscribed',
             'meta_query' => array(
-                'relation' => 'OR',
+                'relation' => 'AND',
                 array(
-                    'key' => '_wpbitswaitlist_product_id',
-                    'value' => $productId
+                    'key' => '_wpbits_status',
+                    'value' => 'wpbits_subscribed'
                 ),
                 array(
-                    'key' => '_wpbitswaitlist_variation_id',
-                    'value' => $productId
+                    'relation' => 'OR',
+                    array(
+                        'key' => '_wpbitswaitlist_product_id',
+                        'value' => $productId
+                    ),
+                    array(
+                        'key' => '_wpbitswaitlist_variation_id',
+                        'value' => $productId
+                    )
                 )
             )
         ];
@@ -102,9 +113,13 @@ class Helpers
     {
         $args = [ 
             'post_type' => 'wpbitswaitlist',
-            'post_status' => $status,
             'fields' => $fields,
             'meta_query' => array(
+                'relation' => 'AND',
+                array(
+                    'key' => '_wpbitswaitlist_status',
+                    'value' => $status
+                ),
                 array(
                     'key' => '_wpbitswaitlist_email',
                     'value' => $email
@@ -129,14 +144,15 @@ class Helpers
         $meta = [
             '_wpbitswaitlist_email' => $email,
             '_wpbitswaitlist_product_id' => $productId,
-            '_wpbitswaitlist_variation_id' => ( $variationId ?? null ),
+            '_wpbitswaitlist_variation_id' => ($variationId ?? null),
+            '_wpbitswaitlist_status' => 'wpbits_subscribed',
             '_wpbitswaitlist_subscribed_at' => date('Y-m-d H:i:s'),
             '_wpbitswaitlist_mailsent_at' => null
         ];
 
         $data = [
             'post_title' => $email,
-            'post_status' => 'wpbits_subscribed',
+            'post_status' => 'publish',
             'post_type' => 'wpbitswaitlist',
             'meta_input' => $meta
         ];
@@ -157,9 +173,13 @@ class Helpers
     {
         $args = array(
             'post_type'  => 'wpbitswaitlist',
-            'post_status' => 'wpbits_subscribed',
             'meta_query' => array(
                 'relation' => 'AND',
+                array(
+                    'key'     => '_wpbitswaitlist_status',
+                    'value'   => 'wpbits_subscribed',
+                    'compare' => '='
+                ),
                 array(
                     'key'     => '_wpbitswaitlist_email',
                     'value'   => $email,
@@ -197,6 +217,17 @@ class Helpers
     public static function getSubscriberEmail(int $subscriberId): string
     {
         return get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
+    }
+
+    /**
+     * @since 1.0.0
+     * 
+     * @param int $subscriberId
+     * @return string Subscriber status.
+     */
+    public static function getSubscriberStatus(int $subscriberId): string
+    {
+        return get_post_meta($subscriberId, '_wpbitswaitlist_status', true);
     }
 
     /**
@@ -263,7 +294,7 @@ class Helpers
      */
     public static function getProductLink(int $subscriberId): string
     {
-        if( get_post_meta($subscriberId, '_wpbitswaitlist_variation_id', true)) {
+        if(get_post_meta($subscriberId, '_wpbitswaitlist_variation_id', true)) {
             $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true);
         } else {
             $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_product_id', true);

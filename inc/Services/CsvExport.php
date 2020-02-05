@@ -71,7 +71,7 @@ class CsvExport
         $formattedSubscribers = [];
         foreach($subscribers as $subscriber) {
             $email = Helpers::getSubscriberEmail($subscriber->ID);
-            $status = str_replace('wpbits_', '', $subscriber->post_status);
+            $status = str_replace('wpbits_', '', Helpers::getSubscriberStatus($subscriber->ID));
             $productId = Helpers::getProductId($subscriber->ID);
             $productName = Helpers::getProductName($subscriber->ID);
             $subscribedAt = Helpers::getSubscriptionDate($subscriber->ID);

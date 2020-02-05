@@ -128,11 +128,12 @@ class SubscriberStatus
             exit();
         }
 
-        $subscriber = array(
-            'ID' => $subscriberId,
-            'post_status' => $status
-        );
-        wp_update_post($subscriber);
+        // $subscriber = array(
+        //     'ID' => $subscriberId
+        // );
+        // wp_update_post($subscriber);
+
+        update_post_meta($subscriberId, '_wpbitswaitlist_status', $status);
 
         if($status === 'wpbits_subscribed') {
             update_post_meta($subscriberId, '_wpbitswaitlist_subscribed_at', date('Y-m-d H:i:s'));
@@ -142,6 +143,6 @@ class SubscriberStatus
             update_post_meta($subscriberId, '_wpbitswaitlist_mailsent_at', date('Y-m-d H:i:s'));
         }
 
-        return $subscriber['post_status'];
+        return $status;
     }
 }

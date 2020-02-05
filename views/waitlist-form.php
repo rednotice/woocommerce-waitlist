@@ -51,7 +51,7 @@
             <small class="field-msg error js-already-subscribed-error"><?php echo sanitize_text_field(get_option( 'wpbits_waitlist_already_subscribed_error')); ?></small>
 
             <input type="hidden" name="productId" value="<?php echo $product->get_id()?>" form="wpbits-waitlist-form">
-            <input type="hidden" name="variationId" form="wpbits-waitlist-form">
+            <input type="hidden" name="variationId" value="<?php echo (isset($variation) ? $variation->get_id() : null) ?>" form="wpbits-waitlist-form">
             <input type="hidden" name="action" value="wpbits_submit_subscriber" form="wpbits-waitlist-form">
         </div>
     </form>

@@ -159,9 +159,9 @@ class Mail
 	 * @since 1.0.0
      * 
      * @param int $subscriberId Id of the subscriber the mail will be send to.
-	 * @return bool
+	 * @return string Status.
 	 */
-    public function sendInstockMail(int $subscriberId): bool 
+    public function sendInstockMail(int $subscriberId): string 
     {
         $to = get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
         $subject = apply_filters( 
@@ -183,8 +183,7 @@ class Mail
             $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_failed');
             return false;
         }
-        $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_mailsent');
-        return true;
+        return $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_mailsent');
     }
 
     /**

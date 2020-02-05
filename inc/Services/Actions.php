@@ -68,13 +68,13 @@ class Actions
      * @param object $post
 	 * @return array
 	 */
-    public function modifyPostRowActions( array $actions, object $post): array
+    public function modifyPostRowActions(array $actions, object $post): array
     {
-        if ($post->post_type == 'wpbitswaitlist' &&  $post->post_status != 'trash') {
+        if ($post->post_type == 'wpbitswaitlist' && $post->post_status != 'trash') {
             $trash = $actions['trash'];
             $actions = [];
 
-            if (get_post_status($post) != 'wpbits_unsubscribed') {
+            if (get_post_meta($post->ID, '_wpbitswaitlist_status', true) != 'wpbits_unsubscribed') {
                 $quickLinks = [
                     [
                         'name' => 'wpbits_mailsent',
@@ -114,7 +114,7 @@ class Actions
         }
 
         $subscriberId = $_GET['post_id'];
-        $this->mail->sendInstockMail($subscriberId);
+        $status = $this->mail->sendInstockMail($subscriberId);
 
         wp_redirect(add_query_arg($status, 1, $_SERVER['HTTP_REFERER']));
         exit();

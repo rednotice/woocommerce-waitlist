@@ -153,8 +153,7 @@ class FormSettings
                 'name' => 'wpbits_waitlist_success',
                 'title' => __('Success Message', 'wpbits-waitlist'),
                 'defaultValue' => __(
-                    'Your subscription was successful. 
-                    We will email you when this product is available again.',
+                    'Your subscription was successful. We will email you when this product is available again.',
                     'wpbits-waitlist'
                 ),
                 'page' => 'wpbits_settings',

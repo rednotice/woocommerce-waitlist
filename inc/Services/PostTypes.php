@@ -238,7 +238,7 @@ class PostTypes
                 break;
 
             case 'status':
-                $status = get_post_status($postId);
+                $status = get_post_meta($postId, '_wpbitswaitlist_status' , true);
 
                 $this->subscriberStatus = new SubscriberStatus();
 
