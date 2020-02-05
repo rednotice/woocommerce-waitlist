@@ -97,6 +97,32 @@ class Mail
     }
 
     /**
+	 * Gets the mail template.
+	 *
+	 * @since 1.0.0
+     * 
+     * @param string $subject Mail subject.
+     * @param string $message Mail message.
+	 * @return string Mail template.
+	 */
+    public function getMailTemplate(string $subject, string $message): string 
+    {
+        ob_start();
+
+        if(function_exists('wc_get_template')) {
+            $wc_emails = new \WC_Emails();
+            $wc_emails->email_header($subject);
+            echo $message;
+            $wc_emails->email_footer();
+        } else {
+            woocommerce_get_template('emails/email-header.php', array('email_heading' => $subject));
+            echo $message;
+            woocommerce_get_template('emails/email-footer.php');
+        }
+        return ob_get_clean();
+    }
+
+    /**
 	 * Sends a success subscription mail to the subscriber.
 	 *
 	 * @since 1.0.0
@@ -104,7 +130,7 @@ class Mail
      * @param int $subscriberId Id of the subscriber the mail will be send to.
 	 * @return void
 	 */
-    public function sendSuccessSubscriptionMail(int $subscriberId ): void
+    public function sendSuccessSubscriptionMail(int $subscriberId): void
     {
         $to = get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
         $subject = apply_filters( 
@@ -125,30 +151,6 @@ class Mail
 
         $mailer = WC()->mailer();
         $mailer->send($to, $subject, $template, $header ?? '');
-    }
-
-    /**
-	 * Gets the mail template.
-	 *
-	 * @since 1.0.0
-     * 
-     * @param string $subject Mail subject.
-     * @param string $message Mail message.
-	 * @return string Mail template.
-	 */
-    public function getMailTemplate(string $subject, string $message): string 
-    {
-        ob_start();
-        if(function_exists('wc_get_template')) {
-            do_action('woocommerce_email_header', $subject, null);
-            echo $message;
-            do_action('woocommerce_email_footer', get_option('woocommerce_email_footer_text'));
-        } else {
-            woocommerce_get_template('emails/email-header.php', array('email_heading' => $subject));
-            echo $message;
-            woocommerce_get_template('emails/email-footer.php');
-        }
-        return ob_get_clean();
     }
 
     /**

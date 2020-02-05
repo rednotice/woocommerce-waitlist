@@ -207,7 +207,7 @@ class SettingsCallbacks
      */
     public function drawTextarea(array $args): void 
     {
-        $text = wp_filter_post_kses(get_option($args['name']));
+        $text = get_option($args['name']);
         echo '<textarea id="' . $args['name'] . '" 
             rows="15"
             cols="50" 
