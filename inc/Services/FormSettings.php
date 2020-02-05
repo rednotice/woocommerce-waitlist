@@ -201,7 +201,7 @@ class FormSettings
                 'name' => 'wpbits_waitlist_confirmation_text',
                 'title' => __('Text to Appear Next to the Checkbox', 'wpbits-waitlist'),
                 'defaultValue' => __(
-                    'I agree to the <a href="#">terms</a> and <a href="#">privacy policy</a>.',
+                    'I agree to the <a href="/#">terms</a> and <a href="/#">privacy policy</a>.',
                     'wpbits-waitlist'
                 ),
                 'page' => 'wpbits_settings',

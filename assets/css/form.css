@@ -29,6 +29,10 @@
     margin-top: 10px;
 }
 
+#wpbits-confirmation {
+    width: 0;
+}
+
 #wpbits-waitlist-container .field-msg {
     display: none;
 }
