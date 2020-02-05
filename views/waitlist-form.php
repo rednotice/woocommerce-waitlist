@@ -1,7 +1,7 @@
 <section class="wpbits-waitlist">
-    <h3 class="wpbits-waitlist-title">
+    <h4 class="wpbits-waitlist-title">
         <?php echo sanitize_text_field(get_option('wpbits_waitlist_title')); ?>
-    </h3>
+    </h4>
 
     <form 
         id="wpbits-waitlist-form"
