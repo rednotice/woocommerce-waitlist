@@ -50,6 +50,7 @@ class Mail
 
         if( get_option('wpbits_waitlist_enable_instock_mail') ) {
             add_action('woocommerce_update_product', array($this, 'automaticInstockMails'), 10, 1);
+            add_action('woocommerce_update_product_variation', array($this, 'automaticInstockMails'), 10, 1);
         }
     }
 
