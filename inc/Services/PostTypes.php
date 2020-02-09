@@ -238,13 +238,19 @@ class PostTypes
                 break;
 
             case 'status':
-                $status = get_post_meta($postId, '_wpbitswaitlist_status' , true);
+                $status = get_post_status($postId);
 
-                $this->subscriberStatus = new SubscriberStatus();
+                $subscriberStatus = new SubscriberStatus();
 
-                $index = array_search($status, array_column($this->subscriberStatus->statuses, 'name'));
-                $statusToDisplay = $this->subscriberStatus->statuses[$index]['label'];
-                $color = $this->subscriberStatus->statuses[$index]['color'];
+                $index = array_search($status, array_column($subscriberStatus->statuses, 'name'));
+
+                if($index === false) {
+                    $statusToDisplay = $status;
+                    $color = 'grey';
+                } else {
+                    $statusToDisplay = $subscriberStatus->statuses[$index]['label'];
+                    $color = $subscriberStatus->statuses[$index]['color'];
+                }
 
                 echo '<span class="wpbits-status-label" style="background-color:' . $color . '">' . $statusToDisplay . '</span>';
                 break;

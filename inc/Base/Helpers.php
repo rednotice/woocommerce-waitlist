@@ -70,28 +70,23 @@ class Helpers
      * @since 1.0.0
      * 
      * @param int $productId Product id.
+     * @param string $status (optional) Subscriber status (default: "wpbits_subscribed".)
      * @return array Subscribers.
      */
-    public static function getSubscribersByProductId(int $productId): array 
+    public static function getSubscribersByProductId(int $productId, string $status = 'wpbits_subscribed'): array 
     {
         $args = [ 
             'post_type' => 'wpbitswaitlist', 
+            'post_status' => $status,
             'meta_query' => array(
-                'relation' => 'AND',
+                'relation' => 'OR',
                 array(
-                    'key' => '_wpbits_status',
-                    'value' => 'wpbits_subscribed'
+                    'key' => '_wpbitswaitlist_product_id',
+                    'value' => $productId
                 ),
                 array(
-                    'relation' => 'OR',
-                    array(
-                        'key' => '_wpbitswaitlist_product_id',
-                        'value' => $productId
-                    ),
-                    array(
-                        'key' => '_wpbitswaitlist_variation_id',
-                        'value' => $productId
-                    )
+                    'key' => '_wpbitswaitlist_variation_id',
+                    'value' => $productId
                 )
             )
         ];
@@ -104,7 +99,7 @@ class Helpers
      * @since 1.0.0
      * 
      * @param string $email Subscriber email.
-     * @param string $status (optional) Subscriber status (efault: 'wpbits_subscribed').
+     * @param string $status (optional) Subscriber status (default: 'wpbits_subscribed').
      * @param string $fields (optional) Return fields. Param 'all' returns all fields, 
      *  param 'ids' returns only the ids (default: 'all').
      * @return array Subscribers.
@@ -113,13 +108,9 @@ class Helpers
     {
         $args = [ 
             'post_type' => 'wpbitswaitlist',
+            'post_status' => $status,
             'fields' => $fields,
             'meta_query' => array(
-                'relation' => 'AND',
-                array(
-                    'key' => '_wpbitswaitlist_status',
-                    'value' => $status
-                ),
                 array(
                     'key' => '_wpbitswaitlist_email',
                     'value' => $email
@@ -145,14 +136,13 @@ class Helpers
             '_wpbitswaitlist_email' => $email,
             '_wpbitswaitlist_product_id' => $productId,
             '_wpbitswaitlist_variation_id' => ($variationId ?? null),
-            '_wpbitswaitlist_status' => 'wpbits_subscribed',
             '_wpbitswaitlist_subscribed_at' => date('Y-m-d H:i:s'),
             '_wpbitswaitlist_mailsent_at' => null
         ];
 
         $data = [
             'post_title' => $email,
-            'post_status' => 'publish',
+            'post_status' => 'wpbits_subscribed',
             'post_type' => 'wpbitswaitlist',
             'meta_input' => $meta
         ];
@@ -173,13 +163,9 @@ class Helpers
     {
         $args = array(
             'post_type'  => 'wpbitswaitlist',
+            'post_status' => 'wpbits_subscribed',
             'meta_query' => array(
                 'relation' => 'AND',
-                array(
-                    'key'     => '_wpbitswaitlist_status',
-                    'value'   => 'wpbits_subscribed',
-                    'compare' => '='
-                ),
                 array(
                     'key'     => '_wpbitswaitlist_email',
                     'value'   => $email,
@@ -227,7 +213,7 @@ class Helpers
      */
     public static function getSubscriberStatus(int $subscriberId): string
     {
-        return get_post_meta($subscriberId, '_wpbitswaitlist_status', true);
+        return get_post_status($subscriberId);
     }
 
     /**
