@@ -46,8 +46,6 @@ class Mail
 	 */
     public function register(): void
     {
-        echo 'Hello';
-        
         add_filter('wpbits_replace_shortcodes', array($this, 'replaceShortcodes'), 10, 2);
 
         if( get_option('wpbits_waitlist_enable_instock_mail') ) {
