@@ -1,13 +1,13 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Api;
+namespace Pixelbase\Api;
 
-use \Inc\Base\Paths;
+use \Pixelbase\Base\Paths;
 
 /**
  * Class contains all settings callback functions.
@@ -78,11 +78,11 @@ class SettingsCallbacks
     {
         if($input && !is_email($input)) {
             add_settings_error(
-                'wpbits_waitlist_subscription_mail_copy',
+                'pxb_waitlist_subscription_mail_copy',
                 esc_attr( 'invalid-email' ),
                 __(
                     'The email address to receive a copy of the subscription success mail is not valid.',
-                    'wpbits-waitlist'
+                    'pxb-waitlist'
                 )
             );
         }
@@ -108,7 +108,7 @@ class SettingsCallbacks
      */
     public function settingsSectionForm(): void
     {
-        _e('Customize how your waitlist form will be displayed to your customers.', 'wpbits-waitlist');
+        _e('Customize how your waitlist form will be displayed to your customers.', 'pxb-waitlist');
     }
 
     /**
@@ -117,7 +117,7 @@ class SettingsCallbacks
      * @return void
      */
     public function settingsSectionValidation() {
-        _e('Customize the success and error messages your subscribers will see when submitting the form.', 'wpbits-waitlist');
+        _e('Customize the success and error messages your subscribers will see when submitting the form.', 'pxb-waitlist');
     }
 
     /**
@@ -133,7 +133,7 @@ class SettingsCallbacks
             <p>The custom text next to the checkbox accepts HTML tags, 
             so you can link to your terms and privacy policy:
             <b>&lta href="#">terms&lt/a&gt; and &lta href="#">privacy policy&lt/a&gt;</b></p>', 
-            'wpbits-waitlist'
+            'pxb-waitlist'
         );
     }
 
@@ -158,7 +158,7 @@ class SettingsCallbacks
             <p>The mail messages also accept all HTML tags which may be used in posts. 
             Use this snippet to link to a product: 
             <b>&lt;a href="{product_link}"&gt;{product_name}&lt;/a&gt;</b></p>',
-            'wpbits-waitlist'
+            'pxb-waitlist'
         );
     }
 
@@ -174,7 +174,7 @@ class SettingsCallbacks
             The unsubscribe link in a success subscription mail leads to this page.</p>
 
             <p>The unsubscribe message accepts all HTML tags which may be used in posts.</p>',
-            'wpbits-waitlist'
+            'pxb-waitlist'
         );
     }
 

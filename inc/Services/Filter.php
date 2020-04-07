@@ -1,11 +1,11 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
 /**
  * Implements a product filter dropdown menu on the waitlist custom post type admin page.
@@ -48,12 +48,12 @@ class Filter
     {
         $productIds= [];
 
-        $query = new \WP_Query('post_type=wpbitswaitlist');
+        $query = new \WP_Query('post_type=pxbwaitlist');
         if($query->have_posts()) {
             while($query->have_posts()) {
                 $query->the_post();
                 $post_id = get_the_ID();
-                $meta = get_post_meta($post_id, '_wpbitswaitlist_product_id' , true);
+                $meta = get_post_meta($post_id, '_pxbwaitlist_product_id' , true);
                 $productIds[] = trim($meta);
             }
         }
@@ -79,7 +79,7 @@ class Filter
     public function registerProductFilter(): void
     {
         global $typenow;
-            if($typenow == 'wpbitswaitlist') {
+            if($typenow == 'pxbwaitlist') {
                 $options = $this->options; // Options for the filter select field
                 $currentOption = '';
             if(isset($_GET['slug'])) {
@@ -87,7 +87,7 @@ class Filter
             } ?>
             <select name="slug" id="slug">
                 <option value="all" <?php selected('all', $currentOption); ?>>
-                    <?php _e('All Products', 'wpbits-waitlist'); ?>
+                    <?php _e('All Products', 'pxb-waitlist'); ?>
                 </option>
                 <?php foreach($options as $option) { ?>
                     <option 
@@ -116,10 +116,10 @@ class Filter
         $post_type = $_GET['post_type'] ?? '';
         if ( is_admin() 
             && $pagenow === 'edit.php' 
-            && $post_type === 'wpbitswaitlist' 
+            && $post_type === 'pxbwaitlist' 
             && isset($_GET['slug'])
             && $_GET['slug'] !='all' ) {
-            $query->query_vars['meta_key'] = '_wpbitswaitlist_product_id';
+            $query->query_vars['meta_key'] = '_pxbwaitlist_product_id';
             $query->query_vars['meta_value'] = $_GET['slug'];
             $query->query_vars['meta_compare'] = '=';
         }

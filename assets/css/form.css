@@ -1,54 +1,54 @@
-.wpbits-waitlist {
+.pxb-waitlist {
     padding: 10px;
     margin-bottom: 1em;
 }
 
 @media (max-width: 575px) {
-    .wpbits-waitlist-title {
+    .pxb-waitlist-title {
         text-align: center;
     }
 }
   
-#wpbits-waitlist-container {
+#pxb-waitlist-container {
     display: flex;
     flex-direction: column;
 }
 
-#wpbits-waitlist-container .email-group {
+#pxb-waitlist-container .email-group {
     display: flex;
     flex-direction: column;
 }
 
-#wpbits-waitlist-email {
+#pxb-waitlist-email {
     width: 100%;
 }
 
-#wpbits-waitlist-container .checkbox-group {
+#pxb-waitlist-container .checkbox-group {
     display: flex;
     justify-content: start;
     margin-top: 10px;
 }
 
-#wpbits-confirmation {
+#pxb-confirmation {
     width: 0;
 }
 
-#wpbits-waitlist-container .field-msg {
+#pxb-waitlist-container .field-msg {
     display: none;
 }
 
-#wpbits-waitlist-container .show {
+#pxb-waitlist-container .show {
     display: block;
 }
 
-#wpbits-waitlist-container .error {
+#pxb-waitlist-container .error {
     color: rgba(255, 0, 0, 0.623);
 }
 
-#wpbits-waitlist-container .success {
+#pxb-waitlist-container .success {
     color: rgba(0, 128, 0, 0.774);
 }
 
-#wpbits-waitlist-submit {
+#pxb-waitlist-submit {
     margin-top: 10px;
 }

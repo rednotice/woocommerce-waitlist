@@ -1,17 +1,17 @@
 {
-    "name": "wpbits/wpbits-waitlist",
+    "name": "pxb/pxb-waitlist",
     "description": "Back in  stock  email notifications for WooCommerce.",
     "type": "project",
     "license": "GPL",
     "authors": [
         {
-            "name": "wpbits",
-            "email": "hello@wpbits.com"
+            "name": "PixelBase",
+            "email": "support@pixelbase.com"
         }
     ],
     "minimum-stability": "dev",
     "require": {},
     "autoload": {
-        "psr-4": {"Inc\\": "./inc"}
+        "psr-4": {"PixelBase\\": "./inc"}
     }
 }

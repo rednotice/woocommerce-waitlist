@@ -1,11 +1,11 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Base;
+namespace PixelBase\Base;
 
 /**
  * Helper functions.
@@ -24,11 +24,11 @@ class Helpers
         $productIds= [];
 
         $args = [ 
-            'post_type' => 'wpbitswaitlist', 
+            'post_type' => 'pxbwaitlist', 
             'meta_query' => array(
                 array(
-                    'key' => '_wpbitswaitlist_status',
-                    'value' => 'wpbits_subscribed'
+                    'key' => '_pxbwaitlist_status',
+                    'value' => 'pxb_subscribed'
                 )
             )
         ];
@@ -38,10 +38,10 @@ class Helpers
             while($query->have_posts()) {
                 $query->the_post();
                 $postId = get_the_ID();
-                if(get_post_meta($postId, '_wpbitswaitlist_variation_id' , true)) {
-                    $productId = get_post_meta($postId, '_wpbitswaitlist_variation_id' , true);
+                if(get_post_meta($postId, '_pxbwaitlist_variation_id' , true)) {
+                    $productId = get_post_meta($postId, '_pxbwaitlist_variation_id' , true);
                 } else {
-                    $productId = get_post_meta($postId, '_wpbitswaitlist_product_id' , true);
+                    $productId = get_post_meta($postId, '_pxbwaitlist_product_id' , true);
                 }
                 $productIds[] = trim($productId);
             }
@@ -58,7 +58,7 @@ class Helpers
     public static function getAllSubscribers(): array 
     {
         $args = [
-            'post_type' => 'wpbitswaitlist', 
+            'post_type' => 'pxbwaitlist', 
             'posts_per_page' => -1
         ];
 
@@ -70,22 +70,22 @@ class Helpers
      * @since 1.0.0
      * 
      * @param int $productId Product id.
-     * @param string $status (optional) Subscriber status (default: "wpbits_subscribed".)
+     * @param string $status (optional) Subscriber status (default: "pxb_subscribed".)
      * @return array Subscribers.
      */
-    public static function getSubscribersByProductId(int $productId, string $status = 'wpbits_subscribed'): array 
+    public static function getSubscribersByProductId(int $productId, string $status = 'pxb_subscribed'): array 
     {
         $args = [ 
-            'post_type' => 'wpbitswaitlist', 
+            'post_type' => 'pxbwaitlist', 
             'post_status' => $status,
             'meta_query' => array(
                 'relation' => 'OR',
                 array(
-                    'key' => '_wpbitswaitlist_product_id',
+                    'key' => '_pxbwaitlist_product_id',
                     'value' => $productId
                 ),
                 array(
-                    'key' => '_wpbitswaitlist_variation_id',
+                    'key' => '_pxbwaitlist_variation_id',
                     'value' => $productId
                 )
             )
@@ -99,20 +99,20 @@ class Helpers
      * @since 1.0.0
      * 
      * @param string $email Subscriber email.
-     * @param string $status (optional) Subscriber status (default: 'wpbits_subscribed').
+     * @param string $status (optional) Subscriber status (default: 'pxb_subscribed').
      * @param string $fields (optional) Return fields. Param 'all' returns all fields, 
      *  param 'ids' returns only the ids (default: 'all').
      * @return array Subscribers.
      */
-    public static function getSubscribersByEmail(string $email, string $status = 'wpbits_subscribed', string $fields = 'all'): array 
+    public static function getSubscribersByEmail(string $email, string $status = 'pxb_subscribed', string $fields = 'all'): array 
     {
         $args = [ 
-            'post_type' => 'wpbitswaitlist',
+            'post_type' => 'pxbwaitlist',
             'post_status' => $status,
             'fields' => $fields,
             'meta_query' => array(
                 array(
-                    'key' => '_wpbitswaitlist_email',
+                    'key' => '_pxbwaitlist_email',
                     'value' => $email
                 )
             )
@@ -133,17 +133,17 @@ class Helpers
     public static function saveSubscriber($email, $productId, $variationId = null): int
     {
         $meta = [
-            '_wpbitswaitlist_email' => $email,
-            '_wpbitswaitlist_product_id' => $productId,
-            '_wpbitswaitlist_variation_id' => ($variationId ?? null),
-            '_wpbitswaitlist_subscribed_at' => date('Y-m-d H:i:s'),
-            '_wpbitswaitlist_mailsent_at' => null
+            '_pxbwaitlist_email' => $email,
+            '_pxbwaitlist_product_id' => $productId,
+            '_pxbwaitlist_variation_id' => ($variationId ?? null),
+            '_pxbwaitlist_subscribed_at' => date('Y-m-d H:i:s'),
+            '_pxbwaitlist_mailsent_at' => null
         ];
 
         $data = [
             'post_title' => $email,
-            'post_status' => 'wpbits_subscribed',
-            'post_type' => 'wpbitswaitlist',
+            'post_status' => 'pxb_subscribed',
+            'post_type' => 'pxbwaitlist',
             'meta_input' => $meta
         ];
 
@@ -162,23 +162,23 @@ class Helpers
     public static function isSubscribed($email, $productId, $variationId = null): bool
     {
         $args = array(
-            'post_type'  => 'wpbitswaitlist',
-            'post_status' => 'wpbits_subscribed',
+            'post_type'  => 'pxbwaitlist',
+            'post_status' => 'pxb_subscribed',
             'meta_query' => array(
                 'relation' => 'AND',
                 array(
-                    'key'     => '_wpbitswaitlist_email',
+                    'key'     => '_pxbwaitlist_email',
                     'value'   => $email,
                     'compare' => '='
                 ),
                 array(
-                    'key'     => '_wpbitswaitlist_product_id',
+                    'key'     => '_pxbwaitlist_product_id',
                     'value'   => $productId,
                     'compare' => '='
                 ),
                 (isset( $variationId ) ?
                     array(
-                    'key'     => '_wpbitswaitlist_variation_id',
+                    'key'     => '_pxbwaitlist_variation_id',
                     'value'   => $variationId,
                     'compare' => '='
                     ) : ''
@@ -202,7 +202,7 @@ class Helpers
      */
     public static function getSubscriberEmail(int $subscriberId): string
     {
-        return get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
+        return get_post_meta($subscriberId, '_pxbwaitlist_email', true);
     }
 
     /**
@@ -225,7 +225,7 @@ class Helpers
     public static function getSubscriptionDate(int $subscriberId): string
     {
 
-        return get_post_meta($subscriberId, '_wpbitswaitlist_subscribed_at', true);
+        return get_post_meta($subscriberId, '_pxbwaitlist_subscribed_at', true);
     }
 
     /**
@@ -237,7 +237,7 @@ class Helpers
     public static function getInstockMailDate(int $subscriberId): ?string
     {
 
-        return get_post_meta($subscriberId, '_wpbitswaitlist_mailsent_at', true);
+        return get_post_meta($subscriberId, '_pxbwaitlist_mailsent_at', true);
     }
 
 
@@ -249,10 +249,10 @@ class Helpers
      */
     public static function getProductId(int $subscriberId): int
     {
-        if( get_post_meta($subscriberId, '_wpbitswaitlist_variation_id', true )) {
-            return get_post_meta($subscriberId, '_wpbitswaitlist_variation_id', true);
+        if( get_post_meta($subscriberId, '_pxbwaitlist_variation_id', true )) {
+            return get_post_meta($subscriberId, '_pxbwaitlist_variation_id', true);
         }
-        return get_post_meta($subscriberId, '_wpbitswaitlist_product_id', true);
+        return get_post_meta($subscriberId, '_pxbwaitlist_product_id', true);
     }
 
     /**
@@ -263,10 +263,10 @@ class Helpers
      */
     public static function getProductName(int $subscriberId): string
     {
-        if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
-            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
+        if( get_post_meta( $subscriberId, '_pxbwaitlist_variation_id', true ) ) {
+            $productId = get_post_meta( $subscriberId, '_pxbwaitlist_variation_id', true );
         } else {
-            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_product_id', true );
+            $productId = get_post_meta( $subscriberId, '_pxbwaitlist_product_id', true );
         }
         $product = wc_get_product( $productId );
         return $product->get_name();
@@ -280,10 +280,10 @@ class Helpers
      */
     public static function getProductLink(int $subscriberId): string
     {
-        if(get_post_meta($subscriberId, '_wpbitswaitlist_variation_id', true)) {
-            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true);
+        if(get_post_meta($subscriberId, '_pxbwaitlist_variation_id', true)) {
+            $productId = get_post_meta( $subscriberId, '_pxbwaitlist_variation_id', true);
         } else {
-            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_product_id', true);
+            $productId = get_post_meta( $subscriberId, '_pxbwaitlist_product_id', true);
         }
         return get_permalink($productId);
     }
@@ -296,10 +296,10 @@ class Helpers
      */
     public static function getProductImage(int $subscriberId): string
     {
-        if( get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true ) ) {
-            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_variation_id', true );
+        if( get_post_meta( $subscriberId, '_pxbwaitlist_variation_id', true ) ) {
+            $productId = get_post_meta( $subscriberId, '_pxbwaitlist_variation_id', true );
         } else {
-            $productId = get_post_meta( $subscriberId, '_wpbitswaitlist_product_id', true );
+            $productId = get_post_meta( $subscriberId, '_pxbwaitlist_product_id', true );
         }
         $productImage = wc_get_product( $productId )->get_image();
         return $productImage;

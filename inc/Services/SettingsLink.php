@@ -1,13 +1,13 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
-use \Inc\Base\Paths;
+use \PixelBase\Base\Paths;
 
 /**
  * Adds a link to the settings on the plugin page.
@@ -48,8 +48,8 @@ class SettingsLink
 	 */
     public function generateSettingsLink(array $links): array
     {
-        $label = __('Settings', 'wpbits-waitlist');
-        $settingsLink = '<a href="admin.php?page=wpbits_waitlist">' . $label . '</a>';
+        $label = __('Settings', 'pxb-waitlist');
+        $settingsLink = '<a href="admin.php?page=pxb_waitlist">' . $label . '</a>';
         $links[] = $settingsLink;
         return $links;
     }

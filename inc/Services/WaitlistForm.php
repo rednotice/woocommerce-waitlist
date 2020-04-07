@@ -1,15 +1,15 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
-use \Inc\Base\Paths;
-use \Inc\Base\Helpers;
-use \Inc\Services\Mail;
+use \PixelBase\Base\Paths;
+use \PixelBase\Base\Helpers;
+use \PixelBase\Services\Mail;
 
 /**
  * Implements the waitlist front end form.
@@ -44,8 +44,8 @@ class WaitlistForm
         add_action('woocommerce_single_product_summary', array($this, 'loadFormTagsForVariationProducts'), 10);
         add_filter('woocommerce_available_variation',  array($this, 'loadTemplateForVariationProducts'), 1, 3);
 
-        add_action('wp_ajax_nopriv_wpbits_submit_subscriber', array($this, 'submitSubscriber'));
-        add_action('wp_ajax_wpbits_submit_subscriber', array($this, 'submitSubscriber'));
+        add_action('wp_ajax_nopriv_pxb_submit_subscriber', array($this, 'submitSubscriber'));
+        add_action('wp_ajax_pxb_submit_subscriber', array($this, 'submitSubscriber'));
     }
 
     /**
@@ -98,7 +98,7 @@ class WaitlistForm
         $url = admin_url('admin-ajax.php');
         if ($product->is_type('variable')) { 
             echo '<form 
-                id="wpbits-waitlist-form" 
+                id="pxb-waitlist-form" 
                 action="#" method="POST" 
                 data-url="' . $url . '"
             >
@@ -159,7 +159,7 @@ class WaitlistForm
         }
 
         if($subscriberId) {
-            if( get_option('wpbits_waitlist_enable_subscription_mail')) {
+            if( get_option('pxb_waitlist_enable_subscription_mail')) {
                 $this->mail = new Mail();
                 $this->mail->sendSuccessSubscriptionMail($subscriberId);
             }

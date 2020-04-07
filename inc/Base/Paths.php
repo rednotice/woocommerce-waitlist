@@ -1,11 +1,11 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Base;
+namespace PixelBase\Base;
 
 /**
  * Contains the plugin paths.
@@ -42,7 +42,7 @@ class Paths
      */
     public function __construct()
     {
-        $this->plugin = plugin_basename(dirname(__FILE__, 3) . '/wpbits-waitlist.php');
+        $this->plugin = plugin_basename(dirname(__FILE__, 3) . '/pxb-waitlist.php');
         $this->pluginPath = plugin_dir_path(dirname(__FILE__, 2));
         $this->pluginUrl = plugin_dir_url(dirname(__FILE__, 2));
     }

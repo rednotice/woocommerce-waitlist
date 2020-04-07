@@ -1,15 +1,15 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
-use \Inc\Base\Paths;
-use \Inc\Base\Helpers;
-use \Inc\Services\SubscriberStatus;
+use \PixelBase\Base\Paths;
+use \PixelBase\Base\Helpers;
+use \PixelBase\Services\SubscriberStatus;
 
 /**
  * Lets subscribers unsubcribe from the waitlist.
@@ -53,7 +53,7 @@ class Unsubscribe
     public static function generateUrl(string $subscriberEmail): string
     {
         $nonce = wp_create_nonce('goodbye_' . $subscriberEmail);
-        return get_site_url() . "/?post_type=wpbitswaitlist&action=wpbits_user_unsubscribe&email={$subscriberEmail}&_wpnonce={$nonce}";
+        return get_site_url() . "/?post_type=pxbwaitlist&action=pxb_user_unsubscribe&email={$subscriberEmail}&_wpnonce={$nonce}";
     }
 
     /**
@@ -65,7 +65,7 @@ class Unsubscribe
 	 */
     public function unsubscribe(): bool
     {   
-        if(!isset($_GET['action']) || $_GET['action'] !== 'wpbits_user_unsubscribe') {
+        if(!isset($_GET['action']) || $_GET['action'] !== 'pxb_user_unsubscribe') {
             return false;
         }
 
@@ -75,7 +75,7 @@ class Unsubscribe
             return false;
         }
 
-        $subscriberIds = Helpers::getSubscribersByEmail($subscriberEmail, 'wpbits_subscribed', 'ids');
+        $subscriberIds = Helpers::getSubscribersByEmail($subscriberEmail, 'pxb_subscribed', 'ids');
         
         if(!$subscriberIds) {
             return false;
@@ -83,10 +83,10 @@ class Unsubscribe
 
         $subscriberStatus = new SubscriberStatus();
         foreach($subscriberIds as $subscriberId) {
-            $subscriberStatus->updateStatus($subscriberId, 'wpbits_unsubscribed');
+            $subscriberStatus->updateStatus($subscriberId, 'pxb_unsubscribed');
         }
 
-        wp_redirect('/?post_type=wpbitswaitlist&wpbits_goodbye');
+        wp_redirect('/?post_type=pxbwaitlist&pxb_goodbye');
         exit();
     }
 
@@ -99,7 +99,7 @@ class Unsubscribe
 	 */
     public function displayConfirmationPage(): void
     {
-        if(isset($_GET['wpbits_goodbye'])) {
+        if(isset($_GET['pxb_goodbye'])) {
             require $this->paths->pluginPath . '/views/unsubscribe.php';
             exit();
         }

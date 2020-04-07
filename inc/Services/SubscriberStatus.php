@@ -1,11 +1,11 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
 /**
  * Is used to register the waitlist custom post types statuses and change the status of the subscribers.
@@ -58,27 +58,27 @@ class SubscriberStatus
     {
         $this->statuses = [
             [
-                'name' => 'wpbits_subscribed',
+                'name' => 'pxb_subscribed',
                 'label' => 'Subscribed', 
-                'textdomain' => 'wpbits-waitlist',
+                'textdomain' => 'pxb-waitlist',
                 'color' => 'blue'
             ],
             [
-                'name' => 'wpbits_unsubscribed',
+                'name' => 'pxb_unsubscribed',
                 'label' => 'Unsubscribed', 
-                'textdomain' => 'wpbits-waitlist',
+                'textdomain' => 'pxb-waitlist',
                 'color' => 'grey'
             ],
             [
-                'name' => 'wpbits_mailsent',
+                'name' => 'pxb_mailsent',
                 'label' => 'Mail Sent', 
-                'textdomain' => 'wpbits-waitlist',
+                'textdomain' => 'pxb-waitlist',
                 'color' => 'green'
             ],
             [
-                'name' => 'wpbits_failed',
+                'name' => 'pxb_failed',
                 'label' => 'Failed', 
-                'textdomain' => 'wpbits-waitlist',
+                'textdomain' => 'pxb-waitlist',
                 'color' => 'red'
             ]
         ];
@@ -134,12 +134,12 @@ class SubscriberStatus
         );
         wp_update_post($subscriber);
 
-        if($status === 'wpbits_subscribed') {
-            update_post_meta($subscriberId, '_wpbitswaitlist_subscribed_at', date('Y-m-d H:i:s'));
+        if($status === 'pxb_subscribed') {
+            update_post_meta($subscriberId, '_pxbwaitlist_subscribed_at', date('Y-m-d H:i:s'));
         }
 
-        if($status === 'wpbits_mailsent') {
-            update_post_meta($subscriberId, '_wpbitswaitlist_mailsent_at', date('Y-m-d H:i:s'));
+        if($status === 'pxb_mailsent') {
+            update_post_meta($subscriberId, '_pxbwaitlist_mailsent_at', date('Y-m-d H:i:s'));
         }
 
         return $status;

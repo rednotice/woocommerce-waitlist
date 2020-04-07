@@ -1,15 +1,15 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
-use \Inc\Base\Helpers;
-use \Inc\Services\Unsubscribe;
-use \Inc\Services\SubscriberStatus;
+use \PixelBase\Base\Helpers;
+use \PixelBase\Services\Unsubscribe;
+use \PixelBase\Services\SubscriberStatus;
 
 /**
  * Handles the mails sent to the subscribers.
@@ -46,9 +46,9 @@ class Mail
 	 */
     public function register(): void
     {
-        add_filter('wpbits_replace_shortcodes', array($this, 'replaceShortcodes'), 10, 2);
+        add_filter('pxb_replace_shortcodes', array($this, 'replaceShortcodes'), 10, 2);
 
-        if( get_option('wpbits_waitlist_enable_instock_mail') ) {
+        if( get_option('pxb_waitlist_enable_instock_mail') ) {
             add_action('woocommerce_update_product', array($this, 'automaticInstockMails'), 10, 1);
             add_action('woocommerce_update_product_variation', array($this, 'automaticInstockMails'), 10, 1);
         }
@@ -133,21 +133,21 @@ class Mail
 	 */
     public function sendSuccessSubscriptionMail(int $subscriberId): void
     {
-        $to = get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
+        $to = get_post_meta($subscriberId, '_pxbwaitlist_email', true);
         $subject = apply_filters( 
-            'wpbits_replace_shortcodes', 
-            get_option('wpbits_waitlist_subscription_mail_subject'), 
+            'pxb_replace_shortcodes', 
+            get_option('pxb_waitlist_subscription_mail_subject'), 
             $subscriberId 
         );
         $message = apply_filters( 
-            'wpbits_replace_shortcodes', 
-            get_option('wpbits_waitlist_subscription_mail_message'), 
+            'pxb_replace_shortcodes', 
+            get_option('pxb_waitlist_subscription_mail_message'), 
             $subscriberId 
         );
         $template = $this->getMailTemplate($subject, $message);
 
-        if(get_option('wpbits_waitlist_subscription_mail_copy')) {
-            $header = 'Bcc: ' . get_option('wpbits_waitlist_subscription_mail_copy');
+        if(get_option('pxb_waitlist_subscription_mail_copy')) {
+            $header = 'Bcc: ' . get_option('pxb_waitlist_subscription_mail_copy');
         }
 
         $mailer = WC()->mailer();
@@ -164,15 +164,15 @@ class Mail
 	 */
     public function sendInstockMail(int $subscriberId): string 
     {
-        $to = get_post_meta($subscriberId, '_wpbitswaitlist_email', true);
+        $to = get_post_meta($subscriberId, '_pxbwaitlist_email', true);
         $subject = apply_filters( 
-            'wpbits_replace_shortcodes', 
-            get_option('wpbits_waitlist_instock_mail_subject'), 
+            'pxb_replace_shortcodes', 
+            get_option('pxb_waitlist_instock_mail_subject'), 
             $subscriberId 
         );
         $message = apply_filters( 
-            'wpbits_replace_shortcodes', 
-            get_option('wpbits_waitlist_instock_mail_message'), 
+            'pxb_replace_shortcodes', 
+            get_option('pxb_waitlist_instock_mail_message'), 
             $subscriberId 
         );
 
@@ -181,10 +181,10 @@ class Mail
         
         $this->subscriberStatus = new SubscriberStatus();
         if(!$mailSentSuccess) {
-            $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_failed');
+            $this->subscriberStatus->updateStatus($subscriberId, 'pxb_failed');
             return false;
         }
-        return $this->subscriberStatus->updateStatus($subscriberId, 'wpbits_mailsent');
+        return $this->subscriberStatus->updateStatus($subscriberId, 'pxb_mailsent');
     }
 
     /**

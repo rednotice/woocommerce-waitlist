@@ -1,13 +1,13 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
-use \Inc\Base\Paths;
+use \PixelBase\Base\Paths;
 
 /**
  * Enqueues the scripts and styleseets for the plugin.

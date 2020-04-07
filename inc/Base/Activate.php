@@ -1,15 +1,15 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Base;
+namespace PixelBase\Base;
 
-use \Inc\Services\FormSettings;
-use \Inc\Services\MailSettings;
-use \Inc\Services\UnsubscribeSettings;
+use \PixelBase\Services\FormSettings;
+use \PixelBase\Services\MailSettings;
+use \PixelBase\Services\UnsubscribeSettings;
 
 /**
  * Activation class.

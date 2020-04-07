@@ -2,7 +2,7 @@
 /**
  * Class SampleTest
  *
- * @package Wpbits_Waitlist
+ * @package pixelbaseWaitlist
  */
 
 /**

@@ -1,14 +1,14 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
-use \Inc\Api\SettingsApi;
-use \Inc\Api\SettingsCallbacks;
+use \PixelBase\Api\SettingsApi;
+use \PixelBase\Api\SettingsCallbacks;
 
 /**
  * This class allows the user to customize the waitlist form.
@@ -117,103 +117,103 @@ class FormSettings
         $this->options = [
             // Front end form options.
             [
-                'name' => 'wpbits_waitlist_title',
-                'title' => __('Title for Subscribe Form', 'wpbits-waitlist'),
-                'defaultValue' => __('Email me when back in stock', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_form',
+                'name' => 'pxb_waitlist_title',
+                'title' => __('Title for Subscribe Form', 'pxb-waitlist'),
+                'defaultValue' => __('Email me when back in stock', 'pxb-waitlist'),
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_form',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_email',
-                'title' => __('Placeholder for Email Field', 'wpbits-waitlist'),
-                'defaultValue' => __('Your email address', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_form',
+                'name' => 'pxb_waitlist_email',
+                'title' => __('Placeholder for Email Field', 'pxb-waitlist'),
+                'defaultValue' => __('Your email address', 'pxb-waitlist'),
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_form',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_subscribe',
-                'title' => __('Text for Subscribe Button', 'wpbits-waitlist'),
-                'defaultValue' => __('Subscribe', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_form',
+                'name' => 'pxb_waitlist_subscribe',
+                'title' => __('Text for Subscribe Button', 'pxb-waitlist'),
+                'defaultValue' => __('Subscribe', 'pxb-waitlist'),
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_form',
                 'callback' => 'drawInputText'
             ],
             // Validation options.
             [
-                'name' => 'wpbits_waitlist_submission',
-                'title' => __('During Submission Message', 'wpbits-waitlist'),
-                'defaultValue' => __('Please wait.', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_validation',
+                'name' => 'pxb_waitlist_submission',
+                'title' => __('During Submission Message', 'pxb-waitlist'),
+                'defaultValue' => __('Please wait.', 'pxb-waitlist'),
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_validation',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_success',
-                'title' => __('Success Message', 'wpbits-waitlist'),
+                'name' => 'pxb_waitlist_success',
+                'title' => __('Success Message', 'pxb-waitlist'),
                 'defaultValue' => __(
                     'Your subscription was successful. We will email you when this product is available again.',
-                    'wpbits-waitlist'
+                    'pxb-waitlist'
                 ),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_validation',
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_validation',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_error',
-                'title' => __('Error Message', 'wpbits-waitlist'),
-                'defaultValue' => __('There was an error. Please try again.', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_validation',
+                'name' => 'pxb_waitlist_error',
+                'title' => __('Error Message', 'pxb-waitlist'),
+                'defaultValue' => __('There was an error. Please try again.', 'pxb-waitlist'),
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_validation',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_email_error',
-                'title' => __('Invalid Email Error Message', 'wpbits-waitlist'),
-                'defaultValue' => __('Your email is required.', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_validation',
+                'name' => 'pxb_waitlist_email_error',
+                'title' => __('Invalid Email Error Message', 'pxb-waitlist'),
+                'defaultValue' => __('Your email is required.', 'pxb-waitlist'),
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_validation',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_already_subscribed_error',
-                'title' => __('Already Subscribed Error Message', 'wpbits-waitlist'),
+                'name' => 'pxb_waitlist_already_subscribed_error',
+                'title' => __('Already Subscribed Error Message', 'pxb-waitlist'),
                 'defaultValue' => __(
                     'You have already subscribed to this product. 
                     We will email you when it is available again.',
-                    'wpbits-waitlist'
+                    'pxb-waitlist'
                 ),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_validation',
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_validation',
                 'callback' => 'drawInputText'
             ],
             // I agree-checkbox.
             [
-                'name' => 'wpbits_waitlist_confirmation',
-                'title' => __('Enable I Agree in Subscribe Form', 'wpbits-waitlist'),
+                'name' => 'pxb_waitlist_confirmation',
+                'title' => __('Enable I Agree in Subscribe Form', 'pxb-waitlist'),
                 'defaultValue' => '',
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_checkbox',
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_checkbox',
                 'callback' => 'drawCheckbox'
             ],
             [
-                'name' => 'wpbits_waitlist_confirmation_text',
-                'title' => __('Text to Appear Next to the Checkbox', 'wpbits-waitlist'),
+                'name' => 'pxb_waitlist_confirmation_text',
+                'title' => __('Text to Appear Next to the Checkbox', 'pxb-waitlist'),
                 'defaultValue' => __(
                     'I agree to the <a href="/#">terms</a> and <a href="/#">privacy policy</a>.',
-                    'wpbits-waitlist'
+                    'pxb-waitlist'
                 ),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_checkbox',
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_checkbox',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_confirmation_error',
-                'title' => __('Checkbox Error Message', 'wpbits-waitlist'),
-                'defaultValue' => __('Please accept our terms and privacy policy.', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_checkbox',
+                'name' => 'pxb_waitlist_confirmation_error',
+                'title' => __('Checkbox Error Message', 'pxb-waitlist'),
+                'defaultValue' => __('Please accept our terms and privacy policy.', 'pxb-waitlist'),
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_checkbox',
                 'callback' => 'drawInputText'
             ]
         ];
@@ -231,80 +231,80 @@ class FormSettings
         $this->settings = [
             // Front end form settings
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_title',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_title',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_email',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_email',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_subscribe',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_subscribe',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             // Validation settings
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_submission',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_submission',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_success',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_success',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_error',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_error',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_email_error',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_email_error',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_already_subscribed_error',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_already_subscribed_error',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             // Checkbox settings
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_confirmation',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_confirmation',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeCheckbox')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_confirmation_text',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_confirmation_text',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeHtmlTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_confirmation_error',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_confirmation_error',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
@@ -323,22 +323,22 @@ class FormSettings
     {
         $this->sections = [
             [
-                'id' => 'wpbits_waitlist_settings_form',
-                'title' => __('Subscribe Form', 'wpbits-waitlist'),
+                'id' => 'pxb_waitlist_settings_form',
+                'title' => __('Subscribe Form', 'pxb-waitlist'),
                 'callback' => array($this->callbacks, 'settingsSectionForm'),
-                'page' => 'wpbits_settings'
+                'page' => 'pxb_settings'
             ],
             [
-                'id' => 'wpbits_waitlist_settings_validation',
-                'title' => __('Validation Messages', 'wpbits-waitlist'),
+                'id' => 'pxb_waitlist_settings_validation',
+                'title' => __('Validation Messages', 'pxb-waitlist'),
                 'callback' => array($this->callbacks, 'settingsSectionValidation'),
-                'page' => 'wpbits_settings'
+                'page' => 'pxb_settings'
             ],
             [
-                'id' => 'wpbits_waitlist_settings_checkbox',
-                'title' => __('I Agree Checkbox in Subscribe Form', 'wpbits-waitlist'),
+                'id' => 'pxb_waitlist_settings_checkbox',
+                'title' => __('I Agree Checkbox in Subscribe Form', 'pxb-waitlist'),
                 'callback' => array($this->callbacks, 'settingsSectionCheckbox'),
-                'page' => 'wpbits_settings'
+                'page' => 'pxb_settings'
             ]
         ];
     }

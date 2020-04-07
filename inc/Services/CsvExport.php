@@ -1,14 +1,14 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
-use \Inc\Base\Paths;
-use \Inc\Base\Helpers;
+use \PixelBase\Base\Paths;
+use \PixelBase\Base\Helpers;
 
 /**
  * Exports the subscribers to a CSV file.
@@ -39,8 +39,8 @@ class CsvExport
 
         add_action('admin_head-edit.php', array($this, 'addExportButton'), 10);
 
-        add_action('wp_ajax_nopriv_wpbits_export', array($this, 'formatExportData'));
-        add_action('wp_ajax_wpbits_export', array($this, 'formatExportData'));
+        add_action('wp_ajax_nopriv_pxb_export', array($this, 'formatExportData'));
+        add_action('wp_ajax_pxb_export', array($this, 'formatExportData'));
     }
 
     /**
@@ -52,7 +52,7 @@ class CsvExport
     {
         global $current_screen;
 
-        if ($current_screen->post_type !== 'wpbitswaitlist') {
+        if ($current_screen->post_type !== 'pxbwaitlist') {
             return null;
         }
 
@@ -71,7 +71,7 @@ class CsvExport
         $formattedSubscribers = [];
         foreach($subscribers as $subscriber) {
             $email = Helpers::getSubscriberEmail($subscriber->ID);
-            $status = str_replace('wpbits_', '', Helpers::getSubscriberStatus($subscriber->ID));
+            $status = str_replace('pxb_', '', Helpers::getSubscriberStatus($subscriber->ID));
             $productId = Helpers::getProductId($subscriber->ID);
             $productName = Helpers::getProductName($subscriber->ID);
             $subscribedAt = Helpers::getSubscriptionDate($subscriber->ID);
