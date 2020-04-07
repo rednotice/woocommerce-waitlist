@@ -1,14 +1,14 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
-use \Inc\Api\SettingsApi;
-use \Inc\Api\SettingsCallbacks;
+use \PixelBase\Api\SettingsApi;
+use \PixelBase\Api\SettingsCallbacks;
 
 /**
  * This class allows the user to customize the mails sent to the subscribers.
@@ -114,24 +114,24 @@ class MailSettings
         $this->options = [
             // Instock mail options.
             [
-                'name' => 'wpbits_waitlist_enable_instock_mail',
-                'title' => __('Enable Automatic Instock Mail', 'wpbits-waitlist'),
+                'name' => 'pxb_waitlist_enable_instock_mail',
+                'title' => __('Enable Automatic Instock Mail', 'pxb-waitlist'),
                 'defaultValue' => 1,
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_mail',
                 'callback' => 'drawCheckbox'
             ],
             [
-                'name' => 'wpbits_waitlist_instock_mail_subject',
-                'title' => __('Instock Mail Subject', 'wpbits-waitlist'),
-                'defaultValue' => __('{product_name} is back in stock', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'name' => 'pxb_waitlist_instock_mail_subject',
+                'title' => __('Instock Mail Subject', 'pxb-waitlist'),
+                'defaultValue' => __('{product_name} is back in stock', 'pxb-waitlist'),
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_mail',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_instock_mail_message',
-                'title' => __('Instock Mail Message', 'wpbits-waitlist'),
+                'name' => 'pxb_waitlist_instock_mail_message',
+                'title' => __('Instock Mail Message', 'pxb-waitlist'),
                 'defaultValue' => __(
                     '<p>Hello {subscriber_email},</p>
 
@@ -142,32 +142,32 @@ class MailSettings
 
 <p>Best wishes,<br>
 your {shop_name} team</p>',
-                    'wpbits-waitlist'
+                    'pxb-waitlist'
                 ),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_mail',
                 'callback' => 'drawTextarea'
             ],
             // Subscription success mail options.
             [
-                'name' => 'wpbits_waitlist_enable_subscription_mail',
-                'title' => __('Enable Success Subscription Mail', 'wpbits-waitlist'),
+                'name' => 'pxb_waitlist_enable_subscription_mail',
+                'title' => __('Enable Success Subscription Mail', 'pxb-waitlist'),
                 'defaultValue' => 1,
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_mail',
                 'callback' => 'drawCheckbox'
             ],
             [
-                'name' => 'wpbits_waitlist_subscription_mail_subject',
-                'title' => __('Success Subscription Mail Subject', 'wpbits-waitlist'),
-                'defaultValue' => __('You have successfully subscribed to {product_name}', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'name' => 'pxb_waitlist_subscription_mail_subject',
+                'title' => __('Success Subscription Mail Subject', 'pxb-waitlist'),
+                'defaultValue' => __('You have successfully subscribed to {product_name}', 'pxb-waitlist'),
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_mail',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_subscription_mail_message',
-                'title' => __('Success Subscription Mail Message', 'wpbits-waitlist'),
+                'name' => 'pxb_waitlist_subscription_mail_message',
+                'title' => __('Success Subscription Mail Message', 'pxb-waitlist'),
                 'defaultValue' => __(
                     '<p>Hello {subscriber_email},</p>
 
@@ -177,18 +177,18 @@ your {shop_name} team</p>',
 your {shop_name} team</p>
 
 <p>To unsubscribe from this service <a href="{unsubscribe_link}">click here</a>.</p>',
-                    'wpbits-waitlist'
+                    'pxb-waitlist'
                 ),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_mail',
                 'callback' => 'drawTextarea'
             ],
             [
-                'name' => 'wpbits_waitlist_subscription_mail_copy',
-                'title' => __('Send Copy of Success Subscription Mail to this Email Address Email', 'wpbits-waitlist'),
+                'name' => 'pxb_waitlist_subscription_mail_copy',
+                'title' => __('Send Copy of Success Subscription Mail to this Email Address Email', 'pxb-waitlist'),
                 'defaultValue' => '',
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_mail',
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_mail',
                 'callback' => 'drawInputText',
                 'placeholder' => 'sample@example.com'
             ]
@@ -206,51 +206,51 @@ your {shop_name} team</p>
         $this->settings = [
             // Instock mail settings.
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_enable_instock_mail',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_enable_instock_mail',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeCheckbox')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_instock_mail_subject',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_instock_mail_subject',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_instock_mail_message',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_instock_mail_message',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeHtmlTextField')
                 ]
             ],
             // Success subscription mail settings.
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_enable_subscription_mail',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_enable_subscription_mail',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeCheckbox')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_subscription_mail_subject',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_subscription_mail_subject',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_subscription_mail_message',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_subscription_mail_message',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeHtmlTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_subscription_mail_copy',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_subscription_mail_copy',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeEmail')
                 ]
@@ -268,10 +268,10 @@ your {shop_name} team</p>
     public function setSections() {
         $this->sections = [
             [
-                'id' => 'wpbits_waitlist_settings_mail',
-                'title' => __('Mail Settings', 'wpbits-waitlist'),
+                'id' => 'pxb_waitlist_settings_mail',
+                'title' => __('Mail Settings', 'pxb-waitlist'),
                 'callback' => array($this->callbacks, 'settingsSectionMail'),
-                'page' => 'wpbits_settings'
+                'page' => 'pxb_settings'
             ],
         ];
     }

@@ -4,8 +4,8 @@
 
     <form method="post" action="options.php">
         <?php 
-            settings_fields( 'wpbits_waitlist_option_group' ); 
-            do_settings_sections( 'wpbits_settings' );
+            settings_fields( 'pxb_waitlist_option_group' ); 
+            do_settings_sections( 'pxb_settings' );
             submit_button();
         ?>
     </form>

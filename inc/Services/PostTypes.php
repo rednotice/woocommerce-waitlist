@@ -1,13 +1,13 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
-use \Inc\Services\SubscriberStatus;
+use \PixelBase\Services\SubscriberStatus;
 
 /**
  * Implements the waitlist custom post type.
@@ -88,14 +88,14 @@ class PostTypes
     public function setPostTypes(): void 
     {
         $this->postTypes[] = [
-            'post_type' => 'wpbitswaitlist',
+            'post_type' => 'pxbwaitlist',
             'name' => 'Waitlist',
             'singular_name' => 'Subscriber',
             'public' => true,
             'publicly_queryable' => false,
             'has_archive' => false,
             'show_ui' => true,
-            'show_in_menu' => 'wpbits_waitlist',
+            'show_in_menu' => 'pxb_waitlist',
             'show_in_admin_bar' => false,
             'capabilities' => [
                 'create_posts' => false
@@ -125,34 +125,34 @@ class PostTypes
                     'labels' => [
                         'name' => $postType['name'],
                         'singular_name' => $postType['singular_name'],
-                        'add_new' => $postType['add_new'] ?? __('Add New', 'wpbits-waitlist'),
-                        'add_new_item' => $postType['add_new_item'] ?? sprintf(__('Add New %s', 'wpbits-waitlist'), $postType['singular_name']),
-                        'edit_item' => $postType['edit_item'] ?? sprintf(__('Add New %s', 'wpbits-waitlist'), $postType['singular_name']),
-                        'new_item' => $postType['new_item'] ?? sprintf(__('New %s', 'wpbits-waitlist'), $postType['singular_name']),
-                        'view_item' => $postType['view_item'] ?? sprintf(__('View %s', 'wpbits-waitlist'), $postType['singular_name']),
-                        'view_items' => $postType['view_items'] ?? sprintf(__('View %s', 'wpbits-waitlist'), $postType['name']),
-                        'search_items' => $postType['search_items'] ?? sprintf(__('Search %s', 'wpbits-waitlist'), $postType['name']),
-                        'not_found' => $postType['not_found'] ?? sprintf(__('No %s found.', 'wpbits-waitlist'), $postType['singular_name']),
-                        'not_found_in_trash' => $postType['not_found_in_trash'] ?? sprintf(__('No %s found in trash.', 'wpbits-waitlist'), $postType['singular_name']),
-                        'parent_item_colon' => $postType['parent_item_colon'] ?? __('Parent Page','wpbits-waitlist'),
-                        'all_items' => $postType['all_items'] ?? sprintf(__('%s', 'wpbits-waitlist'), $postType['name']),
-                        'archives' => $postType['archives'] ?? sprintf(__('%s Archives', 'wpbits-waitlist'), $postType['name']),
-                        'attributes' => $postType['attributes'] ?? sprintf(__('%s Attributes', 'wpbits-waitlist'), $postType['name']),
-                        'insert_into_item' => $postType['insert_into_item'] ?? sprintf(__('Insert into %s', 'wpbits-waitlist'), $postType['singular_name']),
-                        'uploaded_to_this_item' => $postType['uploaded_to_this_item'] ?? sprintf(__('Uploaded to this %s', 'wpbits-waitlist'), $postType['singular_name']),
-                        'featured_image' => $postType['featured_image'] ?? __('Featured Image', 'wpbits-waitlist'),
-                        'set_featured_image' => $postType['set_featured_image'] ?? __('Set featured image', 'wpbits-waitlist'),
-                        'remove_featured_image' => $postType['remove_featured_image'] ?? __('Remove featured image', 'wpbits-waitlist'),
-                        'use_featured_image' => $postType['use_featured_image'] ?? __('Use as featured image', 'wpbits-waitlist'),
+                        'add_new' => $postType['add_new'] ?? __('Add New', 'pxb-waitlist'),
+                        'add_new_item' => $postType['add_new_item'] ?? sprintf(__('Add New %s', 'pxb-waitlist'), $postType['singular_name']),
+                        'edit_item' => $postType['edit_item'] ?? sprintf(__('Add New %s', 'pxb-waitlist'), $postType['singular_name']),
+                        'new_item' => $postType['new_item'] ?? sprintf(__('New %s', 'pxb-waitlist'), $postType['singular_name']),
+                        'view_item' => $postType['view_item'] ?? sprintf(__('View %s', 'pxb-waitlist'), $postType['singular_name']),
+                        'view_items' => $postType['view_items'] ?? sprintf(__('View %s', 'pxb-waitlist'), $postType['name']),
+                        'search_items' => $postType['search_items'] ?? sprintf(__('Search %s', 'pxb-waitlist'), $postType['name']),
+                        'not_found' => $postType['not_found'] ?? sprintf(__('No %s found.', 'pxb-waitlist'), $postType['singular_name']),
+                        'not_found_in_trash' => $postType['not_found_in_trash'] ?? sprintf(__('No %s found in trash.', 'pxb-waitlist'), $postType['singular_name']),
+                        'parent_item_colon' => $postType['parent_item_colon'] ?? __('Parent Page','pxb-waitlist'),
+                        'all_items' => $postType['all_items'] ?? sprintf(__('%s', 'pxb-waitlist'), $postType['name']),
+                        'archives' => $postType['archives'] ?? sprintf(__('%s Archives', 'pxb-waitlist'), $postType['name']),
+                        'attributes' => $postType['attributes'] ?? sprintf(__('%s Attributes', 'pxb-waitlist'), $postType['name']),
+                        'insert_into_item' => $postType['insert_into_item'] ?? sprintf(__('Insert into %s', 'pxb-waitlist'), $postType['singular_name']),
+                        'uploaded_to_this_item' => $postType['uploaded_to_this_item'] ?? sprintf(__('Uploaded to this %s', 'pxb-waitlist'), $postType['singular_name']),
+                        'featured_image' => $postType['featured_image'] ?? __('Featured Image', 'pxb-waitlist'),
+                        'set_featured_image' => $postType['set_featured_image'] ?? __('Set featured image', 'pxb-waitlist'),
+                        'remove_featured_image' => $postType['remove_featured_image'] ?? __('Remove featured image', 'pxb-waitlist'),
+                        'use_featured_image' => $postType['use_featured_image'] ?? __('Use as featured image', 'pxb-waitlist'),
                         'menu_name' => $postType['menu_name'] ?? $postType['name'],
-                        'filter_items_list' => $postType['filter_items_list'] ?? sprintf(__('Filter %s', 'wpbits-waitlist'), $postType['name']),
-                        'items_list_navigation' => $postType['items_list_navigation'] ?? sprintf(__('%s list navigation', 'wpbits-waitlist'), $postType['name']),
-                        'items_list' => $postType['items_list'] ?? sprintf(__('%s list', 'wpbits-waitlist'), $postType['name']),
-                        'item_published' => $postType['item_published'] ?? sprintf(__('%s published.', 'wpbits-waitlist'), $postType['singular_name']),
-                        'item_published_privately' => $postType['item_published_privately'] ?? sprintf(__('%s published privately.', 'wpbits-waitlist'), $postType['singular_name']),
-                        'item_reverted_to_draft' => $postType['item_reverted_to_draft'] ?? sprintf(__('%s reverted to draft.', 'wpbits-waitlist'), $postType['singular_name']),
-                        'item_scheduled' => $postType['item_scheduled'] ?? sprintf(__('%s scheduled.', 'wpbits-waitlist'), $postType['singular_name']),
-                        'item_updated' => $postType['item_updated'] ?? sprintf(__('%s updated.', 'wpbits-waitlist'), $postType['singular_name']),
+                        'filter_items_list' => $postType['filter_items_list'] ?? sprintf(__('Filter %s', 'pxb-waitlist'), $postType['name']),
+                        'items_list_navigation' => $postType['items_list_navigation'] ?? sprintf(__('%s list navigation', 'pxb-waitlist'), $postType['name']),
+                        'items_list' => $postType['items_list'] ?? sprintf(__('%s list', 'pxb-waitlist'), $postType['name']),
+                        'item_published' => $postType['item_published'] ?? sprintf(__('%s published.', 'pxb-waitlist'), $postType['singular_name']),
+                        'item_published_privately' => $postType['item_published_privately'] ?? sprintf(__('%s published privately.', 'pxb-waitlist'), $postType['singular_name']),
+                        'item_reverted_to_draft' => $postType['item_reverted_to_draft'] ?? sprintf(__('%s reverted to draft.', 'pxb-waitlist'), $postType['singular_name']),
+                        'item_scheduled' => $postType['item_scheduled'] ?? sprintf(__('%s scheduled.', 'pxb-waitlist'), $postType['singular_name']),
+                        'item_updated' => $postType['item_updated'] ?? sprintf(__('%s updated.', 'pxb-waitlist'), $postType['singular_name']),
                     ],
                     'public' => $postType['public'] ?? false,
                     'publicly_queryable' => $postType['publicly_queryable'] ?? $postType['public'],
@@ -177,11 +177,11 @@ class PostTypes
     public function setColumns(): void
     {
         $this->columns = [
-            'subscriber_email' => __('Email', 'wpbits-waitlist'),
-            'status' => __('Status', 'wpbits-waitlist'),
-            'product_id' => __('Product', 'wpbits-waitlist'),
-            'mailsent_at' => __('Instock Mail Sent', 'wpbits-waitlist'),
-            'subscribed_at' => __('Subscription Date', 'wpbits-waitlist'),
+            'subscriber_email' => __('Email', 'pxb-waitlist'),
+            'status' => __('Status', 'pxb-waitlist'),
+            'product_id' => __('Product', 'pxb-waitlist'),
+            'mailsent_at' => __('Instock Mail Sent', 'pxb-waitlist'),
+            'subscribed_at' => __('Subscription Date', 'pxb-waitlist'),
         ];
     }
 
@@ -234,7 +234,7 @@ class PostTypes
     {
         switch ($column) {
             case 'subscriber_email':
-                echo get_post_meta($postId, '_wpbitswaitlist_email' , true);
+                echo get_post_meta($postId, '_pxbwaitlist_email' , true);
                 break;
 
             case 'status':
@@ -252,15 +252,15 @@ class PostTypes
                     $color = $subscriberStatus->statuses[$index]['color'];
                 }
 
-                echo '<span class="wpbits-status-label" style="background-color:' . $color . '">' . $statusToDisplay . '</span>';
+                echo '<span class="pxb-status-label" style="background-color:' . $color . '">' . $statusToDisplay . '</span>';
                 break;
 
             case 'product_id':
-                $productId = get_post_meta($postId, '_wpbitswaitlist_product_id' , true);
+                $productId = get_post_meta($postId, '_pxbwaitlist_product_id' , true);
                 $url = get_edit_post_link($productId);
                 $product = wc_get_product($productId);
 
-                $variationId = get_post_meta($postId, '_wpbitswaitlist_variation_id' , true);
+                $variationId = get_post_meta($postId, '_pxbwaitlist_variation_id' , true);
                 if($variationId) {
                     $product = wc_get_product($variationId);
                 }
@@ -269,7 +269,7 @@ class PostTypes
                 break;
 
             case 'mailsent_at':
-                $unixTimeStamp = get_post_meta($postId, '_wpbitswaitlist_mailsent_at' , true);
+                $unixTimeStamp = get_post_meta($postId, '_pxbwaitlist_mailsent_at' , true);
                 if($unixTimeStamp) {
                     $date = date_i18n(get_option('date_format'), strtotime($unixTimeStamp));
                     $time = date_i18n(get_option('time_format'), strtotime($unixTimeStamp));
@@ -278,7 +278,7 @@ class PostTypes
                 break;
 
             case 'subscribed_at' :
-                $unixTimeStamp = get_post_meta($postId, '_wpbitswaitlist_subscribed_at' , true);
+                $unixTimeStamp = get_post_meta($postId, '_pxbwaitlist_subscribed_at' , true);
                 $date = date_i18n(get_option('date_format'), strtotime($unixTimeStamp));
                 $time = date_i18n(get_option('time_format'), strtotime($unixTimeStamp));
 

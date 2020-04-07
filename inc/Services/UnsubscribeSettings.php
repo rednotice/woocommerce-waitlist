@@ -1,14 +1,14 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
-use \Inc\Api\SettingsApi;
-use \Inc\Api\SettingsCallbacks;
+use \PixelBase\Api\SettingsApi;
+use \PixelBase\Api\SettingsCallbacks;
 
 /**
  * This class allows the user to customize the mails sent to the subscribers.
@@ -113,22 +113,22 @@ class UnsubscribeSettings
     public function setOptions() {
         $this->options = [
             [
-                'name' => 'wpbits_waitlist_unsubscribe_title',
-                'title' => __('Title for the Unsubscribe Page', 'wpbits-waitlist'),
-                'defaultValue' => __('You Have Successfully Unsubscribed', 'wpbits-waitlist'),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_unsubscribe',
+                'name' => 'pxb_waitlist_unsubscribe_title',
+                'title' => __('Title for the Unsubscribe Page', 'pxb-waitlist'),
+                'defaultValue' => __('You Have Successfully Unsubscribed', 'pxb-waitlist'),
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_unsubscribe',
                 'callback' => 'drawInputText'
             ],
             [
-                'name' => 'wpbits_waitlist_unsubscribe_message',
-                'title' => __('Message for the Unsubscribe Page', 'wpbits-waitlist'),
+                'name' => 'pxb_waitlist_unsubscribe_message',
+                'title' => __('Message for the Unsubscribe Page', 'pxb-waitlist'),
                 'defaultValue' => __(
                     '<p>We will not send you a notification mail when the product is available again.</p>',
-                    'wpbits-waitlist'
+                    'pxb-waitlist'
                 ),
-                'page' => 'wpbits_settings',
-                'section' => 'wpbits_waitlist_settings_unsubscribe',
+                'page' => 'pxb_settings',
+                'section' => 'pxb_waitlist_settings_unsubscribe',
                 'callback' => 'drawTextarea'
             ]
         ];
@@ -144,15 +144,15 @@ class UnsubscribeSettings
     public function setSettings() {
         $this->settings = [
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_unsubscribe_title',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_unsubscribe_title',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeTextField')
                 ]
             ],
             [
-                'option_group' => 'wpbits_waitlist_option_group',
-                'option_name' => 'wpbits_waitlist_unsubscribe_message',
+                'option_group' => 'pxb_waitlist_option_group',
+                'option_name' => 'pxb_waitlist_unsubscribe_message',
                 'args' => [
                     'sanitize_callback' => array($this->callbacks, 'sanitizeHtmlTextField')
                 ]
@@ -170,10 +170,10 @@ class UnsubscribeSettings
     public function setSections() {
         $this->sections = [
             [
-                'id' => 'wpbits_waitlist_settings_unsubscribe',
-                'title' => __('Unsubscribe Confirmation Page', 'wpbits-waitlist'),
+                'id' => 'pxb_waitlist_settings_unsubscribe',
+                'title' => __('Unsubscribe Confirmation Page', 'pxb-waitlist'),
                 'callback' => array($this->callbacks, 'settingsSectionUnsubscribe'),
-                'page' => 'wpbits_settings'
+                'page' => 'pxb_settings'
             ],
         ];
     }

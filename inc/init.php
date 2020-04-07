@@ -1,11 +1,11 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc;
+namespace PixelBase;
 
 /**
  * Class used to initialize service classes as instantiated objects.

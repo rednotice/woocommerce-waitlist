@@ -1,13 +1,13 @@
 class WaitlistForm {
     constructor() {
-        this.form = document.getElementById('wpbits-waitlist-form');
+        this.form = document.getElementById('pxb-waitlist-form');
 
         this.form.addEventListener('submit', this.subscriptionHandler.bind(this));
     }
 
     async subscriptionHandler() {
         event.preventDefault();
-        this.container = document.getElementById('wpbits-waitlist-container');
+        this.container = document.getElementById('pxb-waitlist-container');
         this.resetValidationMessages();
 
         this.email = this.container.querySelector('[name="email"]').value;
@@ -99,7 +99,7 @@ class WaitlistForm {
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    if(document.getElementById('wpbits-waitlist-form')) {
+    if(document.getElementById('pxb-waitlist-form')) {
         new WaitlistForm();
     }
 })

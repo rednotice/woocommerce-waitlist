@@ -1,14 +1,14 @@
 <?php
 /**
- * @package wpbitsWaitlist
+ * @package pixelbaseWaitlist
  * 
  * @since 1.0.0
  */
 
-namespace Inc\Services;
+namespace PixelBase\Services;
 
-use \Inc\Api\SettingsApi;
-use \Inc\Api\SettingsCallbacks;
+use \PixelBase\Api\SettingsApi;
+use \PixelBase\Api\SettingsCallbacks;
 
 /**
  * Creates the admin pages.
@@ -86,10 +86,10 @@ class AdminPages
     {
         $this->pages = [
             [
-                'page_title' => 'wpbits Waitlist', 
-                'menu_title' => 'wpbits Waitlist', 
+                'page_title' => 'Waitlist', 
+                'menu_title' => 'Waitlist', 
                 'capability' => 'manage_options', 
-                'menu_slug' => 'wpbits_waitlist',
+                'menu_slug' => 'pxb_waitlist',
                 'icon_url' => 'dashicons-clipboard',
                 'position' => 110 
             ]
@@ -107,11 +107,11 @@ class AdminPages
     {
         $this->subpages = [
             [
-                'parent_slug' => 'wpbits_waitlist',
-                'page_title' => __('Settings', 'wpbits-waitlist'),
-                'menu_title' => __('Settings', 'wpbits-waitlist'),
+                'parent_slug' => 'pxb_waitlist',
+                'page_title' => __('Settings', 'pxb-waitlist'),
+                'menu_title' => __('Settings', 'pxb-waitlist'),
                 'capability' => 'manage_options',
-                'menu_slug' => 'wpbits_settings',
+                'menu_slug' => 'pxb_settings',
                 'callback' => array( $this->callbacks, 'settings')
             ]
         ];
