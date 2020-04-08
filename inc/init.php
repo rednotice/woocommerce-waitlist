@@ -24,7 +24,6 @@ final class Init
     public static function getServices() 
     {
         return [
-            Services\Enqueue::class,
             Services\SettingsLink::class,
             Services\AdminPages::class,
             Services\FormSettings::class,
