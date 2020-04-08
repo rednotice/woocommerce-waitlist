@@ -14,7 +14,7 @@
     flex-direction: column;
 }
 
-#pxb-waitlist-container .email-group {
+#pxb-waitlist-container .pxb-waitlist-form-group {
     display: flex;
     flex-direction: column;
 }
@@ -23,14 +23,13 @@
     width: 100%;
 }
 
-#pxb-waitlist-container .checkbox-group {
-    display: flex;
-    justify-content: start;
-    margin-top: 10px;
+.pxb-waitlist-checkbox-group {
+    margin-top: .5em;
 }
 
 #pxb-confirmation {
     width: 0;
+    margin-right: .25em;
 }
 
 #pxb-waitlist-container .field-msg {

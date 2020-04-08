@@ -37,7 +37,6 @@ class Enqueue
         $this->paths = new Paths();
 
         add_action('admin_enqueue_scripts', array( $this, 'enqueueAdminScripts'), 10);
-        add_action('wp_enqueue_scripts', array( $this, 'enqueueFrontEndScripts'), 10);
     }
 
     /**
@@ -49,20 +48,6 @@ class Enqueue
 	 */
     public function enqueueAdminScripts(): void
     {
-        // wp_enqueue_style( 'bootstrap', $this->pluginUrl . 'assets/css/bootstrap.css' );
         wp_enqueue_style('adminStyle', $this->paths->pluginUrl . 'assets/css/admin.css');
-        // wp_enqueue_script('adminScript', $this->pluginUrl . 'assets/js/admin.js');
-    }
-
-    /**
-	 * Enqueues all scripts and stylesheets for the front end.
-	 *
-	 * @since 1.0.0
-     * 
-	 * @return void
-	 */
-    public function enqueueFrontEndScripts(): void
-    {
-        // wp_enqueue_style( 'bootstrap', $this->pluginUrl . 'assets/css/bootstrap.css' );
     }
 }
