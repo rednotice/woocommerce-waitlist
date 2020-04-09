@@ -10,12 +10,9 @@
  * Plugin URI: https://pixelbase.co/plugins/waitlist
  * Description: Back in  stock email notifications for WooCommerce.
  * Version: 1.0.0
- * Author: pxb
+ * Author: PixelBase
  * Author URI: https://pixelbase.co
  * Text Domain: pxb-waitlist
- * Domain Path: /languages
- * WC requires at least: 2.2.0
- * WC tested up to: 3.9
  * 
  * @package     pixelbaseWaitlist
  * @author      PixelBase
@@ -51,3 +48,17 @@ register_deactivation_hook(__FILE__, 'deactivatePxbWaitlist');
 if( class_exists('PixelBase\\Init') && in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ))) ) {
     PixelBase\Init::registerServices();
 }
+
+// Plugin update checker
+require 'plugin-update-checker/plugin-update-checker.php';
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+	'https://github.com/rednotice/pixelbase-waitlist',
+	__FILE__,
+	'pixelbase-waitlist'
+);
+
+//Optional: If you're using a private repository, specify the access token like this:
+$myUpdateChecker->setAuthentication('403ac03febdfd126a493108f163cc4db98e6fc69');
+
+//Optional: Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('master');
