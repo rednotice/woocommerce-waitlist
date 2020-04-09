@@ -1,2 +1,2 @@
 # pixelbase-waitlist
- Waitlist Plugin for WooCommerce (Back in Stock Email Notifications)
+    Waitlist Plugin for WooCommerce (Back in Stock Email Notifications)
