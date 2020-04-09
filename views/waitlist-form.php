@@ -10,11 +10,11 @@
         data-url="<?php echo admin_url('admin-ajax.php'); ?>"
     >
         <div id="pxb-waitlist-container">
-            <div class="form-group email-group">
+            <div class="pxb-waitlist-form-group">
                 <input 
                     id="pxb-waitlist-email"
                     type="email" 
-                    class="form-field"
+                    class=""
                     name="email" 
                     placeholder="<?php echo sanitize_text_field(get_option('pxb_waitlist_email' )); ?>"
                     form="pxb-waitlist-form"
@@ -25,24 +25,20 @@
                 </small>
             </div>
 
-            <?php if(sanitize_text_field(get_option('pxb_waitlist_confirmation')))
-            echo '
-            <div class="form-group">
-                <div class="checkbox-group">
+            <?php if( sanitize_text_field(get_option( 'pxb_waitlist_confirmation' ) ) ) : ?>
+                <div class="pxb-waitlist-checkbox-group">
                     <input 
-                        type="checkbox" 
-                        class="form-field"
+                        type="checkbox"
                         name="confirmation"
                         id="pxb-confirmation"
                         form="pxb-waitlist-form"
                     >
-                    <label for="pxb-confirmation">' . stripslashes(wp_kses_post(addslashes(get_option('pxb_waitlist_confirmation_text')))) . '</label>
+                    <label for="pxb-confirmation"><?php echo stripslashes(wp_kses_post(addslashes(get_option('pxb_waitlist_confirmation_text')))); ?></label>
+                    <small class="field-msg error" data-error="invalidConfirmation">
+                        <?php echo sanitize_text_field(get_option('pxb_waitlist_confirmation_error')); ?>
+                    </small>
                 </div>
-                <small class="field-msg error" data-error="invalidConfirmation">'
-                   . sanitize_text_field(get_option('pxb_waitlist_confirmation_error')) .
-                '</small>
-            </div>
-            ' ; ?>
+            <?php endif; ?>
 
             <button id="pxb-waitlist-submit" type="submit" name="submit" form="pxb-waitlist-form"><?php echo sanitize_text_field(get_option('pxb_waitlist_subscribe')); ?></button>
             <small class="field-msg js-form-submission"><?php echo sanitize_text_field(get_option('pxb_waitlist_submission')); ?></small>

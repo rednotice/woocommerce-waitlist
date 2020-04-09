@@ -7,6 +7,7 @@
 
 namespace PixelBase\Services;
 
+use \PixelBase\Base\Paths;
 use \PixelBase\Api\SettingsApi;
 use \PixelBase\Api\SettingsCallbacks;
 
@@ -73,6 +74,8 @@ class AdminPages
             ->setAdminPages($this->pages)
             ->setAdminSubpages($this->subpages)
             ->register();
+
+        add_action('admin_enqueue_scripts', array( $this, 'enqueueAdminScripts'), 10);
     }
 
     /**
@@ -115,5 +118,18 @@ class AdminPages
                 'callback' => array( $this->callbacks, 'settings')
             ]
         ];
+    }
+
+     /**
+	 * Enqueues all scripts and stylesheets for the admin pages.
+	 *
+	 * @since 1.0.0
+     * 
+	 * @return void
+	 */
+    public function enqueueAdminScripts(): void
+    {
+        $paths = new Paths();
+        wp_enqueue_style('adminStyle', $paths->pluginUrl . 'assets/css/admin.css');
     }
 }
