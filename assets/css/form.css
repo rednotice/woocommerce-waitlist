@@ -1,5 +1,4 @@
 .pxb-waitlist {
-    padding: 10px;
     margin-bottom: 1em;
 }
 
@@ -25,11 +24,14 @@
 
 .pxb-waitlist-checkbox-group {
     margin-top: .5em;
+    display: flex;
+    align-items: baseline;
 }
 
 #pxb-confirmation {
     width: 0;
-    margin-right: .25em;
+    margin-top: 1%;
+    margin-right: .75em;
 }
 
 #pxb-waitlist-container .field-msg {
