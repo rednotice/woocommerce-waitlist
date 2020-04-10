@@ -5,7 +5,7 @@
  * @since 1.0.0
  */
 
-namespace Pixelbase\Api;
+namespace PixelBase\Api;
 
 /**
  * Class SettingsApi.
