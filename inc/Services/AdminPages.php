@@ -94,7 +94,7 @@ class AdminPages
                 'capability' => 'manage_options', 
                 'menu_slug' => 'pxb_waitlist',
                 'icon_url' => 'dashicons-clipboard',
-                'position' => 110 
+                'position' => 56 
             ]
         ];  
     }
