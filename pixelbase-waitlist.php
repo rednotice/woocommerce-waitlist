@@ -9,7 +9,7 @@
  * Plugin Name: PixelBase Waitlist
  * Plugin URI: https://pixelbase.co/plugins/waitlist
  * Description: Back in  stock email notifications for WooCommerce.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: PixelBase
  * Author URI: https://pixelbase.co
  * Text Domain: pxb-waitlist
