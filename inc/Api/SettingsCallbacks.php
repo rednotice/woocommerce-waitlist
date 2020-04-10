@@ -5,9 +5,9 @@
  * @since 1.0.0
  */
 
-namespace Pixelbase\Api;
+namespace PixelBase\Api;
 
-use \Pixelbase\Base\Paths;
+use \PixelBase\Base\Paths;
 
 /**
  * Class contains all settings callback functions.
