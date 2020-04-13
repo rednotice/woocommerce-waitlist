@@ -6,23 +6,24 @@
  */
 
  /**
+ * @wordpress-plugin
  * Plugin Name: PixelBase Waitlist
- * Plugin URI: https://pixelbase.co/plugins/waitlist
- * Description: Back in  stock email notifications for WooCommerce.
- * Version: 1.0.2
+ * Plugin URI: https://pixelbase.co/product/waitlist-back-in-stock-email-notifications-for-woocommerce/
+ * Description: Back in stock email notifications for WooCommerce.
+ * Version: 1.0.3
+ * Requires at least: 5.3
+ * Requires PHP: 7.1
  * Author: PixelBase
  * Author URI: https://pixelbase.co
+ * License: EULA
+ * License URI:
  * Text Domain: pxb-waitlist
+ * Domain Path: /languages
  * 
  * @package     pixelbaseWaitlist
  * @author      PixelBase
  * @copyright   2020 PixelBase
- * @license     GPL-3.0+
- * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
- */
-
- /*
- INSERT LICENSE TEXT HERE
+ * @license     Insert URI here
  */
 
 if (!defined('ABSPATH')) {

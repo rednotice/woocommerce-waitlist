@@ -185,7 +185,7 @@ your {shop_name} team</p>
             ],
             [
                 'name' => 'pxb_waitlist_subscription_mail_copy',
-                'title' => __('Send Copy of Success Subscription Mail to this Email Address Email', 'pxb-waitlist'),
+                'title' => __('Send Copy of Success Subscription Mail to this Email Address', 'pxb-waitlist'),
                 'defaultValue' => '',
                 'page' => 'pxb_settings',
                 'section' => 'pxb_waitlist_settings_mail',
