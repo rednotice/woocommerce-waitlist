@@ -63,3 +63,15 @@ $myUpdateChecker->setAuthentication('403ac03febdfd126a493108f163cc4db98e6fc69');
 
 //Optional: Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('master');
+
+// // Plugin update checker
+// require 'pixelbase-update-checker/class-pixelbase-update-checker.php';
+// $licence_manager = new Pixelbase_Update_Checker(
+//     196,
+//     'PixelBase Waitlist',
+//     'pxb-waitlist',
+//     'http:/one.wordpress.test/api/license-manager',
+//     'plugin',
+//     __FILE__,
+//     'pxb_waitlist'
+// );
