@@ -5,7 +5,7 @@ class WaitlistForm {
         this.form.addEventListener('submit', this.subscriptionHandler.bind(this));
     }
 
-    async subscriptionHandler() {
+    async subscriptionHandler(event) {
         event.preventDefault();
         this.container = document.getElementById('pxb-waitlist-container');
         this.resetValidationMessages();
