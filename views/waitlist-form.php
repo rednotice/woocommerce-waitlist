@@ -5,7 +5,7 @@
 
     <form 
         id="pxb-waitlist-form"
-        action="#" 
+        action="" 
         method="POST" 
         data-url="<?php echo admin_url('admin-ajax.php'); ?>"
     >
