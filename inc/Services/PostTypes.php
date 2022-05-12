@@ -263,6 +263,11 @@ class PostTypes
                 $variationId = get_post_meta($postId, '_pxbwaitlist_variation_id' , true);
                 if($variationId) {
                     $product = wc_get_product($variationId);
+                };
+
+                if(!$product || !$product->get_name()) {
+                    echo 'Product link not found.';
+                    break;
                 }
 
                 echo '<a href="' . $url . '">#' . $productId . ' ' . $product->get_name() .'</a>';

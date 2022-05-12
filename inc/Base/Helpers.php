@@ -269,6 +269,11 @@ class Helpers
             $productId = get_post_meta( $subscriberId, '_pxbwaitlist_product_id', true );
         }
         $product = wc_get_product( $productId );
+
+        if(!$product) {
+            return false;
+        }
+
         return $product->get_name();
     }
 
@@ -301,8 +306,13 @@ class Helpers
         } else {
             $productId = get_post_meta( $subscriberId, '_pxbwaitlist_product_id', true );
         }
-        $productImage = wc_get_product( $productId )->get_image();
-        return $productImage;
+
+        $product = wc_get_product( $productId );
+        if(!$product || !$product->get_image()) {
+            return false;
+        }
+
+        return $product->get_image();
     }
 
     /**

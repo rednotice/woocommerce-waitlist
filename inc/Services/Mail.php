@@ -199,7 +199,7 @@ class Mail
     {
         $updatedProduct = wc_get_product($updatedProductId);
 
-        if(!$updatedProduct->is_in_stock() || $updatedProduct->get_stock_quantity() <= 0 ) {
+        if(!$updatedProduct || !$updatedProduct->is_in_stock() || $updatedProduct->get_stock_quantity() <= 0 ) {
             return false;
         }
 

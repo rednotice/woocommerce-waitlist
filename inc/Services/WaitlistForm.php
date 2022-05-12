@@ -62,7 +62,7 @@ class WaitlistForm
         }
 
         wp_enqueue_style('waitlistFormStyle', $this->paths->pluginUrl . 'assets/css/form.css');
-        wp_enqueue_script('waitlistFormScript', $this->paths->pluginUrl . 'assets/js/form.js');
+        wp_enqueue_script('waitlistFormScript', $this->paths->pluginUrl . 'assets/js/form.js', 100);
         return true;
     }
 
@@ -86,7 +86,7 @@ class WaitlistForm
 
     /**
 	 * Loads the form tags for the waitlist form template
-     * on varation product pages.
+     * on variation product pages.
 	 *
 	 * @since 1.0.0
      * 
@@ -149,31 +149,32 @@ class WaitlistForm
         $variationId = intval($_POST['variationId']);
 
         if(Helpers::isSubscribed($email, $productId, $variationId)) {
-            $return = [
+            $data = [
                 'status' => 'alreadySubscribed'
             ];
-            wp_send_json($return);
+            wp_send_json($data);
             wp_die();
-        } else {
-            $subscriberId = Helpers::saveSubscriber($email, $productId, $variationId);
         }
 
-        if($subscriberId) {
-            if( get_option('pxb_waitlist_enable_subscription_mail')) {
-                $this->mail = new Mail();
-                $this->mail->sendSuccessSubscriptionMail($subscriberId);
-            }
-            $return = [
-                'status' => 'success'
-            ];
-            wp_send_json($return);
-            wp_die();
-        };
+        $subscriberId = Helpers::saveSubscriber($email, $productId, $variationId);
 
-        $return = [
-            'status' => 'error'
+        if(!$subscriberId) {
+            $data = [
+                'status' => 'error'
+            ];
+            wp_send_json($data);
+            wp_die();
+        }
+
+        if(get_option('pxb_waitlist_enable_subscription_mail')) {
+            $this->mail = new Mail();
+            $this->mail->sendSuccessSubscriptionMail($subscriberId);
+        }
+
+        $data = [
+            'status' => 'success'
         ];
-        wp_send_json($return);
+        wp_send_json($data);
         wp_die();
     }
 }

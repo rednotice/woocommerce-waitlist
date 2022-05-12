@@ -61,7 +61,13 @@ class Filter
         $productIds = array_unique($productIds);
 
         foreach($productIds as $productId) {
-            $productName = wc_get_product($productId)->get_name();
+            $product = wc_get_product($productId);
+            $productName = '';
+
+            if($product) {
+                $productName = $product->get_name();
+            }
+
             $this->options[] = [
                 'id' => $productId,
                 'name' => $productName
